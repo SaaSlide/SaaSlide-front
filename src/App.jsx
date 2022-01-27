@@ -1,12 +1,10 @@
 import RoutesApp from './Routes'
-import { Router } from 'react-router-dom'
 
 const App = () => {
   return (
-    // <Router>
-    //   <RoutesApp />
-    // </Router>
-    <h1>hello</h1>
+    <div>
+      <RoutesApp />
+    </div>
   )
 }
 export default App
