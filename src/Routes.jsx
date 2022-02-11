@@ -1,12 +1,12 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
-import { Home, Connexion } from './views'
+import { SignIn, SignUp } from './views'
 
 const RoutesApp = () => {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/connexion" element={<Connexion />} />
+      <Route path="/SignIn" element={<SignIn />} />
+      <Route path="/SignUp" element={<SignUp />} />
     </Routes>
   )
 }
