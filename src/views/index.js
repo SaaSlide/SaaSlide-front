@@ -1,2 +1,2 @@
-export * from './Home'
-export * from './Connexion'
+export * from './SignIn'
+export * from './SignUp'
