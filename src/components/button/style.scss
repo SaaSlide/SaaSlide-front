@@ -1,0 +1,85 @@
+@import '../../styles/variables.scss';
+
+button{
+    background-color: $color-black; 
+    border-radius: 7px;
+    padding: 10px 30px;
+    border: none;
+    color: $color-white;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+
+// Button
+.btn-primary{
+    background-color: $color-primary; 
+}
+
+.btn-secondary{
+    background-color: $color-secondary; 
+}
+
+.btn-danger{
+    background-color: $color-danger;
+}
+
+
+//Button small
+.btn-primary-sm{
+    background-color: $color-primary; 
+    padding: 5px 25px;
+}
+
+.btn-secondary-sm{
+    background-color: $color-secondary; 
+    padding: 5px 25px;
+}
+
+.btn-danger-sm{
+    background-color: $color-danger;
+    padding: 5px 25px;
+}
+
+
+// Button Outline
+.btn-primary-outline{
+    background-color: $color-white;
+    border: 1px solid $color-primary;
+    color: $color-primary;
+}
+
+.btn-secondary-outline{
+    background-color: $color-white;
+    border: 1px solid $color-secondary;
+    color: $color-secondary;
+}
+
+.btn-danger-outline{
+    background-color: $color-white;
+    border: 1px solid $color-danger;
+    color: $color-danger;
+}
+
+
+// Button small outline
+.btn-primary-sm-outline{
+    background-color: $color-white;
+    border: 1px solid $color-primary;
+    color: $color-primary; 
+    padding: 5px 25px;
+}
+
+.btn-secondary-sm-outline{
+    background-color: $color-white;
+    border: 1px solid $color-secondary;
+    color: $color-secondary;
+    padding: 5px 25px;
+}
+
+.btn-danger-sm-outline{
+    background-color: $color-white;
+    border: 1px solid $color-danger;
+    color: $color-danger;
+    padding: 5px 25px;
+}
