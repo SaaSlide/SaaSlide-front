@@ -16,6 +16,7 @@
     .auth-content {
         background-color: $color-tertiary;
         border-radius: 20px;
+        min-width: 20vw;
         padding: 50px 10vw;
         
         h2 {
@@ -42,5 +43,6 @@
         display: flex;
         flex-direction: column;
         row-gap: 2vh;
+        width: 100%;
     }
 }
