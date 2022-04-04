@@ -1,4 +1,42 @@
+@use '/src/styles/variable.scss' as var;
+
 * {
-  background-color: black;
-  color: white;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  color: var.$color-black;
+  background: var.$color-tertiary;
+  font-family: 'Poppins', sans-serif;
+  overflow-x: hidden;
+}
+
+h3 {
+  font-family: 'Raleway', sans-serif;
+  font-size: 30px;
+}
+h4 {
+  font-family: 'Raleway', sans-serif;
+  font-size: 20px;
+}
+
+h5 {
+  font-size: 18px;
+}
+
+p {
+  font-size: 14px;
+}
+a {
+  text-decoration: none;
+}
+a:visited {
+  color: var.$color-black;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
 }

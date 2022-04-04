@@ -1,0 +1,33 @@
+@use '/src/styles/variable.scss' as var;
+
+.sectionSolution {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5%;
+
+  .imgContainer {
+    position: relative;
+    margin-right: 70px;
+
+    :nth-child(1) {
+      position: absolute;
+      top: 0;
+      left: 200px;
+      z-index: 1;
+      width: 500px;
+    }
+    :nth-child(2) {
+      position: relative;
+      z-index: 5;
+      width: 700px;
+    }
+  }
+
+  .title {
+    font-family: 'Raleway', sans-serif;
+    font-size: 30px;
+    margin-bottom: 40px;
+  }
+}

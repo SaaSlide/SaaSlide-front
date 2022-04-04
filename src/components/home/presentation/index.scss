@@ -1,0 +1,11 @@
+@use '/src/styles/variable.scss' as var;
+
+.sectionSondage {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5%;
+
+  background: var.$color-tertiary;
+}

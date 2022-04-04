@@ -1,0 +1,63 @@
+@use '/src/styles/variable.scss' as var;
+.sectionSondage {
+  min-height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5%;
+
+  background: var.$color-white;
+
+  h5 {
+    font-family: 'Raleway', sans-serif;
+    font-size: 30px;
+    margin-bottom: 40px;
+  }
+
+  .containerTextArrow {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    justify-self: flex-start;
+
+    width: 50%;
+
+    position: relative;
+    z-index: 10;
+
+    .containerArrow {
+      margin-top: 25px;
+      align-self: flex-end;
+    }
+  }
+}
+
+.containerImgHexa {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  svg {
+    position: absolute;
+    z-index: 2;
+  }
+
+  .containerImg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    z-index: 5;
+
+    margin-left: 200px;
+
+    img {
+      margin-right: 50px;
+      transition: 0.3s;
+    }
+  }
+}
