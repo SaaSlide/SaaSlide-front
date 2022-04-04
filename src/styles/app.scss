@@ -1,5 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap');
 @import './variables.scss';
 
 * {
   color: rgb(0, 0, 0);
+  font-family: "Raleway";
+}
+
+a{
+  list-style: none;
+  text-decoration: none;
 }

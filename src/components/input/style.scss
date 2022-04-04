@@ -5,12 +5,17 @@
     width: fit-content;
 }
 input{  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     background-color: $color-white;
     border-radius: 7px;
     font-size: 14px;
     border: none;
-    padding: 15px 370px 15px 30px;
+    padding: 15px 0 15px 20px;
     margin: 10px 0;
+    width: 20.933vw;
 
     &::placeholder{
         color: $color-black;

@@ -13,7 +13,7 @@ export const SignIn = () => {
         <Button type="submit" className="btn-secondary" title="Connexion" />
         <div className="already-registered">
           <p>Pas encore inscrit ?</p>
-          <a>Créer un compte</a>
+          <a href="/signup">Créer un compte</a>
         </div>
       </div>
     </div>
