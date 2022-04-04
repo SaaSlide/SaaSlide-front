@@ -1,7 +1,7 @@
 @import '../../styles/variables.scss';
 
 .inputContainer{
-    position: relative;
+    width: 100%;
 
     input{  
         background-color: $color-white;
@@ -9,8 +9,7 @@
         font-size: 14px;
         border: none;
         padding: 15px 0 15px 30px;
-        margin: 10px 0;
-        
+        width: -webkit-fill-available;
         filter: drop-shadow(4px 4px 15px rgba(0, 0, 0, 0.05));
     
         &::placeholder{
@@ -20,7 +19,8 @@
 
     .eye {
         position: absolute;
-        background: red;
+        transform: translate(-30px, 50%);
+        background: none;
         border: none;
         padding: 0;
         color: $color-black;

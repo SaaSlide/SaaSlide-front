@@ -7,15 +7,17 @@ export const SignUp = () => {
     <div className="container_auth">
       <div className="auth-content">
         <h2>Créer un compte</h2>
-        <Input type="text" password={false} placeholder="Nom d'utilisateur" />
-        <Input type="email" password={false} placeholder="Email" />
-        <Input type="password" password={true} placeholder="Mot de passe" />
-        <Input
-          type="password"
-          password={true}
-          placeholder="Vérification mot de passe"
-        />
-        <Button type="submit" className="btn-secondary" title="S'inscrire" />
+        <form className="register-form">
+          <Input type="text" password={false} placeholder="Nom d'utilisateur" />
+          <Input type="email" password={false} placeholder="Email" />
+          <Input type="password" password={true} placeholder="Mot de passe" />
+          <Input
+            type="password"
+            password={true}
+            placeholder="Vérification mot de passe"
+          />
+          <Button type="submit" className="btn-secondary" title="S'inscrire" />
+        </form>
         <div className="already-registered">
           <p>Déjà inscrit ?</p>
           <a href="signin">Connectez-vous</a>
