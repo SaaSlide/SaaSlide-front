@@ -1,12 +1,17 @@
 @import '../variables.scss';
 
 .container_auth {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
 
-
+    .logo{
+        position: absolute;
+        top: 8%;
+        left: 8%;
+    }
     .login {
         display: flex;
         justify-content: center;

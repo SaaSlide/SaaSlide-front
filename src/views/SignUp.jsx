@@ -5,6 +5,9 @@ import '../styles/authentification/authentification.scss'
 export const SignUp = () => {
   return (
     <div className="container_auth">
+      <div className="logo">
+        <img src="../../public/logo.png" alt="Logo SaaSlide" />
+      </div>
       <div className="auth-content">
         <h2>Créer un compte</h2>
         <form className="register-form">
