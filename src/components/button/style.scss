@@ -1,7 +1,7 @@
 @import '../../styles/variables.scss';
 
 button{
-    background-color: $color-black; 
+    
     border-radius: 7px;
     padding: 10px 30px;
     border: none;
@@ -14,10 +14,32 @@ button{
 // Button
 .btn-primary{
     background-color: $color-primary; 
+    border: 3px solid $color-primary;
+
+    &:hover{
+        background-color: $hover-primary;
+        border: 3px solid $hover-primary;
+    }
+
+    &:focus{
+        border-color: $focus-primary;
+    }
 }
 
 .btn-secondary{
     background-color: $color-secondary; 
+    border: 3px solid $color-secondary;
+    
+    &:hover{
+        background-color: $hover-secondary;
+        border: 3px solid $hover-secondary;
+
+    }
+
+    &:focus{
+        border-color: $focus-secondary;
+    }
+
 }
 
 .btn-danger{
@@ -53,6 +75,7 @@ button{
     background-color: $color-white;
     border: 1px solid $color-secondary;
     color: $color-secondary;
+
 }
 
 .btn-danger-outline{

@@ -2,34 +2,28 @@
 
 .inputContainer{
     position: relative;
-    width: fit-content;
-}
-input{  
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    background-color: $color-white;
-    border-radius: 7px;
-    font-size: 14px;
-    border: none;
-    padding: 15px 0 15px 20px;
-    margin: 10px 0;
-    width: 20.933vw;
 
-    &::placeholder{
-        color: $color-black;
+    input{  
+        background-color: $color-white;
+        border-radius: 7px;
+        font-size: 14px;
+        border: none;
+        padding: 15px 0 15px 30px;
+        margin: 10px 0;
+        
+        filter: drop-shadow(4px 4px 15px rgba(0, 0, 0, 0.05));
+    
+        &::placeholder{
+            color: $color-black;
+        }
     }
-}
 
-.eye {
-    position: absolute;
-    right: 15px;
-    top: 3px;
-    background: none;
-    border: none;
-    height: 100%;
-    padding: 0;
-    color: $color-black;
-    cursor: pointer;
+    .eye {
+        position: absolute;
+        background: red;
+        border: none;
+        padding: 0;
+        color: $color-black;
+        cursor: pointer;
+    }
 }

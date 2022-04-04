@@ -6,7 +6,7 @@ export const SignIn = () => {
     <div className="container_auth">
       <div className="auth-content">
         <h2>Se Connecter</h2>
-        <div className="input-content">
+        <div className="input-content login">
           <Input type="email" password={false} placeholder="Email" />
           <Input type="password" password={true} placeholder="Mot de passe" />
         </div>
