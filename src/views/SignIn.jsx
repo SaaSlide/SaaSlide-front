@@ -5,7 +5,7 @@ import Logo from '../components/logo'
 export const SignIn = () => {
   return (
     <div className="container_auth">
-      <Logo />
+      <Logo width="180" />
       <div className="auth-content login">
         <h2>Se Connecter</h2>
         <form className="login-form">

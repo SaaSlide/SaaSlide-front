@@ -1,12 +1,12 @@
 import React from 'react'
 import './style.scss'
 
-const Logo = () => {
+const Logo = ({ width }) => {
   return (
     <div className="logo">
       <a href="/">
         <svg
-          width="180"
+          width={width}
           viewBox="0 0 182 140"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
