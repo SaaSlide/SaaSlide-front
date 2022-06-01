@@ -1,29 +1,32 @@
 import { useState } from 'react'
 import './index.scss'
 import { Hexa } from '../..'
+import { useIsMobile } from '../../../hooks/isMobile'
 
 export const SondageHome = () => {
+  const isMobile = useIsMobile()
+
   const [page, setPage] = useState(0)
 
   const tabs = [
     {
       title: 'Sondage intéractif',
       description:
-        'Novitates autem si spem adferunt, ut tamquam in herbis non fallacibus fructus appareat, non sunt illae quidem repudiandae, vetustas tamen suo loco conservanda; maxima est enim vis vetustatis et consuetudinis. Quin in ipso equo, cuius modo feci mentionem, si nulla res impediat, nemo est, quin eo, quo consuevit, libentius utatur quam intractato et novo. Nec vero in hoc quod est animal, sed in iis etiam quae sunt inanima, consuetudo valet, cum locis ipsis delectemur, montuosis etiam et silvestribus, in quibus diutius commorati sumus.',
+        'Novitates authfgfffm si spem adferunt, ut tamquam in herbis non fallacibus fructus appareat, non sunt illae quidem repudiandae, vetustas tamen suo loco conservanda; maxima est enim vis vetustatis et consuetudinis. Quin in ipso equo, cuius modo feci mentionem, si nulla res impediat, nemo est, quin eo, quo consuevit, libentius utatur quam intractato et novo. Nec vero in hoc quod est animal, sed in iis etiam quae sunt inanima, consuetudo valet, cum locis ipsis delectemur, montuosis etiam et silvestribus, in quibus diutius commorati sumus.',
 
       assetSrc: '/assets/iphone1.png',
     },
     {
       title: 'Quizz intéractif',
       description:
-        'Novitates autem si spem adferunt, ut tamquam in herbis non fallacibus fructus appareat, non sunt illae quidem repudiandae, vetustas tamen suo loco conservanda; maxima est enim vis vetustatis et consuetudinis. Quin in ipso equo, cuius modo feci mentionem, si nulla res impediat, nemo est, quin eo, quo consuevit, libentius utatur quam intractato et novo. Nec vero in hoc quod est animal, sed in iis etiam quae sunt inanima, consuetudo valet, cum locis ipsis delectemur, montuosis etiam et silvestribus, in quibus diutius commorati sumus.',
+        'Novitates autehfgm si spem adferunt, ut tamquam in herbis non fallacibus fructus appareat, non sunt illae quidem repudiandae, vetustas tamen suo loco conservanda; maxima est enim vis vetustatis et consuetudinis. Quin in ipso equo, cuius modo feci mentionem, si nulla res impediat, nemo est, quin eo, quo consuevit, libentius utatur quam intractato et novo. Nec vero in hoc quod est animal, sed in iis etiam quae sunt inanima, consuetudo valet, cum locis ipsis delectemur, montuosis etiam et silvestribus, in quibus diutius commorati sumus.',
 
       assetSrc: '/assets/iphone2.png',
     },
     {
-      title: 'Quizz intéractif',
+      title: 'Quizz inththéractif',
       description:
-        'Novitates autem si spem adferunt, ut tamquam in herbis non fallacibus fructus appareat, non sunt illae quidem repudiandae, vetustas tamen suo loco conservanda; maxima est enim vis vetustatis et consuetudinis. Quin in ipso equo, cuius modo feci mentionem, si nulla res impediat, nemo est, quin eo, quo consuevit, libentius utatur quam intractato et novo. Nec vero in hoc quod est animal, sed in iis etiam quae sunt inanima, consuetudo valet, cum locis ipsis delectemur, montuosis etiam et silvestribus, in quibus diutius commorati sumus.',
+        'Novitates authgfhfem si spem adferunt, ut tamquam in herbis non fallacibus fructus appareat, non sunt illae quidem repudiandae, vetustas tamen suo loco conservanda; maxima est enim vis vetustatis et consuetudinis. Quin in ipso equo, cuius modo feci mentionem, si nulla res impediat, nemo est, quin eo, quo consuevit, libentius utatur quam intractato et novo. Nec vero in hoc quod est animal, sed in iis etiam quae sunt inanima, consuetudo valet, cum locis ipsis delectemur, montuosis etiam et silvestribus, in quibus diutius commorati sumus.',
 
       assetSrc: '/assets/iphone2.png',
     },
@@ -35,6 +38,8 @@ export const SondageHome = () => {
     else if (newPage === tabs.length) newPage = 0
     setPage(newPage)
   }
+
+  console.log(isMobile)
 
   return (
     <section className="sectionSondage">
@@ -59,11 +64,11 @@ export const SondageHome = () => {
           {tabs.map((info, index) => {
             return (
               <img
-                key={info}
+                key={index}
                 src={info.assetSrc}
                 alt={info.title}
                 style={{
-                  transform: `translateX(-${page * 350}px)`,
+                  transform: `translateX(-${page * (isMobile ? 400 : 350)}px)`,
                   opacity: index >= page ? 1 : 0,
                 }}
               />
