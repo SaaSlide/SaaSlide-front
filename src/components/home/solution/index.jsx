@@ -1,11 +1,6 @@
 import { Hexa } from '../..'
 import './index.scss'
-import {
-  useViewportScroll,
-  motion,
-  useTransform,
-  useMotionValue,
-} from 'framer-motion'
+import { useViewportScroll, motion, useTransform } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 
 export const SolutionHome = () => {
@@ -36,7 +31,6 @@ export const SolutionHome = () => {
     setPhoneHeight(phone.current.getBoundingClientRect().top + window.scrollY)
   }, [phone])
 
-  console.log(scrollY)
   return (
     <section className="sectionSolution">
       <div className="imgContainer">

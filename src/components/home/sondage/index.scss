@@ -1,4 +1,6 @@
 @use '/src/styles/variable.scss' as var;
+@use '/src/styles/mixin.scss' as mix;
+
 .sectionSondage {
   min-height: 100vh;
   display: flex;
@@ -7,6 +9,10 @@
   padding: 5%;
 
   background: var.$color-white;
+  @include mix.mobile {
+    flex-direction: column-reverse;
+    justify-content: center;
+  }
 
   h5 {
     font-family: 'Raleway', sans-serif;
@@ -28,9 +34,19 @@
     position: relative;
     z-index: 10;
 
+    @include mix.mobile {
+      margin-right: 0px;
+      flex-direction: column-reverse;
+      width: 100%;
+    }
+
     .containerArrow {
       margin-top: 25px;
       align-self: flex-end;
+      @include mix.mobile {
+        align-self: center;
+        margin-bottom: 50px;
+      }
     }
   }
 }
@@ -44,6 +60,9 @@
   svg {
     position: absolute;
     z-index: 2;
+    @include mix.mobile {
+      width: 400px;
+    }
   }
 
   .containerImg {
@@ -56,9 +75,18 @@
 
     margin-left: 200px;
 
+    @include mix.mobile {
+      position: relative;
+      margin-left: 0px;
+    }
+
     img {
       margin-right: 50px;
       transition: 0.3s;
+      @include mix.mobile {
+        width: 200px;
+        margin: 0 100px;
+      }
     }
   }
 }
