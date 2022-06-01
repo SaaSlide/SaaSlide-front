@@ -4,9 +4,17 @@ import Hexagon from '../components/hexagon'
 import Input from '../components/input'
 import Logo from '../components/logo'
 import '../styles/authentification/authentification.scss'
+import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
+axios.defaults.baseURL = 'http://localhost:5000'
 
 export const SignUp = () => {
   const [isLoading, setIsLoading] = useState(false)
+  const [inputErrorPseudo, setInputErrorPseudo] = useState('')
+  const [inputErrorEmail, setInputErrorEmail] = useState('')
+  const [inputErrorPassword, setInputErrorPassword] = useState('')
+  const [inputErrorPasswordCopy, setInputErrorPasswordCopy] = useState('')
+  const navigate = useNavigate()
 
   const validatePseudo = (value) => {
     let error
@@ -41,23 +49,82 @@ export const SignUp = () => {
     return error
   }
 
+  onchange = (e) => {
+    const name = e.target.name
+    const value = e.target.value
+    if (name === 'name') {
+      setInputErrorPseudo(validatePseudo(value))
+    } else if (name === 'email') {
+      setInputErrorEmail(validateEmail(value))
+    } else if (name === 'password') {
+      setInputErrorPassword(validatePassword(value))
+    } else if (name === 'confirmPassword') {
+      const passwordInput = document.querySelector(
+        'input[name="password"]',
+      ).value
+      setInputErrorPasswordCopy(validateConfirmPassword(passwordInput, value))
+    }
+  }
+
+  const handleSubmit = (e) => {
+    console.log('submit')
+    e.preventDefault()
+    axios
+      .post('/auth/register', {
+        name: e.target[0].value,
+        mail: e.target[1].value,
+        password: e.target[2].value,
+      })
+      .then((res) => {
+        console.log(res)
+        navigate('/signin')
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
   return (
     <div className="container_auth">
       <Logo width="180" />
       <div className="auth-content">
         <h2>Créer un compte</h2>
-        <form className="register-form">
-          <Input type="text" password={false} placeholder="Nom d'utilisateur" />
-          <Input type="email" password={false} placeholder="Email" />
-          <Input type="password" password={true} placeholder="Mot de passe" />
+        <form onSubmit={handleSubmit} className="register-form">
           <Input
+            name="name"
+            type="text"
+            password={false}
+            placeholder="Nom d'utilisateur"
+            onChange={(e) => onchange(e)}
+          />
+          <p>{inputErrorPseudo}</p>
+          <Input
+            name="email"
+            type="email"
+            password={false}
+            placeholder="Email"
+            onChange={(e) => onchange(e)}
+          />
+          <p>{inputErrorEmail}</p>
+          <Input
+            name="password"
+            type="password"
+            password={true}
+            placeholder="Mot de passe"
+            onChange={(e) => onchange(e)}
+          />
+          <p>{inputErrorPassword}</p>
+          <Input
+            name="confirmPassword"
             type="password"
             password={true}
             placeholder="Vérification mot de passe"
+            onChange={(e) => onchange(e)}
           />
+          <p>{inputErrorPasswordCopy}</p>
           <Button type="submit" className="btn-secondary" title="S'inscrire" />
         </form>
-        <div className="already-registered">
+        <div className="already-registered signup">
           <p>Déjà inscrit ?</p>
           <a href="signin">Connectez-vous</a>
         </div>
