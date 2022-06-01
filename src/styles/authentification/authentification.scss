@@ -1,4 +1,5 @@
 @import '../variables.scss';
+@import '../mixin.scss';
 
 .container_auth {
     position: relative;
@@ -17,12 +18,13 @@
             text-transform: uppercase;
             font-size: 30px;
             font-weight: 600;
+            margin-bottom: 30px;
         }
 
         .already-registered {
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: center;   
             p{
                 color: $color-black;
                 
@@ -32,6 +34,10 @@
                 color: $color-primary;
                 margin-left: 5px;
             }
+        }
+
+        .signup{
+            margin-top: 15px; 
         }
     }
 
@@ -49,12 +55,33 @@
             column-gap: 2vh;
             width: 100%;
             margin-bottom: 30px;
+            @include mobile{
+                flex-direction: column;
+                .inputContainer{
+                    margin: 10px 0;
+                }
+            }
         }
 
         .submit{
             display: flex;  
+            @include mobile(){
+                flex-direction: column;
+            }
             .already-registered{
                 margin-left: 20px;
+                @include mobile(){
+                    flex-direction: column;
+                }
+            }
+
+            .signin{
+                @include mobile(){
+                    margin: 20px 0;
+                    a{
+                        margin: 5px 0;
+                    }
+                }
             }
         }
     }
