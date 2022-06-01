@@ -68,7 +68,9 @@ export const SondageHome = () => {
                 src={info.assetSrc}
                 alt={info.title}
                 style={{
-                  transform: `translateX(-${page * (isMobile ? 400 : 350)}px)`,
+                  transform: `translateX(${
+                    page * (isMobile ? -400 : -350) + (isMobile ? 400 : 0)
+                  }px)`,
                   opacity: index >= page ? 1 : 0,
                 }}
               />

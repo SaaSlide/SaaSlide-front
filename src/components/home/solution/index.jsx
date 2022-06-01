@@ -2,11 +2,13 @@ import { Hexa } from '../..'
 import './index.scss'
 import { useViewportScroll, motion, useTransform } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
+import { useIsMobile } from '../../../hooks/isMobile'
 
 export const SolutionHome = () => {
   const { scrollY } = useViewportScroll()
   const [desktopHeight, setDesktopHeight] = useState()
   const [phoneHeight, setPhoneHeight] = useState()
+  const isMobile = useIsMobile()
 
   const y1 = useTransform(
     scrollY,
@@ -43,14 +45,14 @@ export const SolutionHome = () => {
             src="/assets/phone.png"
             alt="phone_support"
             className="phoneImg"
-            style={{ y: y2 }}
+            style={{ y: isMobile ? 150 : y2 }}
           />
           <motion.img
             ref={desktop}
             src="/assets/desktop.png"
             alt="desktop_support"
             className="desktopImg"
-            style={{ y: y1 }}
+            style={{ y: isMobile ? 50 : y1 }}
           />
         </div>
       </div>
