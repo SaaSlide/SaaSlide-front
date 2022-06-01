@@ -12,12 +12,18 @@
   @include mix.mobile {
     flex-direction: column-reverse;
     justify-content: center;
+
+    max-width: 100vw;
+    overflow-x: hidden;
   }
 
   h5 {
     font-family: 'Raleway', sans-serif;
     font-size: 30px;
     margin-bottom: 40px;
+    @include mix.mobile {
+      margin-top: 40px;
+    }
   }
 
   .containerTextArrow {
@@ -46,6 +52,11 @@
       @include mix.mobile {
         align-self: center;
         margin-bottom: 50px;
+        width: 100vw;
+        position: absolute;
+        display: flex;
+        justify-content: space-between;
+        top: -290px;
       }
     }
   }
@@ -61,7 +72,8 @@
     position: absolute;
     z-index: 2;
     @include mix.mobile {
-      width: 400px;
+      top: 150px;
+      width: 300px;
     }
   }
 
@@ -86,6 +98,7 @@
       @include mix.mobile {
         width: 200px;
         margin: 0 100px;
+        margin-bottom: 50px;
       }
     }
   }

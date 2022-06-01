@@ -1,4 +1,5 @@
 @use '/src/styles/variable.scss' as var;
+@use '/src/styles/mixin.scss' as mix;
 
 .sectionPres {
   min-height: 100vh;
@@ -10,16 +11,33 @@
 
   background: var.$color-tertiary;
 
+  @include mix.mobile {
+    min-height: auto;
+  }
   .wrap {
     width: 100%;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    margin-bottom: 250px;
+    margin-bottom: 200px;
+    margin-top: 100px;
+
+    @include mix.mobile {
+      flex-direction: column;
+      margin-top: 60px;
+      margin-bottom: 100px;
+    }
 
     iframe {
       width: 50%;
       height: 60vh;
+
+      @include mix.mobile {
+        width: 95%;
+        height: 200px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
     }
 
     h5 {
@@ -27,10 +45,16 @@
       font-family: 'Raleway', sans-serif;
       width: 90%;
       margin-bottom: 30px;
+      @include mix.mobile {
+        width: 100%;
+      }
     }
 
     .btnTextContainer {
       margin-left: 10vw;
+      @include mix.mobile {
+        margin-left: 0vw;
+      }
     }
   }
 
@@ -58,26 +82,37 @@
     justify-content: center;
     align-items: center;
 
-    margin-bottom: 250px;
+    margin-bottom: 120px;
+    @include mix.mobile {
+      margin-bottom: 30px;
+    }
 
     h5 {
+      font-weight: 500;
       font-size: 30px;
       font-family: 'Raleway', sans-serif;
-      width: 90%;
+      width: 95%;
       margin-bottom: 50px;
       text-transform: uppercase;
       text-align: center;
+
+      @include mix.mobile {
+        font-size: 10px;
+      }
     }
 
     button {
       font-size: 30px;
       color: white;
       font-family: 'Raleway', sans-serif;
-
+      font-weight: 500;
       background-color: var.$color-primary;
       padding: 15px 30px;
       border: 1px solid var.$color-primary;
       border-radius: 7px;
+      @include mix.mobile {
+        font-size: 18px;
+      }
     }
   }
 }

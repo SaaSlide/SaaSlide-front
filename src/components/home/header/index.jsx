@@ -15,7 +15,7 @@ export const HeaderHome = () => {
           <div className="filterBlack" />
           <div className="textContainer textContainer1">
             <p className="title">Pour les étudiants</p>
-            <p>
+            <p className="text">
               Novitates autem si spem adferunt, ut tamquam in herbis non
               fallacibus fructus appareat, non sunt illae quidem repudiandae,
               vetustas tamen suo loco conservanda; maxima est enim vis
@@ -28,7 +28,7 @@ export const HeaderHome = () => {
           <div className="filterBlack" />
           <div className="textContainer textContainer2">
             <p className="title">Pour les étudiants</p>
-            <p>
+            <p className="text">
               Novitates autem si spem adferunt, ut tamquam in herbis non
               fallacibus fructus appareat, non sunt illae quidem repudiandae,
               vetustas tamen suo loco conservanda; maxima est enim vis
@@ -41,7 +41,7 @@ export const HeaderHome = () => {
           <div className="filterBlack" />
           <div className="textContainer textContainer3">
             <p className="title">Pour les étudiants</p>
-            <p>
+            <p className="text">
               Novitates autem si spem adferunt, ut tamquam in herbis non
               fallacibus fructus appareat, non sunt illae quidem repudiandae,
               vetustas tamen suo loco conservanda; maxima est enim vis
