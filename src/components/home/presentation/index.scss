@@ -1,0 +1,83 @@
+@use '/src/styles/variable.scss' as var;
+
+.sectionPres {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5%;
+
+  background: var.$color-tertiary;
+
+  .wrap {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-bottom: 250px;
+
+    iframe {
+      width: 50%;
+      height: 60vh;
+    }
+
+    h5 {
+      font-size: 30px;
+      font-family: 'Raleway', sans-serif;
+      width: 90%;
+      margin-bottom: 30px;
+    }
+
+    .btnTextContainer {
+      margin-left: 10vw;
+    }
+  }
+
+  .btnContainer {
+    button {
+      font-size: 18px;
+      color: white;
+
+      background-color: var.$color-secondary;
+      padding: 10px 30px;
+      border: 1px solid var.$color-secondary;
+      border-radius: 7px;
+    }
+
+    .btnPres {
+      background-color: transparent;
+      color: var.$color-secondary;
+      margin-left: 20px;
+    }
+  }
+
+  .createPres {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    margin-bottom: 250px;
+
+    h5 {
+      font-size: 30px;
+      font-family: 'Raleway', sans-serif;
+      width: 90%;
+      margin-bottom: 50px;
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    button {
+      font-size: 30px;
+      color: white;
+      font-family: 'Raleway', sans-serif;
+
+      background-color: var.$color-primary;
+      padding: 15px 30px;
+      border: 1px solid var.$color-primary;
+      border-radius: 7px;
+    }
+  }
+}

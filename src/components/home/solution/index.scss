@@ -1,0 +1,57 @@
+@use '/src/styles/variable.scss' as var;
+@use '/src/styles/mixin.scss';
+
+.sectionSolution {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5%;
+
+  .imgContainer {
+    position: relative;
+
+    .hexa {
+      position: absolute;
+      right: -30%;
+      z-index: 1;
+      width: 40vw;
+      svg {
+        width: 100%;
+      }
+    }
+
+    .imgContainerPhoneDesktop {
+      position: relative;
+      min-width: 40vw;
+      margin-right: 20%;
+    }
+
+    .desktopImg {
+      position: relative;
+      z-index: 5;
+      width: 120%;
+    }
+    .phoneImg {
+      position: absolute;
+      z-index: 8;
+      width: calc(40% - 50px);
+      right: -20%;
+    }
+  }
+
+  .textContainer {
+    position: relative;
+    z-index: 20;
+    margin-left: 15%;
+
+    .title {
+      font-family: 'Raleway', sans-serif;
+      font-size: 30px;
+      margin-bottom: 40px;
+    }
+    p {
+      width: 70%;
+    }
+  }
+}
