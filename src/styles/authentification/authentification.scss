@@ -1,0 +1,65 @@
+@import '../variables.scss';
+
+.container_auth {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+    .auth-content {
+        background-color: $color-tertiary;
+        border-radius: 20px;
+        min-width: 20vw;
+        padding: 50px 10vw;
+        
+        h2 {
+            text-transform: uppercase;
+            font-size: 30px;
+            font-weight: 600;
+        }
+
+        .already-registered {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            p{
+                color: $color-black;
+                
+            }
+
+            a{
+                color: $color-primary;
+                margin-left: 5px;
+            }
+        }
+    }
+
+    .register-form {
+        display: flex;
+        flex-direction: column;
+        row-gap: 2vh;
+        width: 100%;
+    }
+    .login-form{
+        display: flex;
+        flex-direction: column;
+        .input-content{
+            display: flex;
+            column-gap: 2vh;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        .submit{
+            display: flex;  
+            .already-registered{
+                margin-left: 20px;
+            }
+        }
+    }
+
+    .login{
+        width: 50vw;
+    }
+}

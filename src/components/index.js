@@ -1,3 +1,7 @@
 export * from './general'
 // export * from './layout'
+export * from './button'
+export * from './input'
+export * from './logo'
+export * from './hexagon'
 export * from './home'
