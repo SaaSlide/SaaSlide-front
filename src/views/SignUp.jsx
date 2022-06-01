@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Button from '../components/button'
 import Hexagon from '../components/hexagon'
 import Input from '../components/input'
@@ -83,10 +83,6 @@ export const SignUp = () => {
         console.log(err)
       })
   }
-
-  useEffect(() => {
-    onchange
-  }, [])
 
   return (
     <div className="container_auth">
