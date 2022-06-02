@@ -1,12 +1,16 @@
 import React, { useState } from 'react'
 import './style.scss'
 
-const Input = ({ password, label, placeholder }) => {
+const Input = ({ password, label, placeholder, ...rest }) => {
   const [visible, setVisible] = useState(!password)
   return (
     <div className="inputContainer">
       <label>{label}</label>
-      <input type={visible ? 'text' : 'password'} placeholder={placeholder} />
+      <input
+        type={visible ? 'text' : 'password'}
+        placeholder={placeholder}
+        {...rest}
+      />
       {password ? (
         <button className="eye" onClick={() => setVisible(!visible)}>
           {visible ? (
