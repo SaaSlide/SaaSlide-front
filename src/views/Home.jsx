@@ -3,6 +3,7 @@ import {
   SolutionHome,
   SondageHome,
   PresentationHome,
+  Footer,
 } from '../components'
 
 export const Home = () => {
@@ -12,6 +13,7 @@ export const Home = () => {
       <SolutionHome />
       <SondageHome />
       <PresentationHome />
+      <Footer />
     </>
   )
 }
