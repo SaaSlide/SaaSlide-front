@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import Button from '../components/button'
-import Hexagon from '../components/hexagon'
 import Input from '../components/input'
 import Logo from '../components/logo'
 import '../styles/authentification/authentification.scss'
@@ -129,7 +128,6 @@ export const SignUp = () => {
           <a href="signin">Connectez-vous</a>
         </div>
       </div>
-      <Hexagon className="vector" width="345" backgroundColor="#F3A953" />
     </div>
   )
 }
