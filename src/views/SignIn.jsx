@@ -1,32 +1,25 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Button from '../components/button'
 import Input from '../components/input'
 import Logo from '../components/logo'
-import axios from 'axios'
+import { TokenContext } from '../App'
+import { Login } from '../services/apiService'
 
 export const SignIn = () => {
   const navigate = useNavigate()
+  const [context, setContext] = useContext(TokenContext)
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    axios
-      .post('/auth/login', {
-        mail: e.target[0].value,
-        password: e.target[1].value,
-      })
-      .then((res) => {
-        console.log(res)
-        const date = new Date(Date.now() + 86400000)
-        document.cookie = `tokensaaslide=${
-          res.data.token
-        }; expires=${date.toUTCString()}; sameSite=strict`
-        const TokenContext = React.createContext(res.data.token)
-        navigate('/')
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+    const loginResponse = await Login(e.target[0].value, e.target[1].value)
+    if (loginResponse.status === 200) {
+      console.log(loginResponse.data.token)
+      setContext(loginResponse.data.token)
+      navigate('/')
+    } else {
+      console.log('Connexion failed')
+    }
   }
 
   return (

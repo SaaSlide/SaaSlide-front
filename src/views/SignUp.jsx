@@ -4,8 +4,7 @@ import Input from '../components/input'
 import Logo from '../components/logo'
 import '../styles/authentification/authentification.scss'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
-axios.defaults.baseURL = 'http://localhost:5000'
+import { Register } from '../services/apiService'
 
 export const SignUp = () => {
   const [isLoading, setIsLoading] = useState(false)
@@ -13,6 +12,7 @@ export const SignUp = () => {
   const [inputErrorEmail, setInputErrorEmail] = useState('')
   const [inputErrorPassword, setInputErrorPassword] = useState('')
   const [inputErrorPasswordCopy, setInputErrorPasswordCopy] = useState('')
+  const [inputError, setInputError] = useState('')
   const navigate = useNavigate()
 
   const validatePseudo = (value) => {
@@ -65,22 +65,19 @@ export const SignUp = () => {
     }
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     console.log('submit')
     e.preventDefault()
-    axios
-      .post('/auth/register', {
-        name: e.target[0].value,
-        mail: e.target[1].value,
-        password: e.target[2].value,
-      })
-      .then((res) => {
-        console.log(res)
-        navigate('/signin')
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+    let registerResponse = await Register(
+      e.target[0].value,
+      e.target[1].value,
+      e.target[2].value,
+    )
+    if (registerResponse.status === 201) {
+      navigate('/signin')
+    } else {
+      setInputError('Une erreur est survenue, veuillez réessayer')
+    }
   }
 
   return (
@@ -122,6 +119,7 @@ export const SignUp = () => {
           />
           <p>{inputErrorPasswordCopy}</p>
           <Button type="submit" className="btn-secondary" title="S'inscrire" />
+          {inputError}
         </form>
         <div className="already-registered signup">
           <p>Déjà inscrit ?</p>
