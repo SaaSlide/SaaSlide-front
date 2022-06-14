@@ -2,11 +2,11 @@
 @use '/src/styles/mixin.scss' as mix;
 
 .sectionSolution {
-  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 5%;
+  padding-bottom: 300px;
 
   @include mix.mobile {
     flex-direction: column-reverse;
