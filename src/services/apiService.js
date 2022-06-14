@@ -34,3 +34,26 @@ export const Login = (email, password) => {
       return err
     })
 }
+
+export const AddNewPdf = (userToken, pdf) => {
+  // prettier-ignore
+  const headers = {
+    'Content-Type': 'multipart/form-data',
+    'Authorization': `Bearer ${userToken[0]}`
+  }
+  const formData = new FormData()
+  formData.append('file', pdf)
+
+  return axios
+    .post('/api/diapo', formData, {
+      headers: headers,
+    })
+    .then((res) => {
+      console.log(res)
+      return res
+    })
+    .catch((err) => {
+      console.log(err)
+      return err
+    })
+}

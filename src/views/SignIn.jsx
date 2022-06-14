@@ -14,9 +14,8 @@ export const SignIn = () => {
     e.preventDefault()
     const loginResponse = await Login(e.target[0].value, e.target[1].value)
     if (loginResponse.status === 200) {
-      console.log(loginResponse.data.token)
       setContext(loginResponse.data.token)
-      navigate('/')
+      navigate('/diapo-list')
     } else {
       console.log('Connexion failed')
     }
