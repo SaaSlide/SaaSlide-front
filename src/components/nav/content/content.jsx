@@ -1,5 +1,9 @@
 import './content.scss'
 
-export const Content = (props) => {
-  return <div className="content">{props}</div>
+export const Content = () => {
+  return (
+    <div className="content">
+      <h1>Bonjour</h1>
+    </div>
+  )
 }

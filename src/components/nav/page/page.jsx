@@ -3,10 +3,10 @@ import './page.scss'
 import { Content } from '../content/content'
 import { SideBar } from '../sidebar/sidebar'
 
-export const Page = (props) => {
+export const Page = () => {
   return (
     <div className="page">
-      <SideBar routes={props.routes} />
+      <SideBar />
       <Content />
     </div>
   )
