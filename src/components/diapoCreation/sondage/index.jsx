@@ -7,13 +7,13 @@ export const Sondage = ({}) => {
     propositions.push('Nouvelle proposition')
   }
 
+  const save = () => {
+    console.log('save')
+  }
+
   return (
     <div className="container">
-      <img
-        onClick={() => console.log('set la catégorie a null')}
-        src="/assets/close_big.png"
-        alt="close"
-      />
+      <img src="/assets/close_big.png" alt="close" />
       <p>Ajouter un sondage</p>
       <div>
         {propositions.map((proposition) => {
@@ -25,7 +25,7 @@ export const Sondage = ({}) => {
           <img src="/assets/edit.png" alt="edit" />
           <p>Ajouter une proposition</p>
         </div>
-        <button>Enregistrer</button>
+        <button onClick={save}>Enregistrer</button>
       </div>
     </div>
   )
