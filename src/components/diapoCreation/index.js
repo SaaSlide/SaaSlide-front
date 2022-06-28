@@ -1,3 +1,5 @@
 export * from './layout/index'
-export * from './personalisation/index'
+export * from './parameters/index'
 export * from './sondage/index'
+export * from './content/index'
+export * from './layoutWindow/index'

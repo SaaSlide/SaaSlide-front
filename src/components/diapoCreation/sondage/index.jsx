@@ -12,8 +12,7 @@ export const Sondage = () => {
   }
 
   return (
-    <div className="container">
-      <img src="/assets/close_big.png" alt="close" />
+    <>
       <p>Ajouter un sondage</p>
       <div>
         {propositions.map((proposition, index) => {
@@ -27,6 +26,6 @@ export const Sondage = () => {
         </button>
         <button onClick={save}>Enregistrer</button>
       </div>
-    </div>
+    </>
   )
 }

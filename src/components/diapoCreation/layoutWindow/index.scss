@@ -1,0 +1,9 @@
+@use '/src/styles/variable.scss' as var;
+@use '/src/styles/mixin.scss' as mix;
+
+.container {
+  .close {
+    width: 30px;
+    height: 30px;
+  }
+}

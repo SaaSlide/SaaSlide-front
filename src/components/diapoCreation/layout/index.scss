@@ -6,9 +6,12 @@
   display: flex;
   width: 100%;
 
-  .secondContainer {
+  .contentContainer {
     width: 100%;
     padding: 30px 15px;
+    border-radius: 30px 0px 0px 0px;
+
+    background-color: var.$color-white;
 
     .buttonsContainer {
       display: flex;
@@ -17,10 +20,28 @@
       gap: 15px;
 
       margin-bottom: 90px;
+      margin-right: 50px;
+
+      height: fit-content;
 
       button {
         padding: 0;
       }
+
+      img {
+        width: 35px;
+      }
+
+      .buttonLeave {
+        color: var.$color-secondary;
+        border: 1px solid var.$color-secondary;
+        border-radius: 5px;
+        padding: 10px 30px;
+      }
     }
+  }
+
+  .imgSlider {
+    width: 80%;
   }
 }

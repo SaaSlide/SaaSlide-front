@@ -1,7 +1,6 @@
-import { useState } from 'react'
 import './links.scss'
 
-export const Links = () => {
+export const Links = ({ category, setCategory }) => {
   const sondage = {
     key: 'SONDAGE',
     value: 'Sondage',
@@ -29,8 +28,6 @@ export const Links = () => {
 
   const routes = [sondage, quizz, note, parametre]
 
-  const [link, setLink] = useState('')
-
   return (
     <div className="links">
       {routes.map((elem) => (
@@ -39,7 +36,7 @@ export const Links = () => {
           <div className="link">
             <div
               className="onclick"
-              onClick={() => setLink(elem.key)}
+              onClick={() => setCategory(elem.key)}
               aria-hidden="true"
             >
               <div className="link-icon">
@@ -47,7 +44,7 @@ export const Links = () => {
               </div>
               <p className="navlink">{elem.value}</p>
             </div>
-            <div className={link === elem.key && 'active'}></div>
+            <div className={category === elem.key && 'active'}></div>
           </div>
         </div>
       ))}
