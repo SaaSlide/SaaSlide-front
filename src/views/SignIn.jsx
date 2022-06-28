@@ -24,10 +24,9 @@ export const SignIn = () => {
 
   return (
     <div className="container_auth">
-      <Logo width="180" />
       <div className="auth-content login">
-        <h2>Se Connecter</h2>
         <form onSubmit={handleSubmit} className="login-form">
+          <h2>Se Connecter</h2>
           <div className="input-content">
             <Input type="email" password={false} placeholder="Email" />
             <Input type="password" password={true} placeholder="Mot de passe" />
@@ -41,6 +40,7 @@ export const SignIn = () => {
           </div>
         </form>
       </div>
+      <div className="container_img_login"></div>
     </div>
   )
 }

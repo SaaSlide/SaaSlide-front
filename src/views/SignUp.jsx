@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import Button from '../components/button'
 import Input from '../components/input'
-import Logo from '../components/logo'
 import '../styles/authentification/authentification.scss'
 import { useNavigate } from 'react-router-dom'
 import { Register } from '../services/apiService'
@@ -82,10 +81,9 @@ export const SignUp = () => {
 
   return (
     <div className="container_auth">
-      <Logo width="180" />
       <div className="auth-content">
-        <h2>Créer un compte</h2>
         <form onSubmit={handleSubmit} className="register-form">
+          <h2>Créer un compte</h2>
           <Input
             name="name"
             type="text"
@@ -93,7 +91,7 @@ export const SignUp = () => {
             placeholder="Nom d'utilisateur"
             onChange={(e) => onchange(e)}
           />
-          <p>{inputErrorPseudo}</p>
+          <p className="error">{inputErrorPseudo}</p>
           <Input
             name="email"
             type="email"
@@ -101,7 +99,7 @@ export const SignUp = () => {
             placeholder="Email"
             onChange={(e) => onchange(e)}
           />
-          <p>{inputErrorEmail}</p>
+          <p className="error">{inputErrorEmail}</p>
           <Input
             name="password"
             type="password"
@@ -109,7 +107,7 @@ export const SignUp = () => {
             placeholder="Mot de passe"
             onChange={(e) => onchange(e)}
           />
-          <p>{inputErrorPassword}</p>
+          <p className="error">{inputErrorPassword}</p>
           <Input
             name="confirmPassword"
             type="password"
@@ -117,15 +115,22 @@ export const SignUp = () => {
             placeholder="Vérification mot de passe"
             onChange={(e) => onchange(e)}
           />
-          <p>{inputErrorPasswordCopy}</p>
-          <Button type="submit" className="btn-secondary" title="S'inscrire" />
-          {inputError}
+          <p className="error">{inputErrorPasswordCopy}</p>
+          <div className="submit">
+            <Button
+              type="submit"
+              className="btn-secondary"
+              title="S'inscrire"
+            />
+            <div className="already-registered signup">
+              <p>Déjà inscrit ?</p>
+              <a href="signin">Connectez-vous</a>
+            </div>
+          </div>
+          <p className="error">{inputError}</p>
         </form>
-        <div className="already-registered signup">
-          <p>Déjà inscrit ?</p>
-          <a href="signin">Connectez-vous</a>
-        </div>
       </div>
+      <div className="container_img_register"></div>
     </div>
   )
 }

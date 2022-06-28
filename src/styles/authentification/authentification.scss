@@ -2,92 +2,63 @@
 @import '../mixin.scss';
 
 .container_auth {
-    position: relative;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-between;
     height: 100vh;
-    background-color: $color-white;
 
-    .auth-content {
-        background-color: $color-tertiary;
-        border-radius: 20px;
-        min-width: 20vw;
-        padding: 50px 10vw;
-        
-        h2 {
-            text-transform: uppercase;
-            font-size: 30px;
-            font-weight: 600;
-            margin-bottom: 30px;
-        }
-
-        .already-registered {
-            display: flex;
-            justify-content: center;
-            align-items: center;   
-            p{
-                color: $color-black;
-                
-            }
-
-            a{
-                color: $color-primary;
-                margin-left: 5px;
-            }
-        }
-
-        .signup{
-            margin-top: 15px; 
-        }
-    }
-
-    .register-form {
+    .auth-content{
         display: flex;
-        flex-direction: column;
-        row-gap: 2vh;
-        width: 100%;
-    }
-    .login-form{
-        display: flex;
-        flex-direction: column;
-        .input-content{
-            display: flex;
-            column-gap: 2vh;
-            width: 100%;
-            margin-bottom: 30px;
-            @include mobile{
-                flex-direction: column;
-                .inputContainer{
-                    margin: 10px 0;
-                }
-            }
-        }
+        justify-content: center;
+        align-items: center;
+        width: 50vw;
 
-        .submit{
-            display: flex;  
-            @include mobile(){
-                flex-direction: column;
+        .login-form, .register-form{
+            width: 30vw;
+
+            h2{
+                font-family: 'Raleway', sans-serif;
+                text-transform: uppercase;
+                font-size: 30px;
             }
-            .already-registered{
-                margin-left: 20px;
-                @include mobile(){
-                    flex-direction: column;
-                }
+            
+            .inputContainer{
+                margin-top: 20px;
             }
 
-            .signin{
-                @include mobile(){
-                    margin: 20px 0;
+            .submit{
+                margin-top: 20px;
+                display: flex;
+
+                .already-registered{
+                    display: flex;
+                    align-items: center;
+                    margin-left: 10px;
+
                     a{
-                        margin: 5px 0;
+                        color: $color-primary;
+                        margin-left: 8px;
                     }
                 }
             }
+            .error{
+                margin-top: 5px;
+                color: $color-danger;
+            }
         }
     }
+    .container_img_login{
+        background-color: black;
+        background-image: url('../../../public/assets/login_img.jpg');
+        background-size: cover;
+        background-position: 0%;
+        width: 50vw;
+    }
 
-    .login{
+    .container_img_register{
+        background-color: black;
+        background-image: url('../../../public/assets/register_img.jpg');
+        background-size: cover;
+        background-position: 0%;
         width: 50vw;
     }
 }
