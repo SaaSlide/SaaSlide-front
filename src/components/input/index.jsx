@@ -1,22 +1,26 @@
 import React, { useState } from 'react'
 import './style.scss'
 
-const Input = ({ password, label, placeholder, ...rest }) => {
-  const [visible, setVisible] = useState(!password)
+const Input = ({ password, label, placeholder, animation, ...rest }) => {
+  const [visible, setVisible] = useState(false)
   return (
-    <div className="inputContainer">
+    <div className={`inputContainer ${animation}`}>
       <label>{label}</label>
       <input
+        {...rest}
         type={visible ? 'text' : 'password'}
         placeholder={placeholder}
-        {...rest}
       />
       {password ? (
-        <button className="eye" onClick={() => setVisible(!visible)}>
+        <button
+          type="button"
+          className="eye"
+          onClick={() => setVisible(!visible)}
+        >
           {visible ? (
             <svg
               width="20"
-              height="14"
+              height="20"
               viewBox="0 0 20 14"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
