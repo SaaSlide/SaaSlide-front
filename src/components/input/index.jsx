@@ -7,9 +7,9 @@ const Input = ({ password, label, placeholder, animation, ...rest }) => {
     <div className={`inputContainer ${animation}`}>
       <label>{label}</label>
       <input
+        {...rest}
         type={visible ? 'text' : 'password'}
         placeholder={placeholder}
-        {...rest}
       />
       {password ? (
         <button
