@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import Button from '../components/button'
 import Input from '../components/input'
-import Logo from '../components/logo'
 import '../styles/authentification/authentification.scss'
 import { useNavigate } from 'react-router-dom'
 import { Register } from '../services/apiService'
@@ -82,50 +81,58 @@ export const SignUp = () => {
 
   return (
     <div className="container_auth">
-      <Logo width="180" />
       <div className="auth-content">
-        <h2>Créer un compte</h2>
         <form onSubmit={handleSubmit} className="register-form">
+          <h2 className="animation a1">Créer un compte</h2>
           <Input
             name="name"
             type="text"
-            password={false}
             placeholder="Nom d'utilisateur"
             onChange={(e) => onchange(e)}
+            animation="animation a2"
           />
-          <p>{inputErrorPseudo}</p>
+          <p className="error">{inputErrorPseudo}</p>
           <Input
             name="email"
             type="email"
-            password={false}
             placeholder="Email"
             onChange={(e) => onchange(e)}
+            animation="animation a3"
           />
-          <p>{inputErrorEmail}</p>
+          <p className="error">{inputErrorEmail}</p>
           <Input
             name="password"
             type="password"
             password={true}
             placeholder="Mot de passe"
             onChange={(e) => onchange(e)}
+            animation="animation a4"
           />
-          <p>{inputErrorPassword}</p>
+          <p className="error">{inputErrorPassword}</p>
           <Input
             name="confirmPassword"
             type="password"
             password={true}
             placeholder="Vérification mot de passe"
             onChange={(e) => onchange(e)}
+            animation="animation a5"
           />
-          <p>{inputErrorPasswordCopy}</p>
-          <Button type="submit" className="btn-secondary" title="S'inscrire" />
-          {inputError}
+          <p className="error">{inputErrorPasswordCopy}</p>
+          <div className="submit animation a6">
+            <Button
+              type="submit"
+              className="btn-secondary"
+              title="S'inscrire"
+            />
+            <div className="already-registered signup">
+              <p>Déjà inscrit ?</p>
+              <a href="signin">Connectez-vous</a>
+            </div>
+          </div>
+          <p className="error">{inputError}</p>
         </form>
-        <div className="already-registered signup">
-          <p>Déjà inscrit ?</p>
-          <a href="signin">Connectez-vous</a>
-        </div>
       </div>
+      <div className="container_img_register"></div>
     </div>
   )
 }
