@@ -101,6 +101,8 @@
     img {
       margin-right: 50px;
       transition: 0.3s;
+      width: 25vw;
+      max-width: 300px;
       @include mix.mobile {
         width: 200px;
         margin: 0 100px;

@@ -1,6 +1,6 @@
 import './index.scss'
 
-export const Personalisation = ({}) => {
+export const Personalisation = () => {
   return (
     <div className="container">
       <img src="/assets/close_big.png" alt="close" />

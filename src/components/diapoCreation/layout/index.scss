@@ -1,0 +1,26 @@
+@use '/src/styles/variable.scss' as var;
+@use '/src/styles/mixin.scss' as mix;
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  width: 100%;
+
+  .secondContainer {
+    width: 100%;
+    padding: 30px 15px;
+
+    .buttonsContainer {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 15px;
+
+      margin-bottom: 90px;
+
+      button {
+        padding: 0;
+      }
+    }
+  }
+}

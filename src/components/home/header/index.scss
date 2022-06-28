@@ -5,6 +5,10 @@
   min-height: 100vh;
   position: relative;
   color: var.$color-white;
+
+  a {
+    color: var.$color-white;
+  }
   a:visited {
     color: var.$color-white;
   }
