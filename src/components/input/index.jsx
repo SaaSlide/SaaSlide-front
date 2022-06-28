@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './style.scss'
 
-const Input = ({ password, label, placeholder, animation, ...rest }) => {
+const Input = ({ password, label, placeholder, animation, rest }) => {
   const [visible, setVisible] = useState(!password)
   return (
     <div className={`inputContainer ${animation}`}>
@@ -16,7 +16,7 @@ const Input = ({ password, label, placeholder, animation, ...rest }) => {
           {visible ? (
             <svg
               width="20"
-              height="14"
+              height="20"
               viewBox="0 0 20 14"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"

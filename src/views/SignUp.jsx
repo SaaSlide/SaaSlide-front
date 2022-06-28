@@ -87,10 +87,9 @@ export const SignUp = () => {
           <Input
             name="name"
             type="text"
-            password={false}
             placeholder="Nom d'utilisateur"
             onChange={(e) => onchange(e)}
-            className="animation a2"
+            animation="animation a2"
           />
           <p className="error">{inputErrorPseudo}</p>
           <Input
@@ -99,7 +98,7 @@ export const SignUp = () => {
             password={false}
             placeholder="Email"
             onChange={(e) => onchange(e)}
-            className="animation a3"
+            animation="animation a3"
           />
           <p className="error">{inputErrorEmail}</p>
           <Input
@@ -108,7 +107,6 @@ export const SignUp = () => {
             password={true}
             placeholder="Mot de passe"
             onChange={(e) => onchange(e)}
-            className="animation a4"
             animation="animation a4"
           />
           <p className="error">{inputErrorPassword}</p>
@@ -118,7 +116,6 @@ export const SignUp = () => {
             password={true}
             placeholder="Vérification mot de passe"
             onChange={(e) => onchange(e)}
-            className="animation a5"
             animation="animation a5"
           />
           <p className="error">{inputErrorPasswordCopy}</p>

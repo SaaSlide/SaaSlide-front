@@ -28,17 +28,11 @@ export const SignIn = () => {
         <form onSubmit={handleSubmit} className="login-form">
           <h2 className="animation a1">Se Connecter</h2>
           <div className="input-content">
-            <Input
-              type="email"
-              password={false}
-              placeholder="Email"
-              className="animation a2"
-            />
+            <Input type="email" placeholder="Email" animation="animation a2" />
             <Input
               type="password"
               password={true}
               placeholder="Mot de passe"
-              className="animation a3"
               animation="animation a3"
             />
           </div>
