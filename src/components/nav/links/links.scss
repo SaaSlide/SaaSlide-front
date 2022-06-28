@@ -1,0 +1,54 @@
+.links {
+    width: 100%;
+}
+
+.active {
+    width: 4px;
+    border-radius: 2px;
+    height: 100%;
+    background-color: black;
+    animation-duration: 0.2s;
+    animation-name: active;
+}
+
+.item {
+    display: flex;
+    justify-content: space-between;
+}
+
+.link {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.navlink {
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 27px;
+}
+
+.onclick {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 150px;
+}
+
+.link-icon {
+    width: 20px;
+    height: 20px;
+}
+
+@keyframes active {
+    from {
+        width: 0px;
+    }
+  
+    to {
+        width: 4px;
+    }
+  }
