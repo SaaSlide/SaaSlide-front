@@ -52,6 +52,7 @@
         background-size: cover;
         background-position: 0%;
         width: 50vw;
+        animation: right 1s;
     }
 
     .container_img_register{
@@ -60,5 +61,56 @@
         background-size: cover;
         background-position: 0%;
         width: 50vw;
+        animation: right 1s;
+    }
+}
+
+.animation{
+    animation-name: move;
+    animation-duration: .4s;
+    animation-fill-mode: both;
+    animation-delay: 1s;
+}
+
+.a1{
+    animation-delay: 0.5s;
+}
+.a2{
+    animation-delay: 0.6s;
+}
+.a3{
+    animation-delay: 0.7s;
+}
+.a4{
+    animation-delay: 0.8s;
+}
+.a5{
+    animation-delay: 0.9s;
+}
+.a6{
+    animation-delay: 1s;
+}
+
+@keyframes move {
+    0% {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-40px);
+      }
+    
+      100% {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+}
+
+@keyframes right{
+    0%{
+        z-index: 999;
+        width: 100%;
+    }
+    100%{
+        z-index: 1;
     }
 }

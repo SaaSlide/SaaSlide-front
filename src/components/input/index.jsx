@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import './style.scss'
 
-const Input = ({ password, label, placeholder, ...rest }) => {
+const Input = ({ password, label, placeholder, animation, ...rest }) => {
   const [visible, setVisible] = useState(!password)
   return (
-    <div className="inputContainer">
+    <div className={`inputContainer ${animation}`}>
       <label>{label}</label>
       <input
         type={visible ? 'text' : 'password'}

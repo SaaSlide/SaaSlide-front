@@ -26,12 +26,23 @@ export const SignIn = () => {
     <div className="container_auth">
       <div className="auth-content login">
         <form onSubmit={handleSubmit} className="login-form">
-          <h2>Se Connecter</h2>
+          <h2 className="animation a1">Se Connecter</h2>
           <div className="input-content">
-            <Input type="email" password={false} placeholder="Email" />
-            <Input type="password" password={true} placeholder="Mot de passe" />
+            <Input
+              type="email"
+              password={false}
+              placeholder="Email"
+              className="animation a2"
+            />
+            <Input
+              type="password"
+              password={true}
+              placeholder="Mot de passe"
+              className="animation a3"
+              animation="animation a3"
+            />
           </div>
-          <div className="submit">
+          <div className="submit animation a4">
             <Button type="submit" className="btn-secondary" title="Connexion" />
             <div className="already-registered signin">
               <p>Pas encore inscrit ?</p>
