@@ -10,23 +10,30 @@ export const SondageHome = () => {
 
   const tabs = [
     {
-      title: 'Sondage intéractif',
+      title: 'Sondage',
       description:
-        'Novitates authfgfffm si spem adferunt, ut tamquam in herbis non fallacibus fructus appareat, non sunt illae quidem repudiandae, vetustas tamen suo loco conservanda; maxima est enim vis vetustatis et consuetudinis. Quin in ipso equo, cuius modo feci mentionem, si nulla res impediat, nemo est, quin eo, quo consuevit, libentius utatur quam intractato et novo. Nec vero in hoc quod est animal, sed in iis etiam quae sunt inanima, consuetudo valet, cum locis ipsis delectemur, montuosis etiam et silvestribus, in quibus diutius commorati sumus.',
+        'Le présentateur pourra créer des sondages auxquels son audience pourra répondre depuis leur smarthone en temps réel. C’est une manière ludique de faire participer votre audience pour connaitre un point de vue, réaliser des statistiques. Dans les prochaines version de SasSlide il sera possible de modifier le contenu de votre dipositive en fonction des réponses aux sondages !',
 
       assetSrc: '/assets/iphone1.png',
     },
     {
-      title: 'Quizz intéractif',
+      title: 'Quizz',
       description:
-        'Novitates autehfgm si spem adferunt, ut tamquam in herbis non fallacibus fructus appareat, non sunt illae quidem repudiandae, vetustas tamen suo loco conservanda; maxima est enim vis vetustatis et consuetudinis. Quin in ipso equo, cuius modo feci mentionem, si nulla res impediat, nemo est, quin eo, quo consuevit, libentius utatur quam intractato et novo. Nec vero in hoc quod est animal, sed in iis etiam quae sunt inanima, consuetudo valet, cum locis ipsis delectemur, montuosis etiam et silvestribus, in quibus diutius commorati sumus.',
+        'Parmis les différents moyens d’intéractions, il est possible de créer des quizz auxquels le public pourra répondre depuis son smartphone. Le quizz sera afficher sur la présentation et le public recevra les réponses sur leur smartphone une fois le quizz terminé. C’est un bon moyen de faire participer votre audience ce qui peut amener à débat, peut servir d’accroche ou de transition à votre présentation.',
 
       assetSrc: '/assets/iphone2.png',
     },
     {
-      title: 'Quizz inththéractif',
+      title: 'Discussion en direct',
       description:
-        'Novitates authgfhfem si spem adferunt, ut tamquam in herbis non fallacibus fructus appareat, non sunt illae quidem repudiandae, vetustas tamen suo loco conservanda; maxima est enim vis vetustatis et consuetudinis. Quin in ipso equo, cuius modo feci mentionem, si nulla res impediat, nemo est, quin eo, quo consuevit, libentius utatur quam intractato et novo. Nec vero in hoc quod est animal, sed in iis etiam quae sunt inanima, consuetudo valet, cum locis ipsis delectemur, montuosis etiam et silvestribus, in quibus diutius commorati sumus.',
+        'L’audience dispose d’un chat qui lui permets d’intéragir en direct avec le présentateur et le reste de l’audience de manière anonyme. Le chat est une option désactivable par le présentateur durant la création de sa présentation.',
+
+      assetSrc: '/assets/iphone2.png',
+    },
+    {
+      title: 'Emojis',
+      description:
+        'Le public pourra, si il le souhaite, envoyer des émojis qui seront visible par tous durant une présentation. Cette fonction est un moyen ludique et simple pour communiquer avec l’audience et le présentateur. C’est une fonction optionnel qui pourra être désactiver par le présentateur si il le souhaite.',
 
       assetSrc: '/assets/iphone2.png',
     },
