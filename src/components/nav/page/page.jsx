@@ -9,10 +9,10 @@ export const Page = () => {
   const [ToggleSidebar, setToggleSidebar] = useState(true)
   return (
     <ToggleSideBarContext.Provider value={[ToggleSidebar, setToggleSidebar]}>
-    <div className="page">
-      <SideBar />
-      <Content />
-    </div>
+      <div className="page">
+        <SideBar />
+        <Content />
+      </div>
     </ToggleSideBarContext.Provider>
   )
 }
