@@ -95,7 +95,6 @@ export const SignUp = () => {
           <Input
             name="email"
             type="email"
-            password={false}
             placeholder="Email"
             onChange={(e) => onchange(e)}
             animation="animation a3"

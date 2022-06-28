@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import './style.scss'
 
-const Input = ({ password, label, placeholder, animation, rest }) => {
-  const [visible, setVisible] = useState(!password)
+const Input = ({ password, label, placeholder, animation, ...rest }) => {
+  const [visible, setVisible] = useState(false)
   return (
     <div className={`inputContainer ${animation}`}>
       <label>{label}</label>
@@ -12,7 +12,11 @@ const Input = ({ password, label, placeholder, animation, rest }) => {
         {...rest}
       />
       {password ? (
-        <button className="eye" onClick={() => setVisible(!visible)}>
+        <button
+          type="button"
+          className="eye"
+          onClick={() => setVisible(!visible)}
+        >
           {visible ? (
             <svg
               width="20"

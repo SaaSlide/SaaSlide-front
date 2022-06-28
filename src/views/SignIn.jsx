@@ -2,7 +2,6 @@ import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Button from '../components/button'
 import Input from '../components/input'
-import Logo from '../components/logo'
 import { TokenContext } from '../App'
 import { Login } from '../services/apiService'
 
