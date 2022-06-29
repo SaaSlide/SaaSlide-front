@@ -1,4 +1,4 @@
-import './index.scss'
+import './parameters.scss'
 
 export const Parameters = () => {
   return (

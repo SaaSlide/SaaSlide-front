@@ -1,4 +1,4 @@
-import './index.scss'
+import './layout.scss'
 import { SideBar } from '../../../layout/nav/sidebar/sidebar'
 
 export const LayoutCreation = ({ children, category, setCategory }) => {

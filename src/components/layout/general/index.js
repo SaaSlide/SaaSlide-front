@@ -1,2 +1,2 @@
-export * from './hexagone/index'
-export * from './footer/index'
+export * from './hexagone/hexagone'
+export * from './footer/footer'

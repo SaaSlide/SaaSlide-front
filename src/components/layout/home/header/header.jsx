@@ -1,10 +1,10 @@
-import './index.scss'
+import './header.scss'
 
 export const HeaderHome = () => {
   return (
     <header className="header">
       <nav>
-        <img src="/assets/logo_blanc.png" alt="logo" />
+        <img src="/assets/images/logo_blanc.png" alt="logo" />
         <div>
           <a href="/signup">S'inscrire</a>
           <a href="/signin">Se connecter</a>

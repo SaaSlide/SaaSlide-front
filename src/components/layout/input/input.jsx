@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import './style.scss'
+import './input.scss'
 
 const Input = ({ password, label, placeholder, animation, ...rest }) => {
-  const [visible, setVisible] = useState(false)
+  const [visible, setVisible] = useState(!password)
   return (
     <div className={`inputContainer ${animation}`}>
       <label>{label}</label>

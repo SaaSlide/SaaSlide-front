@@ -1,7 +1,7 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { SignIn, SignUp, Home, DiapoCreation } from './views'
-import { ImportPdf } from './components/business/ImportPdf'
+import { ImportPdf } from './components/business/ImportPdf/importPdf'
 
 const RoutesApp = () => {
   return (

@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import './index.scss'
-import { Hexa } from '../../general/hexagone/index'
+import './sondage.scss'
+import { Hexa } from '../../general/hexagone/hexagone'
 import { useIsMobile } from '../../../../utils/hooks/isMobile'
 
 export const SondageHome = () => {

@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react'
-import './style.scss'
+import './pdfList.scss'
 import { TokenContext } from '../../../App'
 import {
   GetAllDiapoForUser,

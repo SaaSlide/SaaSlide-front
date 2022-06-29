@@ -1,4 +1,4 @@
-import './index.scss'
+import './sondage.scss'
 
 export const Sondage = () => {
   const propositions = ['A', 'B', 'C']

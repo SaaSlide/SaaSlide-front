@@ -1,7 +1,7 @@
-import './index.scss'
-import { Sondage } from '../sondage'
-import { Parameters } from '../parameters'
-import { LayoutWindow } from '../layoutWindow'
+import './content.scss'
+import { Sondage } from '../sondage/sondage'
+import { Parameters } from '../parameters/parameters'
+import { LayoutWindow } from '../layoutWindow/layoutWindow'
 
 export const ContentCreation = ({ category, setCategory }) => {
   const renderCategory = () => {

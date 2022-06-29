@@ -1,4 +1,4 @@
-import './index.scss'
+import './layoutWindow.scss'
 
 export const LayoutWindow = ({ children, setCategory }) => {
   return (

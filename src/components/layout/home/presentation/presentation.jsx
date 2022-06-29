@@ -1,4 +1,4 @@
-import './index.scss'
+import './presentation.scss'
 
 export const PresentationHome = () => {
   return (

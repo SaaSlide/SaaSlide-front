@@ -1,5 +1,5 @@
 import React from 'react'
-import './style.scss'
+import './hexagon.scss'
 
 const Hexagon = ({ className, width, backgroundColor }) => {
   return (

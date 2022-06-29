@@ -1,5 +1,5 @@
-import { Hexa } from '../../general/hexagone/index'
-import './index.scss'
+import { Hexa } from '../../general/hexagone/hexagone'
+import './solution.scss'
 import { useViewportScroll, motion, useTransform } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 import { useIsMobile } from '../../../../utils/hooks/isMobile'

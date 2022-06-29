@@ -1,4 +1,4 @@
-import './index.scss'
+import './footer.scss'
 import { useIsMobile } from '../../../../utils/hooks/isMobile'
 
 export const Footer = () => {
