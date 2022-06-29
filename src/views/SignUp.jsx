@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import Button from '../components/button'
-import Input from '../components/input'
+import Button from '../components/layout/button'
+import Input from '../components/layout/input'
 import '../styles/authentification/authentification.scss'
 import { useNavigate } from 'react-router-dom'
 import { Register } from '../services/apiService'

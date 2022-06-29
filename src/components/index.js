@@ -1,4 +1,2 @@
-export * from './general'
-// export * from './layout'
-export * from './home'
-export * from './diapoCreation'
+export * from './business'
+export * from './layout'

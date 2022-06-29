@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
-import { TokenContext } from '../../App'
-import { AddNewPdf } from '../../services/apiService'
-import Button from '../button'
+import { TokenContext } from '../../../App'
+import { AddNewPdf } from '../../../services/apiService'
+import Button from '../../layout/button'
 import './style.scss'
 
 export const ImportPdf = () => {

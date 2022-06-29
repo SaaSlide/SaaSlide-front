@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
-import Button from '../components/button'
-import Input from '../components/input'
+import Button from '../components/layout/button'
+import Input from '../components/layout/input'
 import { TokenContext } from '../App'
 import { Login } from '../services/apiService'
 
