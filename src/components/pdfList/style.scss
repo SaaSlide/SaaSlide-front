@@ -1,0 +1,19 @@
+.diapo-list {
+  display: flex;
+}
+
+.diapoCover {
+  margin: 0 3vw 3vh 0;
+}
+
+.diapoCover-img {
+  width: 30vw;
+  height: 35vh;
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.25);
+}
+
+.cross-delete {
+  position: relative;
+  top: 0px;
+  left: 0px;
+}
