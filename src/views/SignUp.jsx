@@ -13,6 +13,7 @@ export const SignUp = () => {
   const [inputErrorPassword, setInputErrorPassword] = useState('')
   const [inputErrorPasswordCopy, setInputErrorPasswordCopy] = useState('')
   const [inputError, setInputError] = useState('')
+  const [passwordVerify, setPasswordVerify] = useState('')
   const navigate = useNavigate()
   const isMobile = useIsMobile()
 
@@ -52,6 +53,12 @@ export const SignUp = () => {
   onchange = (e) => {
     const name = e.target.name
     const value = e.target.value
+
+    const passwordInput = document.querySelector('input[name="password"]').value
+    const confirmPasswordInput = document.querySelector(
+      'input[name="confirmPassword"]',
+    ).value
+
     if (name === 'name') {
       setInputErrorPseudo(validatePseudo(value))
     } else if (name === 'email') {
@@ -59,10 +66,10 @@ export const SignUp = () => {
     } else if (name === 'password') {
       setInputErrorPassword(validatePassword(value))
     } else if (name === 'confirmPassword') {
-      const passwordInput = document.querySelector(
-        'input[name="password"]',
-      ).value
       setInputErrorPasswordCopy(validateConfirmPassword(passwordInput, value))
+    }
+    if (passwordInput === confirmPasswordInput) {
+      setPasswordVerify(passwordInput)
     }
   }
 
@@ -72,7 +79,7 @@ export const SignUp = () => {
     let registerResponse = await Register(
       e.target[0].value,
       e.target[1].value,
-      e.target[2].value,
+      passwordVerify,
     )
     if (registerResponse.status === 201) {
       navigate('/signin')
