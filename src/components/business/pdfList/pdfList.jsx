@@ -8,12 +8,13 @@ import {
 
 export const PdfList = () => {
   const userToken = useContext(TokenContext)
-  const [pdfs, setPdfs] = useState(null)
+  const [pdfs, setPdfs] = useState(undefined)
   const [isDiapoHovered, setIsDiapoHovered] = useState(false)
   const [onDeleteMessage, setOnDeleteMessage] = useState('')
 
   const getAllDiapo = async () => {
     let response = await GetAllDiapoForUser(userToken)
+    console.log(response)
     setPdfs(response)
   }
 

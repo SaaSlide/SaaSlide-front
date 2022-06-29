@@ -1,5 +1,5 @@
 import './profilemodal.scss'
-import Button from '../../../button'
+import Button from '../../../../../button/button'
 
 export const ProfileModal = (props) => {
   return (

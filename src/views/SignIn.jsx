@@ -14,7 +14,7 @@ export const SignIn = () => {
     const loginResponse = await Login(e.target[0].value, e.target[1].value)
     if (loginResponse.status === 200) {
       setContext(loginResponse.data.token)
-      navigate('/diapo-list')
+      navigate('/managepdf')
     } else {
       console.log('Connexion failed')
     }

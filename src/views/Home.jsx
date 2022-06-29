@@ -3,8 +3,8 @@ import {
   SolutionHome,
   SondageHome,
   PresentationHome,
-  Footer,
-} from '../components'
+} from '../components/layout/home'
+import { Footer } from '../components/layout/general'
 
 export const Home = () => {
   return (

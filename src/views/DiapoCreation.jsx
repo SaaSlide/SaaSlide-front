@@ -1,4 +1,7 @@
-import { LayoutCreation, ContentCreation } from '../components'
+import {
+  LayoutCreation,
+  ContentCreation,
+} from '../components/business/diapoCreation'
 import { useState } from 'react'
 
 export const DiapoCreation = () => {
