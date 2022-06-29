@@ -5,25 +5,25 @@ export const Links = ({ category, setCategory }) => {
     key: 'SONDAGE',
     value: 'Sondage',
     tabIndex: 0,
-    icon: '/assets/sondageicon.svg',
+    icon: '/assets/icons/sondageicon.svg',
   }
   const quizz = {
     key: 'QUIZZ',
     value: 'Quizz',
     tabIndex: 1,
-    icon: '/assets/quizzicon.svg',
+    icon: '/assets/icons/quizzicon.svg',
   }
   const note = {
     key: 'NOTE',
     value: 'Note',
     tabIndex: 2,
-    icon: '/assets/noteicon.svg',
+    icon: '/assets/icons/noteicon.svg',
   }
   const parametre = {
     key: 'PARAMETRE',
     value: 'Paramètres',
     tabIndex: 3,
-    icon: '/assets/paramsicon.svg',
+    icon: '/assets/icons/paramsicon.svg',
   }
 
   const routes = [sondage, quizz, note, parametre]

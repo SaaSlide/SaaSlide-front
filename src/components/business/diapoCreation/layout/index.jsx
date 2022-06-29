@@ -1,5 +1,5 @@
 import './index.scss'
-import { SideBar } from '../../nav/sidebar/sidebar'
+import { SideBar } from '../../../layout/nav/sidebar/sidebar'
 
 export const LayoutCreation = ({ children, category, setCategory }) => {
   const startProject = () => {

@@ -1,4 +1,6 @@
+import { useState } from 'react'
 import './index.scss'
+import { motion } from 'framer-motion'
 
 export const Hexa = ({ color = 'white' }) => {
   return (

@@ -1,5 +1,5 @@
 import './index.scss'
-import { useIsMobile } from '../../../hooks/isMobile'
+import { useIsMobile } from '../../../../utils/hooks/isMobile'
 
 export const Footer = () => {
   const isMobile = useIsMobile()
@@ -23,13 +23,13 @@ export const Footer = () => {
       <div>
         <div className="containerLogo">
           <a href="https://facebook.com/">
-            <img src="/assets/facebook.svg" alt="logo facebook" />
+            <img src="/assets/icons/facebook.svg" alt="logo facebook" />
           </a>
           <a href="https://twitter.com/">
-            <img src="/assets/twitter.svg" alt="logo twitter" />
+            <img src="/assets/icons/twitter.svg" alt="logo twitter" />
           </a>
           <a href="https://linkedin.com/">
-            <img src="/assets/LinkedIn.svg" alt="logo linkedin" />
+            <img src="/assets/icons/LinkedIn.svg" alt="logo linkedin" />
           </a>
         </div>
         <p>

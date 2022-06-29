@@ -1,7 +1,10 @@
 import React, { useContext, useState, useEffect } from 'react'
 import './style.scss'
 import { TokenContext } from '../../../App'
-import { GetAllDiapoForUser, DeleteDiapoById } from '../../../services/apiService'
+import {
+  GetAllDiapoForUser,
+  DeleteDiapoById,
+} from '../../../services/apiService'
 
 export const PdfList = () => {
   const userToken = useContext(TokenContext)

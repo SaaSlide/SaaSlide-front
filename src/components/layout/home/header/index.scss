@@ -1,6 +1,5 @@
-@use '/src/styles/variable.scss' as var;
-@use '/src/styles/mixin.scss' as mix;
-
+@use '../../../../assets/styles/variable.scss' as var;
+@use '../../../../assets/styles/mixin.scss' as mix;
 .header {
   min-height: 100vh;
   position: relative;
@@ -133,13 +132,13 @@
     }
 
     .bg1 {
-      background-image: url('../../../../public/assets/header-image1.jpg');
+      background-image: url('../../../../../public/assets/images/header-image1.jpg');
     }
     .bg2 {
-      background-image: url('../../../../public/assets/header-image2.jpg');
+      background-image: url('../../../../../public/assets/images/header-image2.jpg');
     }
     .bg3 {
-      background-image: url('../../../../public/assets/header-image3.jpg');
+      background-image: url('../../../../../public/assets/images/header-image3.jpg');
     }
   }
 }

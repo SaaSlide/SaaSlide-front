@@ -1,8 +1,8 @@
-import { Hexa } from '../..'
+import { Hexa } from '../../general/hexagone/index'
 import './index.scss'
 import { useViewportScroll, motion, useTransform } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
-import { useIsMobile } from '../../../hooks/isMobile'
+import { useIsMobile } from '../../../../utils/hooks/isMobile'
 
 export const SolutionHome = () => {
   const { scrollY } = useViewportScroll()
@@ -42,14 +42,14 @@ export const SolutionHome = () => {
         <div className="imgContainerPhoneDesktop">
           <motion.img
             ref={phone}
-            src="/assets/phone.png"
+            src="/assets/images/phone.png"
             alt="phone_support"
             className="phoneImg"
             style={{ y: isMobile ? 150 : y2 }}
           />
           <motion.img
             ref={desktop}
-            src="/assets/desktop.png"
+            src="/assets/images/desktop.png"
             alt="desktop_support"
             className="desktopImg"
             style={{ y: isMobile ? 50 : y1 }}
