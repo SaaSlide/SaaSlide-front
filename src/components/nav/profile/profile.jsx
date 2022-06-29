@@ -1,12 +1,21 @@
+import { useState } from 'react'
+import { ProfileModal } from './modalprofile/profilemodal'
+import './profile.scss'
+
 export const Profile = () => {
+  const [toggleModal, setToggleModal] = useState(false)
+
   return (
     <div>
       <div>
-        <h1>image</h1>
+        <div onClick={() => setToggleModal(!toggleModal)} aria-hidden="true">
+          <h1>image</h1>
+        </div>
+        <div>
+          <h2>Name</h2>
+        </div>
       </div>
-      <div>
-        <h2>Mon peudo</h2>
-      </div>
+      {toggleModal && <ProfileModal closeModal={() => setToggleModal()} />}
     </div>
   )
 }

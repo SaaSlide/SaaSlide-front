@@ -44,7 +44,7 @@ button{
 
 .btn-danger{
     background-color: $color-danger;
-    border: 3px solid $color-secondary;
+    border: 3px solid $color-danger;
     
     &:hover{
         background-color: $hover-danger;
