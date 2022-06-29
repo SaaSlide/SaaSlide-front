@@ -1,11 +1,12 @@
 import './layoutWindow.scss'
 
-export const LayoutWindow = ({ children, setCategory }) => {
+export const LayoutWindow = ({ children, setCategory, title }) => {
   return (
-    <div className="container">
+    <div className="containerModify">
       <button className="close" onClick={() => setCategory('')}>
-        <img src="/assets/close_big.png" alt="close" />
+        <img src="/assets/images/close_big.png" alt="close" />
       </button>
+      <h5>{title}</h5>
       {children}
     </div>
   )

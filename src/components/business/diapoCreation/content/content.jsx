@@ -7,17 +7,24 @@ export const ContentCreation = ({ category, setCategory }) => {
   const renderCategory = () => {
     switch (category) {
       case 'SONDAGE':
-        return <Sondage />
+        return (
+          <LayoutWindow setCategory={setCategory} title={'Ajouter un sondage'}>
+            <Sondage />
+          </LayoutWindow>
+        )
       case 'PARAMETRE':
-        return <Parameters />
+        return (
+          <LayoutWindow
+            setCategory={setCategory}
+            title={'Paramètre de personnalisation'}
+          >
+            <Parameters />
+          </LayoutWindow>
+        )
       default:
         return <></>
     }
   }
 
-  return category === '' ? (
-    <>{renderCategory()}</>
-  ) : (
-    <LayoutWindow setCategory={setCategory}>{renderCategory()}</LayoutWindow>
-  )
+  return renderCategory()
 }

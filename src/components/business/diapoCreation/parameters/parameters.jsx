@@ -3,8 +3,6 @@ import './parameters.scss'
 export const Parameters = () => {
   return (
     <>
-      <p>Paramètre de personnalisation</p>
-
       <div>
         <label htmlFor="envoiQuestion">Envoi de questions</label>
         <input id="envoiQuestion" type="checkbox" />

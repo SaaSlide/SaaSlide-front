@@ -41,7 +41,34 @@
     }
   }
 
-  .imgSlider {
-    width: 80%;
+  .containerSlider {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+
+    button {
+      padding: 0;
+    }
+
+    .numberSlider {
+      position: absolute;
+      color: var.$color-black;
+      bottom: -30px;
+      left: 85px;
+      font-size: 14px;
+    }
+
+    .sliderImgContainer {
+      display: flex;
+      width: 65vw;
+      overflow: hidden;
+
+      .imgSlider {
+        min-width: 100%;
+        transition: 0.3s;
+      }
+    }
   }
 }

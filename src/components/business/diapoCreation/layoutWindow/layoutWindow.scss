@@ -1,9 +1,22 @@
 @use '../../../../assets/styles/variable.scss' as var;
 @use '../../../../assets/styles/mixin.scss' as mix;
 
-.container {
+.containerModify {
+  position: relative;
+  padding: 40px 30px 40px 5%;
+  margin-bottom: 40px;
+
+  display: flex;
+  flex-direction: column;
+
+  background-color: var.$color-tertiary;
+  border-radius: 10px;
+  height: auto;
   .close {
+    position: absolute;
     width: 30px;
     height: 30px;
+    right: 15px;
+    top: 15px;
   }
 }
