@@ -4,6 +4,7 @@ import Input from '../components/layout/input/input'
 import '../assets/styles/authentification/authentification.scss'
 import { useNavigate } from 'react-router-dom'
 import { Register } from '../services/apiService'
+import { useIsMobile } from '../utils/hooks/isMobile'
 
 export const SignUp = () => {
   const [isLoading, setIsLoading] = useState(false)
@@ -13,6 +14,7 @@ export const SignUp = () => {
   const [inputErrorPasswordCopy, setInputErrorPasswordCopy] = useState('')
   const [inputError, setInputError] = useState('')
   const navigate = useNavigate()
+  const isMobile = useIsMobile()
 
   const validatePseudo = (value) => {
     let error
@@ -81,58 +83,116 @@ export const SignUp = () => {
 
   return (
     <div className="container_auth">
-      <div className="auth-content">
-        <form onSubmit={handleSubmit} className="register-form">
-          <h2 className="animation a1">Créer un compte</h2>
-          <Input
-            name="name"
-            type="text"
-            placeholder="Nom d'utilisateur"
-            onChange={(e) => onchange(e)}
-            animation="animation a2"
-          />
-          <p className="error">{inputErrorPseudo}</p>
-          <Input
-            name="email"
-            type="email"
-            placeholder="Email"
-            onChange={(e) => onchange(e)}
-            animation="animation a3"
-          />
-          <p className="error">{inputErrorEmail}</p>
-          <Input
-            name="password"
-            type="password"
-            password={true}
-            placeholder="Mot de passe"
-            onChange={(e) => onchange(e)}
-            animation="animation a4"
-          />
-          <p className="error">{inputErrorPassword}</p>
-          <Input
-            name="confirmPassword"
-            type="password"
-            password={true}
-            placeholder="Vérification mot de passe"
-            onChange={(e) => onchange(e)}
-            animation="animation a5"
-          />
-          <p className="error">{inputErrorPasswordCopy}</p>
-          <div className="submit animation a6">
-            <Button
-              type="submit"
-              className="btn-secondary"
-              title="S'inscrire"
-            />
-            <div className="already-registered signup">
-              <p>Déjà inscrit ?</p>
-              <a href="signin">Connectez-vous</a>
-            </div>
+      {!isMobile ? (
+        <>
+          <div className="auth-content">
+            <form onSubmit={handleSubmit} className="register-form">
+              <h2 className="animation a1">Créer un compte</h2>
+              <Input
+                name="name"
+                type="text"
+                placeholder="Nom d'utilisateur"
+                onChange={(e) => onchange(e)}
+                animation="animation a2"
+              />
+              <p className="error">{inputErrorPseudo}</p>
+              <Input
+                name="email"
+                type="email"
+                placeholder="Email"
+                onChange={(e) => onchange(e)}
+                animation="animation a3"
+              />
+              <p className="error">{inputErrorEmail}</p>
+              <Input
+                name="password"
+                type="password"
+                password={true}
+                placeholder="Mot de passe"
+                onChange={(e) => onchange(e)}
+                animation="animation a4"
+              />
+              <p className="error">{inputErrorPassword}</p>
+              <Input
+                name="confirmPassword"
+                type="password"
+                password={true}
+                placeholder="Vérification mot de passe"
+                onChange={(e) => onchange(e)}
+                animation="animation a5"
+              />
+              <p className="error">{inputErrorPasswordCopy}</p>
+              <div className="submit animation a6">
+                <Button
+                  type="submit"
+                  className="btn-secondary"
+                  title="S'inscrire"
+                />
+                <div className="already-registered signup">
+                  <p>Déjà inscrit ?</p>
+                  <a href="signin">Connectez-vous</a>
+                </div>
+              </div>
+              <p className="error">{inputError}</p>
+            </form>
           </div>
-          <p className="error">{inputError}</p>
-        </form>
-      </div>
-      <div className="container_img_register"></div>
+          <div className="container_img_register"></div>
+        </>
+      ) : (
+        <div className="container-auth-mobile register">
+          <div className="auth-content-mobile">
+            <form onSubmit={handleSubmit} className="register-form">
+              <h2 className="animation a1">Créer un compte</h2>
+              <Input
+                name="name"
+                type="text"
+                placeholder="Nom d'utilisateur"
+                onChange={(e) => onchange(e)}
+                animation="animation a2"
+              />
+              <p className="error">{inputErrorPseudo}</p>
+              <Input
+                name="email"
+                type="email"
+                placeholder="Email"
+                onChange={(e) => onchange(e)}
+                animation="animation a3"
+              />
+              <p className="error">{inputErrorEmail}</p>
+              <Input
+                name="password"
+                type="password"
+                password={true}
+                placeholder="Mot de passe"
+                onChange={(e) => onchange(e)}
+                animation="animation a4"
+              />
+              <p className="error">{inputErrorPassword}</p>
+              <Input
+                name="confirmPassword"
+                type="password"
+                password={true}
+                placeholder="Vérification mot de passe"
+                onChange={(e) => onchange(e)}
+                animation="animation a5"
+              />
+              <p className="error">{inputErrorPasswordCopy}</p>
+              <div className="submit animation a6">
+                <Button
+                  type="submit"
+                  className="btn-secondary"
+                  title="S'inscrire"
+                />
+                <div className="already-registered signup">
+                  <p>Déjà inscrit ?</p>
+                  <a href="signin">Connectez-vous</a>
+                </div>
+              </div>
+              <p className="error">{inputError}</p>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
