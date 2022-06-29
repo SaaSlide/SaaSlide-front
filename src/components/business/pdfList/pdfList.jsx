@@ -58,7 +58,7 @@ export const PdfList = () => {
                 <button onClick={() => deleteDiapo(diapo._id)}>
                   <img
                     className="cross-delete"
-                    src="/assets/cross-delete.svg"
+                    src="/assets/icons/cross-delete.svg"
                     alt="Croix de suppression"
                   />
                 </button>
