@@ -1,26 +1,20 @@
 import './content.scss'
 import { Sondage } from '../sondage/sondage'
 import { Parameters } from '../parameters/parameters'
-import { LayoutWindow } from '../layoutWindow/layoutWindow'
+import { Note } from '../note/note'
+import { Quizz } from '../quizz/quizz'
 
 export const ContentCreation = ({ category, setCategory }) => {
   const renderCategory = () => {
     switch (category) {
       case 'SONDAGE':
-        return (
-          <LayoutWindow setCategory={setCategory} title={'Ajouter un sondage'}>
-            <Sondage />
-          </LayoutWindow>
-        )
+        return <Sondage setCategory={setCategory} />
+      case 'QUIZZ':
+        return <Quizz setCategory={setCategory} />
+      case 'NOTE':
+        return <Note setCategory={setCategory} />
       case 'PARAMETRE':
-        return (
-          <LayoutWindow
-            setCategory={setCategory}
-            title={'Paramètre de personnalisation'}
-          >
-            <Parameters />
-          </LayoutWindow>
-        )
+        return <Parameters setCategory={setCategory} />
       default:
         return <></>
     }
