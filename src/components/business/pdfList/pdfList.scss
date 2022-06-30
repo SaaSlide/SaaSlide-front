@@ -1,9 +1,12 @@
 .diapo-list {
   display: flex;
+  flex-wrap: wrap;
+  width: 70vw;
 }
 
 .diapoCover {
   margin: 0 3vw 3vh 0;
+  position: relative;
 }
 
 .diapoCover-img {
@@ -13,7 +16,9 @@
 }
 
 .cross-delete {
-  position: relative;
-  top: 0px;
-  left: 0px;
+  position: absolute;
+  top: -25px;
+  left: -25px;
+  margin: 0 0 0 0;
+  padding: 0;
 }

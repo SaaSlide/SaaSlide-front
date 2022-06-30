@@ -45,7 +45,7 @@ export const ImportPdf = () => {
       <p className="importpdfContainer-subtitle">PDF de 20mo max</p>
       <form onSubmit={handleSubmit} className="importpdfContainer-form">
         <div>
-          <label htmlFor="file" className="button btn-secondary">
+          <label htmlFor="file" className="button-label btn-secondary-label">
             <input
               className="importpdfContainer-input"
               onChange={(e) => onChange(e.target.files[0])}
