@@ -14,18 +14,18 @@ export const PdfList = () => {
 
   const getAllDiapo = async () => {
     let response = await GetAllDiapoForUser(userToken)
-    setPdfs(response)
+    setPdfs(response.reverse())
   }
 
   const deleteDiapo = async (diapoId) => {
     console.log(diapoId)
     const deleteResponse = await DeleteDiapoById(userToken, diapoId)
     // TODO: never go in if even status is 200
-    if (deleteResponse.status === 200) {
-      setOnDeleteMessage('Fichier supprimé')
-    } else {
-      setOnDeleteMessage('Une erreur est survenu, veuillez réesseyer')
-    }
+    // if (deleteResponse.status === 200) {
+    //   setOnDeleteMessage('Fichier supprimé')
+    // } else {
+    //   setOnDeleteMessage('Une erreur est survenu, veuillez réesseyer')
+    // }
     getAllDiapo()
   }
 
@@ -36,14 +36,24 @@ export const PdfList = () => {
   return (
     <div>
       <h4>RECENT</h4>
-      {onDeleteMessage && <span>{onDeleteMessage}</span>}
+      {onDeleteMessage && (
+        <span
+          className={
+            onDeleteMessage
+              ? 'importpdfContainer-status-failed'
+              : 'importpdfContainer-status'
+          }
+        >
+          {onDeleteMessage}
+        </span>
+      )}
       <div className="diapo-list">
         {pdfs &&
-          pdfs.map((diapo, index) => (
+          pdfs.map((diapo) => (
             <div
-              key={index}
+              key={diapo._id}
               className="diapoCover"
-              onMouseEnter={() => setIsDiapoHovered(true)}
+              onMouseEnter={() => setIsDiapoHovered(diapo._id)}
               onMouseLeave={() => setIsDiapoHovered(false)}
             >
               <img
@@ -54,10 +64,12 @@ export const PdfList = () => {
                 }
                 alt="Première page diaporama"
               />
-              {isDiapoHovered && (
-                <button onClick={() => deleteDiapo(diapo._id)}>
+              {isDiapoHovered === diapo._id && (
+                <button
+                  onClick={() => deleteDiapo(diapo._id)}
+                  className="cross-delete"
+                >
                   <img
-                    className="cross-delete"
                     src="/assets/icons/cross-delete.svg"
                     alt="Croix de suppression"
                   />
