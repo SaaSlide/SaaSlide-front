@@ -195,7 +195,11 @@ export const SignUp = () => {
                   <a href="signin">Connectez-vous</a>
                 </div>
               </div>
-              <p className="error">{inputError}</p>
+              {inputError ? (
+                <p className="input-error">{inputError}</p>
+              ) : (
+                <p>{inputError}</p>
+              )}
             </form>
           </div>
         </div>
