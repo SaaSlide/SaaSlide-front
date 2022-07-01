@@ -1,30 +1,52 @@
 import './sondage.scss'
+import { LayoutWindow } from '../layoutWindow/layoutWindow'
+import { useState } from 'react'
 
-export const Sondage = () => {
-  const propositions = ['A', 'B', 'C']
+export const Sondage = ({ setCategory }) => {
+  const [propositions, setPropositions] = useState(['A', 'B', 'C'])
 
   const addProposition = () => {
-    propositions.push('Nouvelle proposition')
+    const newPropositions = [...propositions]
+    newPropositions.push('')
+    setPropositions(newPropositions)
   }
-
-  const save = () => {
-    console.log('save')
+  const deleteProposition = (index) => {
+    console.log(index)
+    const newPropositions = [...propositions]
+    newPropositions.splice(index, 1)
+    setPropositions(newPropositions)
   }
 
   return (
-    <>
-      <div>
+    <LayoutWindow setCategory={setCategory} title={'Ajouter un sondage'}>
+      <div className="propositionsContainer">
         {propositions.map((proposition, index) => {
-          return <input key={index} type="text" value={proposition} />
+          return (
+            <div key={index} className="inputContainerProposition">
+              <button onClick={() => deleteProposition(index)}>
+                <img src="/assets/images/close_big.png" alt="close" />
+              </button>{' '}
+              <input
+                type="text"
+                value={proposition}
+                // onChange={(e) =>
+                //   setPropositions()
+                // }
+              />
+            </div>
+          )
         })}
       </div>
-      <div>
-        <button onClick={addProposition}>
-          <img src="/assets/images/edit.png" alt="edit" />
-          <p>Ajouter une proposition</p>
-        </button>
-        <button onClick={save}>Enregistrer</button>
-      </div>
-    </>
+      <button
+        disabled={propositions.length === 4}
+        className={`addProposition ${
+          propositions.length === 4 ? 'disabledProp' : ''
+        }`}
+        onClick={addProposition}
+      >
+        <img src="/assets/images/edit.png" alt="edit" />
+        <p>Ajouter une proposition</p>
+      </button>
+    </LayoutWindow>
   )
 }
