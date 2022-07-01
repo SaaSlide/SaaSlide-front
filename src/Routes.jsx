@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { SignIn, SignUp, Home, DiapoCreation } from './views'
 import { ImportPdf } from './components/business/ImportPdf/importPdf'
 import { PdfList } from './components'
+import { useCookie } from './utils/cookie/cookie'
 
 const RoutesApp = () => {
+  useCookie()
+
   return (
     <Routes>
       <Route path="/signin" element={<SignIn />} />
