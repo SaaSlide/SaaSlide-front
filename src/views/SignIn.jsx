@@ -9,18 +9,6 @@ export const SignIn = () => {
   const navigate = useNavigate()
   const [context, setContext] = useContext(TokenContext)
 
-  if (document.cookie && document.cookie !== '') {
-    let cookies = document.cookie.split(';')
-    cookies.forEach((cookie) => {
-      const cookieName = cookie.split('=')[0]
-      const cookieValue = cookie.split('=')[1]
-      if (cookieName === 'cookieUser') {
-        setContext(cookieValue)
-        navigate('/diapo-list')
-      }
-    })
-  }
-
   const handleSubmit = async (e) => {
     e.preventDefault()
     const loginResponse = await Login(e.target[0].value, e.target[1].value)

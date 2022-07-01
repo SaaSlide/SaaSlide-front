@@ -70,6 +70,8 @@ export const GetAllDiapoForUser = (userToken) => {
     'Authorization': `Bearer ${userToken[0]}`
   }
 
+  console.log(userToken[0])
+
   return axios
     .get('/api/diapo', {
       headers: headers,

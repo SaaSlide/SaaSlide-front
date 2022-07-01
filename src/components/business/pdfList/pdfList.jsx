@@ -12,26 +12,30 @@ export const PdfList = () => {
   const [isDiapoHovered, setIsDiapoHovered] = useState(false)
   const [onDeleteMessage, setOnDeleteMessage] = useState('')
 
-  const getAllDiapo = async () => {
-    let response = await GetAllDiapoForUser(userToken)
-    setPdfs(response.reverse())
+  const getAllDiapo = async (token) => {
+    let response = await GetAllDiapoForUser(token)
+    if (response) {
+      setPdfs(response.reverse())
+    } else {
+      setPdfs(null)
+    }
   }
 
   const deleteDiapo = async (diapoId) => {
     console.log(diapoId)
     const deleteResponse = await DeleteDiapoById(userToken, diapoId)
-    // TODO: never go in if even status is 200
-    // if (deleteResponse.status === 200) {
-    //   setOnDeleteMessage('Fichier supprimé')
-    // } else {
-    //   setOnDeleteMessage('Une erreur est survenu, veuillez réesseyer')
-    // }
-    getAllDiapo()
+
+    if (deleteResponse) {
+      setOnDeleteMessage('Fichier supprimé')
+    } else {
+      setOnDeleteMessage('Une erreur est survenu, veuillez réesseyer')
+    }
+    getAllDiapo(userToken)
   }
 
   useEffect(() => {
-    getAllDiapo()
-  }, [])
+    userToken[0] && getAllDiapo(userToken)
+  }, [userToken])
 
   return (
     <div>
