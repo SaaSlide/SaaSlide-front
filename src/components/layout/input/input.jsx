@@ -4,7 +4,7 @@ import './input.scss'
 const Input = ({ password, label, placeholder, animation, ...rest }) => {
   const [visible, setVisible] = useState(!password)
   return (
-    <div className={`inputContainer ${animation}`}>
+    <div className={`input_container ${animation}`}>
       <label>{label}</label>
       <input
         {...rest}
