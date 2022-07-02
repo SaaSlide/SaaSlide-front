@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { useState } from 'react'
 axios.defaults.baseURL = 'http://localhost:4000'
 
 export const Register = (name, email, password) => {

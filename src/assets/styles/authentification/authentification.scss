@@ -28,11 +28,16 @@
             .submit{
                 margin-top: 20px;
                 display: flex;
+                flex-wrap: wrap;
+
+                button{
+                    margin-right: 10px;
+                }
 
                 .already-registered{
                     display: flex;
                     align-items: center;
-                    margin-left: 10px;
+                    margin: 10px 0;
 
                     a{
                         color: $color-primary;
@@ -72,5 +77,79 @@
     }
     100%{
         z-index: 1;
+    }
+}
+
+
+// RESPONSIVE MOBILE
+
+.container-auth-mobile.login{
+    background-image: url('../../../../public/assets/images/login_img_mobile.jpg');
+    background-size: cover;
+    background-position: 0%;
+}
+
+.container-auth-mobile.register{
+    background-image: url('../../../../public/assets/images/register_img_mobile.jpg');
+    background-size: cover;
+}
+
+.container-auth-mobile{
+    width: 100%;
+    .auth-content-mobile{
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .login-form, .register-form{
+            width: 80vw;
+
+            h2{
+                font-family: 'Raleway', sans-serif;
+                text-transform: uppercase;
+                font-size: 25px;
+                color: $color-white;
+            }
+            
+            .inputContainer{
+                margin-top: 20px;
+            }
+
+            .submit{
+                margin-top: 20px;
+                display: flex;
+                flex-wrap: wrap;
+
+                button{
+                    margin-right: 10px;
+                }
+
+                .already-registered{
+                    display: flex;
+                    align-items: center;
+                    margin: 10px 2px;
+                    color: $color-white;
+
+                    a{
+                        color: $color-primary;
+                        margin-left: 8px;
+                    }
+                }
+            }
+            .error{
+                margin-top: 5px;
+                color: $color-danger;
+            }
+
+            .input-error{
+                margin-top: 10px;
+                background-color: rgba(179, 48, 48, 0.7);
+                color: $color-white;
+                padding: 15px;
+                border-radius: 8px;
+                text-align: center;
+            }
+        }
     }
 }
