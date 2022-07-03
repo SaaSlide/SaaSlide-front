@@ -1,9 +1,15 @@
 import './sondage.scss'
 import { LayoutWindow } from '../layoutWindow/layoutWindow'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useManageDiapo } from '../../../../utils/hooks'
 
-export const Sondage = ({ setCategory }) => {
-  const [propositions, setPropositions] = useState(['A', 'B', 'C'])
+export const Sondage = () => {
+  const { sondage } = useManageDiapo()
+  const [propositions, setPropositions] = useState(sondage)
+
+  useEffect(() => {
+    setPropositions(sondage)
+  }, [sondage])
 
   const addProposition = () => {
     const newPropositions = [...propositions]
@@ -18,7 +24,7 @@ export const Sondage = ({ setCategory }) => {
   }
 
   return (
-    <LayoutWindow setCategory={setCategory} title={'Ajouter un sondage'}>
+    <LayoutWindow title={'Ajouter un sondage'}>
       <div className="propositionsContainer">
         {propositions.map((proposition, index) => {
           return (

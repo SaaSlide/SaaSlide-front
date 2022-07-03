@@ -4,12 +4,12 @@ import { Profile } from '../profile/profile'
 import Logo from '../../logo/logo'
 import { Links } from '../links/links'
 
-export const SideBar = ({ category, setCategory }) => {
+export const SideBar = () => {
   return (
     <div>
       <div className="sidebar">
         <Logo width="140px" />
-        <Links category={category} setCategory={setCategory} />
+        <Links />
         <Profile />
       </div>
     </div>

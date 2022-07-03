@@ -1,13 +1,15 @@
 import './layoutWindow.scss'
+import { useManageDiapo } from '../../../../utils/hooks'
 
 export const LayoutWindow = ({
   children,
-  setCategory,
   title,
   onSave,
   onDelete,
   btnDelete = true,
 }) => {
+  const { setCategory } = useManageDiapo()
+
   return (
     <div className="containerModify">
       <button className="close" onClick={() => setCategory('')}>

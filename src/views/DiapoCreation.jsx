@@ -1,9 +1,8 @@
 import { LayoutCreation, ContentCreation } from '../components'
 import { useState } from 'react'
+import { ProvideManageDiapo } from '../utils/hooks'
 
 export const DiapoCreation = () => {
-  const [category, setCategory] = useState('')
-
   const slider = {
     _id: '62b9c10442d4ae9b5863d051',
     infoDiapo: [
@@ -23,8 +22,10 @@ export const DiapoCreation = () => {
   }
 
   return (
-    <LayoutCreation category={category} setCategory={setCategory}>
-      <ContentCreation category={category} setCategory={setCategory} />
-    </LayoutCreation>
+    <ProvideManageDiapo>
+      <LayoutCreation>
+        <ContentCreation />
+      </LayoutCreation>
+    </ProvideManageDiapo>
   )
 }
