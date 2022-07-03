@@ -4,11 +4,11 @@ import './assets/styles/app.scss'
 import './assets/styles/variable.scss'
 import App from './App'
 import { BrowserRouter } from 'react-router-dom'
-import { SocketProvider } from './utils/hooks'
+import SocketProvider from './utils/socket'
 
 ReactDOM.render(
   <BrowserRouter>
-    <SocketProvider>
+    <SocketProvider room={'room1'} pseudo={'John Doe'}>
       <App />
     </SocketProvider>
   </BrowserRouter>,
