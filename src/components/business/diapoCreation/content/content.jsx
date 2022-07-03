@@ -3,18 +3,21 @@ import { Sondage } from '../sondage/sondage'
 import { Parameters } from '../parameters/parameters'
 import { Note } from '../note/note'
 import { Quizz } from '../quizz/quizz'
+import { useManageDiapo } from '../../../../utils/hooks'
 
-export const ContentCreation = ({ category, setCategory }) => {
+export const ContentCreation = () => {
+  const { category } = useManageDiapo()
+
   const renderCategory = () => {
     switch (category) {
       case 'SONDAGE':
-        return <Sondage setCategory={setCategory} />
+        return <Sondage />
       case 'QUIZZ':
-        return <Quizz setCategory={setCategory} />
+        return <Quizz />
       case 'NOTE':
-        return <Note setCategory={setCategory} />
+        return <Note />
       case 'PARAMETRE':
-        return <Parameters setCategory={setCategory} />
+        return <Parameters />
       default:
         return <></>
     }

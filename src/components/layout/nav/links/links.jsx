@@ -1,6 +1,9 @@
 import './links.scss'
+import { useManageDiapo } from '../../../../utils/hooks'
 
-export const Links = ({ category, setCategory }) => {
+export const Links = () => {
+  const { category, setCategory } = useManageDiapo()
+
   const sondage = {
     key: 'SONDAGE',
     value: 'Sondage',

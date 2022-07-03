@@ -1,9 +1,9 @@
 import './layout.scss'
 import { SideBar } from '../../../layout/nav/sidebar/sidebar'
-import { useState } from 'react'
+import { useManageDiapo } from '../../../../utils/hooks'
 
-export const LayoutCreation = ({ children, category, setCategory }) => {
-  const [index, setIndex] = useState(0)
+export const LayoutCreation = ({ children }) => {
+  const { index, setIndex } = useManageDiapo()
 
   //img to iterate
   const data = {
@@ -28,7 +28,7 @@ export const LayoutCreation = ({ children, category, setCategory }) => {
 
   return (
     <div className="container">
-      <SideBar category={category} setCategory={setCategory} />
+      <SideBar />
       <div className="contentContainer">
         <div className="buttonsContainer">
           <a href="/diapo-list" className="buttonLeave">
