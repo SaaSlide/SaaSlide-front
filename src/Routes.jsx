@@ -4,6 +4,7 @@ import { SignIn, SignUp, Home, DiapoCreation } from './views'
 import { ImportPdf } from './components/business/ImportPdf/importPdf'
 import { PdfList } from './components'
 import { useCookie } from './utils/cookie/cookie'
+import { SideBar } from './components/layout/nav/sidebar/sidebar'
 
 const RoutesApp = () => {
   useCookie()
