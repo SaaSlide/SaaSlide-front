@@ -32,7 +32,6 @@ const SocketProvider = ({ room, pseudo, children }) => {
      * Sending to all clients in room except sender
      * For question submissions
      * Getter => socket.on("get_question",({pseudo,question})=>{})
-     * @param {string} pseudo
      * @param {string} question
      */
     sendQuestion: (question) => {
