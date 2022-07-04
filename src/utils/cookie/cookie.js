@@ -10,7 +10,7 @@ export const useCookie = () => {
       cookies.forEach((cookie) => {
         const cookieName = cookie.split('=')[0]
         const cookieValue = cookie.split('=')[1]
-        if (cookieName === 'cookieUser') {
+        if (cookieName.trim() === 'cookieUser') {
           setContext(cookieValue)
         }
       })
