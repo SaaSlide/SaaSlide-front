@@ -1,0 +1,31 @@
+@import '../../../../assets/styles/variables.scss';
+
+.dld-pdf {
+  width: 90vw;
+  height: 17vh;
+  margin-left: 5vw;
+  margin-top: 7vh;
+  background-color: $color-white;
+  border-radius: 10px;
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  div {
+    margin-left: 7vw;
+  }
+}
+
+.dld-pdf::nth-first-child {
+  margin-top: -2.5vh;
+}
+
+.dld-pdf-img {
+  margin-left: 2vw;
+}
+
+.dld-pdf-btn {
+  width: 60vw;
+  margin-top: 2.5vh;
+}
