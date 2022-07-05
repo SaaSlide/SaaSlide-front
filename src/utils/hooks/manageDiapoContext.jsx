@@ -44,7 +44,7 @@ function useProvideManageDiapo() {
         const headers = {
           'Authorization': `Bearer ${userToken}`
         }
-        const res = await axios.get(`/api/diapo/${id}`, {
+        const res = await axios.get(`/diapo/${id}`, {
           headers,
         })
         setDiapo(res.data)
@@ -155,15 +155,19 @@ function useProvideManageDiapo() {
       console.log(error)
     }
   }
+  console.log(diapo)
   const saveParams = async (body) => {
     try {
       // prettier-ignore
       const headers = {
       'Authorization': `Bearer ${userToken}`
     }
-      const res = await axios.put(`/api/diapo/params/${diapo._id}`, body, {
-        headers,
-      })
+      const res = await axios.put(
+        `/api/diapo/params/${diapo._id}?emoji=${body.sendEmoji}&answer=${body.sendAnswer}`,
+        {
+          headers,
+        },
+      )
       setParameters(body)
       toast.success('Paramètres mis à jour !', {
         position: 'bottom-center',
