@@ -1,0 +1,16 @@
+.profile-picture-empty {
+    width: 120px;
+    height: 120px;
+    background-image: url('../../../../../../../public/assets/images/empty-profile-pic.png');
+    background-size: cover;
+    border-radius: 100%;
+}
+
+.sidebar-edit-profile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    cursor: pointer;
+}

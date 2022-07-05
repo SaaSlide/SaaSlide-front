@@ -8,10 +8,9 @@ export const ManagePdf = () => {
       component={
         <>
           <ImportPdf />
+          <PdfList />
         </>
       }
-    >
-      <div>Bonjour</div>
-    </AppLayout>
+    />
   )
 }

@@ -9,7 +9,7 @@ const RoutesApp = () => {
       <Route path="/signin" element={<SignIn />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/" element={<Home />} />
-      <Route path="/diapo-list" element={<ManagePdf />} />
+      <Route path="/managepdf" element={<ManagePdf />} />
       <Route path="/diapo/:id" element={<DiapoCreation />} />
     </Routes>
   )

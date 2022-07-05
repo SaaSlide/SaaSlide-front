@@ -12,7 +12,7 @@ export const GetUserProfile = (userToken) => {
     })
     .then((res) => {
       console.log(res)
-      return res
+      return res.data
     })
     .catch((err) => {
       console.log(err)
@@ -20,14 +20,20 @@ export const GetUserProfile = (userToken) => {
     })
 }
 
-export const UpdateUserProfile = (userToken , name, email, picture, password) => {
+export const UpdateUserProfile = (
+  userToken,
+  name,
+  email,
+  picture,
+  password,
+) => {
   // prettier-ignore
   const headers = {
     'Authorization': `Bearer ${userToken[0]}`
   }
+
   return axios
-    .post('/api/user/profile', 
-    {
+    .post('/api/user/profile', {
       headers: headers,
       name: name,
       mail: email,
@@ -42,4 +48,29 @@ export const UpdateUserProfile = (userToken , name, email, picture, password) =>
       console.log(err)
       return err
     })
+}
+
+export const DeleteUserProfile = (userToken, idUser) => {
+  // prettier-ignore
+  const headers = {
+    'Authorization': `Bearer ${userToken[0]}`
+  }
+
+  return axios
+    .delete('/api/user/profile', {
+      headers: headers,
+      _id: idUser,
+    })
+    .then((res) => {
+      console.log(res)
+      return res
+    })
+    .catch((err) => {
+      console.log(err)
+      return err
+    })
+}
+
+export const DeleteCookie = () => {
+  return axios.get('/delete-cookie')
 }
