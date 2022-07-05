@@ -1,13 +1,17 @@
 @import '../../../assets/styles/variables.scss';
 
+.importpdfContainer-background{
+  background-color: white;
+}
+
 .importpdfContainer {
-  width: 65vw;
   height: 40vh;
+  margin: 0 100px;
   background-color: $color-tertiary;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: center;
 }
 
 .importpdfContainer-title {
@@ -15,9 +19,9 @@
 }
 
 .importpdfContainer-subtitle {
-  margin-left: 5vw;
-  font-size: 18px;
-  margin-bottom: -4vh;
+  font-size: 14px;
+  margin: 20px 5vw 5px 5vw;
+  color: $color-danger;
 }
 
 .importpdfContainer-form {
@@ -37,6 +41,7 @@
   .importpdfContainer-status {
     font-size: 18px;
     font-weight: 500;
+    color: green;
   }
 
   .importpdfContainer-status-failed {
@@ -62,11 +67,11 @@ input[type='file'] {
 
 .btn-secondary-label {
   background-color: $color-secondary;
-  border: 3px solid $color-secondary;
+  border: 2px solid $color-secondary;
 
   &:hover {
     background-color: $hover-secondary;
-    border: 3px solid $hover-secondary;
+    border: 2px solid $hover-secondary;
   }
 
   &:focus {
@@ -77,4 +82,24 @@ input[type='file'] {
 .btn-secondary-outline:hover {
   background-color: #2239D7;
   color: whitesmoke;
+}
+
+// RESPONSIVE MOBILE
+
+.importpdfContainerMobile{
+  background-color: $color-tertiary;
+
+  h5{
+    font-weight: 500;
+  }
+}
+
+.button-sm-label {
+  border-radius: 7px;
+  padding: 7px 25px;
+  border: none;
+  color: $color-white;
+  font-size: 18px;
+  cursor: pointer;
+  margin-right: 3vw;
 }
