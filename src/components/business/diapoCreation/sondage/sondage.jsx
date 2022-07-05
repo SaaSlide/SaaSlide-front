@@ -17,14 +17,13 @@ export const Sondage = () => {
     setPropositions(newPropositions)
   }
   const deleteProposition = (index) => {
-    console.log(index)
     const newPropositions = [...propositions]
     newPropositions.splice(index, 1)
     setPropositions(newPropositions)
   }
 
   return (
-    <LayoutWindow title={'Ajouter un sondage'}>
+    <LayoutWindow title={'Ajouter un sondage à votre slide'}>
       <div className="propositionsContainer">
         {propositions.map((proposition, index) => {
           return (

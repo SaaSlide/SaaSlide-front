@@ -2,7 +2,7 @@ import './quizz.scss'
 import { LayoutWindow } from '../layoutWindow/layoutWindow'
 import { useState } from 'react'
 
-export const Quizz = ({ setCategory }) => {
+export const Quizz = () => {
   const [propositions, setPropositions] = useState(['Vrai', 'faux', 'jsp'])
 
   const addProposition = () => {
@@ -12,13 +12,12 @@ export const Quizz = ({ setCategory }) => {
   }
 
   const deleteProposition = (index) => {
-    console.log(index)
     const newPropositions = [...propositions]
     newPropositions.splice(index, 1)
     setPropositions(newPropositions)
   }
   return (
-    <LayoutWindow setCategory={setCategory} title={'Ajouter un quizz'}>
+    <LayoutWindow title={'Ajouter un quizz à votre slide'}>
       <div className="quizzContainer">
         <input
           type="text"

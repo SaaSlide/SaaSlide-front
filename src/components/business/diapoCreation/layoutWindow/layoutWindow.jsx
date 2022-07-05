@@ -7,6 +7,7 @@ export const LayoutWindow = ({
   onSave,
   onDelete,
   btnDelete = true,
+  parameters = false,
 }) => {
   const { setCategory } = useManageDiapo()
 
@@ -19,11 +20,11 @@ export const LayoutWindow = ({
       {children}
       <div className="btnContainer">
         <button className="btnSave" onClick={onSave}>
-          Enregistrer
+          {parameters ? 'Enregistrer' : 'Ajouter à la slide'}
         </button>
         {btnDelete && (
           <button className="btnDelete" onClick={onDelete}>
-            Supprimer
+            Supprimer de la slide
           </button>
         )}
       </div>

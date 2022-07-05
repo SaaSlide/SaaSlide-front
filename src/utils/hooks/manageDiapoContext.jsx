@@ -1,4 +1,8 @@
 import { createContext, useState, useContext, useEffect } from 'react'
+import { TokenContext } from '../../App'
+import { useLocation } from 'react-router-dom'
+import axios from 'axios'
+axios.defaults.baseURL = 'http://localhost:4000'
 
 export const ManageDiapoContext = createContext()
 
@@ -16,7 +20,7 @@ export const useManageDiapo = () => {
 }
 
 function useProvideManageDiapo() {
-  const [diapo, setDiapo] = useState({})
+  const [diapo, setDiapo] = useState()
   const [index, setIndex] = useState(0)
   const [category, setCategory] = useState('')
   const [parameters, setParameters] = useState({})
@@ -24,31 +28,92 @@ function useProvideManageDiapo() {
   const [quizz, setQuizz] = useState({})
   const [note, setNote] = useState('')
 
-  useEffect(() => {
-    console.log('fetch data')
+  const [userToken] = useContext(TokenContext)
+  const location = useLocation()
 
-    //vide le localstorage
-    //fetch les data
-
-    // setDiapo(data.infoDiapo)
-    // setParameters({ sendAnswer: data.sendAnswer, sendEmoji: data.sendEmoji })
-  }, [])
+  const id = location.pathname.replace('/diapo/', '')
 
   useEffect(() => {
-    console.log('index changing')
+    const fetchData = async () => {
+      try {
+        //vide le localstorage
+
+        // prettier-ignore
+        const headers = {
+          'Authorization': `Bearer ${userToken}`
+        }
+        const res = await axios.get(`/api/diapo/${id}`, {
+          headers,
+        })
+        setDiapo(res.data)
+        setParameters({
+          sendAnswer: res.data.sendAnswer,
+          sendEmoji: res.data.sendEmoji,
+        })
+        setSondage(res.data.infoDiapo[index].surveys)
+        setQuizz(res.data.infoDiapo[index].quizzs)
+        setNote(res.data.infoDiapo[index].notes)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    if (userToken) fetchData()
+  }, [userToken])
+
+  useEffect(() => {
     //check if not in localstorage
-    //fetch everything with the page id
+    if (diapo) {
+      setSondage(diapo.infoDiapo[index].surveys)
+      setQuizz(diapo.infoDiapo[index].quizzs)
+      setNote(diapo.infoDiapo[index].notes)
+    }
+  }, [index, diapo])
 
-    setSondage([Math.random(), Math.random(), Math.random()])
-    // setQuizz()
-    // setNote()
-  }, [index])
+  // const getNote = async () => {
+  //   try {
+  //     //vide le localstorage
+
+  //     console.log(diapo.infoDiapo[index]._id)
+
+  //     // prettier-ignore
+  //     const headers = {
+  //     'Authorization': `Bearer ${userToken}`
+  //   }
+  //     const res = await axios.get(`/api/note/${diapo.infoDiapo[index]._id}`, {
+  //       headers,
+  //     })
+  //     return res.data.notes[0]
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
+
+  const saveParams = async (body) => {
+    try {
+      // prettier-ignore
+      const headers = {
+      'Authorization': `Bearer ${userToken}`
+    }
+      const res = await axios.put(`/api/diapo/params/${diapo._id}`, body, {
+        headers,
+      })
+      setParameters(body)
+      console.log(res.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return {
+    diapo,
     category,
     setCategory,
     index,
     setIndex,
     sondage,
+    quizz,
+    note,
+    parameters,
+    saveParams,
   }
 }
