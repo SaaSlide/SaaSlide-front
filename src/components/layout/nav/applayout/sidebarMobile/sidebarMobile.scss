@@ -1,0 +1,42 @@
+@import '../../../../../assets/styles/variables.scss';
+
+.sidebarMobile{
+    position: fixed;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.85);
+    color: white;
+    width: 100%;
+    height: 80px;
+
+    .plus{
+        display: block;
+        margin: -15px auto 0 auto;
+        background-color: $color-secondary;
+        border-radius: 25px;
+    }
+    .links{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        li{
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            margin: 10px 32.5px 20px 32.5px;
+
+            p{
+                margin-top: 5px;
+                color: $color-white;
+            }
+        }
+
+        .settings{
+            p{
+                color: rgb(154, 154, 154);
+            }
+        }
+    }
+}
