@@ -1,9 +1,15 @@
 import './quizz.scss'
 import { LayoutWindow } from '../layoutWindow/layoutWindow'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useManageDiapo } from '../../../../utils/hooks'
 
 export const Quizz = () => {
-  const [propositions, setPropositions] = useState(['Vrai', 'faux', 'jsp'])
+  const { quizz, saveQuizz, index } = useManageDiapo()
+  const [propositions, setPropositions] = useState(quizz)
+
+  useEffect(() => {
+    setPropositions(quizz)
+  }, [index])
 
   const addProposition = () => {
     const newPropositions = [...propositions]
@@ -16,6 +22,7 @@ export const Quizz = () => {
     newPropositions.splice(index, 1)
     setPropositions(newPropositions)
   }
+
   return (
     <LayoutWindow title={'Ajouter un quizz à votre slide'}>
       <div className="quizzContainer">

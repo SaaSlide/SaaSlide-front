@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { useManageDiapo } from '../../../../utils/hooks'
 
 export const Note = () => {
-  const { note, index } = useManageDiapo()
+  const { note, saveNote, index } = useManageDiapo()
 
   const [tempNote, setTempNote] = useState(note)
 
@@ -18,7 +18,11 @@ export const Note = () => {
   }, [index])
 
   return (
-    <LayoutWindow title={'Ajouter des notes'} btnDelete={false}>
+    <LayoutWindow
+      title={'Ajouter des notes'}
+      onSave={() => saveNote(tempNote)}
+      btnDelete={false}
+    >
       <textarea
         placeholder="Ajouter des notes à votre slide"
         value={tempNote}

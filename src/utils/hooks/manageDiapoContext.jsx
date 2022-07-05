@@ -2,6 +2,8 @@ import { createContext, useState, useContext, useEffect } from 'react'
 import { TokenContext } from '../../App'
 import { useLocation } from 'react-router-dom'
 import axios from 'axios'
+import { toast } from 'react-toastify'
+
 axios.defaults.baseURL = 'http://localhost:4000'
 
 export const ManageDiapoContext = createContext()
@@ -69,25 +71,90 @@ function useProvideManageDiapo() {
     }
   }, [index, diapo])
 
-  // const getNote = async () => {
-  //   try {
-  //     //vide le localstorage
-
-  //     console.log(diapo.infoDiapo[index]._id)
-
-  //     // prettier-ignore
-  //     const headers = {
-  //     'Authorization': `Bearer ${userToken}`
-  //   }
-  //     const res = await axios.get(`/api/note/${diapo.infoDiapo[index]._id}`, {
-  //       headers,
-  //     })
-  //     return res.data.notes[0]
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
-
+  const saveSondage = async (body, remove = false) => {
+    if (body.length < 2 && !remove) {
+      toast.warn('Veuillez au moins ajoutez 2 propositions', {
+        position: 'bottom-center',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      })
+      return
+    }
+    try {
+      // prettier-ignore
+      const headers = {
+      'Authorization': `Bearer ${userToken}`
+    }
+      const res = await axios.put(
+        `/api/survey/${diapo.infoDiapo[index]._id}`,
+        body,
+        {
+          headers,
+        },
+      )
+      setSondage(body)
+      toast.success('Sondage mis à jour !', {
+        position: 'bottom-center',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      })
+    } catch (error) {
+      toast.error('Une erreur est survenu...', {
+        position: 'bottom-center',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      })
+      console.log(error)
+    }
+  }
+  const saveNote = async (body) => {
+    try {
+      // prettier-ignore
+      const headers = {
+      'Authorization': `Bearer ${userToken}`
+    }
+      const res = await axios.put(
+        `/api/note/${diapo.infoDiapo[index]._id}`,
+        body,
+        {
+          headers,
+        },
+      )
+      setNote(body)
+      toast.success('Note mis à jour !', {
+        position: 'bottom-center',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      })
+    } catch (error) {
+      toast.error('Une erreur est survenu...', {
+        position: 'bottom-center',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      })
+      console.log(error)
+    }
+  }
   const saveParams = async (body) => {
     try {
       // prettier-ignore
@@ -98,8 +165,25 @@ function useProvideManageDiapo() {
         headers,
       })
       setParameters(body)
-      console.log(res.data)
+      toast.success('Paramètres mis à jour !', {
+        position: 'bottom-center',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      })
     } catch (error) {
+      toast.error('Une erreur est survenu...', {
+        position: 'bottom-center',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      })
       console.log(error)
     }
   }
@@ -111,8 +195,10 @@ function useProvideManageDiapo() {
     index,
     setIndex,
     sondage,
+    saveSondage,
     quizz,
     note,
+    saveNote,
     parameters,
     saveParams,
   }

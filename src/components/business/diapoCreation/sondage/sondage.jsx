@@ -4,26 +4,44 @@ import { useEffect, useState } from 'react'
 import { useManageDiapo } from '../../../../utils/hooks'
 
 export const Sondage = () => {
-  const { sondage } = useManageDiapo()
+  const { sondage, saveSondage, index } = useManageDiapo()
   const [propositions, setPropositions] = useState(sondage)
 
   useEffect(() => {
     setPropositions(sondage)
-  }, [sondage])
+  }, [index])
 
   const addProposition = () => {
     const newPropositions = [...propositions]
     newPropositions.push('')
     setPropositions(newPropositions)
   }
+
   const deleteProposition = (index) => {
     const newPropositions = [...propositions]
     newPropositions.splice(index, 1)
     setPropositions(newPropositions)
   }
 
+  const onChangeProposition = (index, value) => {
+    const newPropositions = [...propositions]
+    newPropositions[index] = value
+    setPropositions(newPropositions)
+  }
+
+  const removeFromSlide = () => {
+    let newPropositions = [...propositions]
+    newPropositions = []
+    setPropositions(newPropositions)
+    saveSondage(newPropositions, true)
+  }
+
   return (
-    <LayoutWindow title={'Ajouter un sondage à votre slide'}>
+    <LayoutWindow
+      title={'Ajouter un sondage à votre slide'}
+      onSave={() => saveSondage(propositions)}
+      onDelete={removeFromSlide}
+    >
       <div className="propositionsContainer">
         {propositions.map((proposition, index) => {
           return (
@@ -34,9 +52,7 @@ export const Sondage = () => {
               <input
                 type="text"
                 value={proposition}
-                // onChange={(e) =>
-                //   setPropositions()
-                // }
+                onChange={(e) => onChangeProposition(index, e.target.value)}
               />
             </div>
           )
