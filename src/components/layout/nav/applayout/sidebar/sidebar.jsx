@@ -17,7 +17,7 @@ export const SideBar = ({ category, setCategory }) => {
         </div>
       ) : (
         <div className="sidebar_responsive">
-          <Logo width="140px" />
+          <Logo width="120px" />
           <Profile />
         </div>
       )}
