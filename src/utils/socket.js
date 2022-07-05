@@ -1,4 +1,4 @@
-import { useEffect, createContext } from 'react'
+import { createContext } from 'react'
 import { io } from 'socket.io-client'
 
 export const SocketContext = createContext({})
@@ -74,7 +74,7 @@ const SocketProvider = ({ room, pseudo, children }) => {
   }
 
   return (
-    <SocketContext.Provider value={{ socket, sio }}>
+    <SocketContext.Provider value={{ socket, sio, pseudo }}>
       {children}
     </SocketContext.Provider>
   )
