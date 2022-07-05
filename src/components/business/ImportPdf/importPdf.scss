@@ -19,8 +19,9 @@
 }
 
 .importpdfContainer-subtitle {
-  font-size: 18px;
-  margin: 20px 5vw 10px 5vw;
+  font-size: 14px;
+  margin: 20px 5vw 5px 5vw;
+  color: $color-danger;
 }
 
 .importpdfContainer-form {
@@ -40,6 +41,7 @@
   .importpdfContainer-status {
     font-size: 18px;
     font-weight: 500;
+    color: green;
   }
 
   .importpdfContainer-status-failed {

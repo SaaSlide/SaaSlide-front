@@ -46,9 +46,16 @@
   border-radius: 25px;
 }
 
-.simplebar-scrollbar.simplebar-visible:before{
+.simplebar-track.simplebar-vertical .simplebar-scrollbar:before{
   opacity: 1;
+}
+
+.simplebar-scrollbar.simplebar-visible:before{
   background: $color-secondary;
+}
+
+.importpdfContainer-status-failed{
+  color: $color-danger  ;
 }
 
 // RESPONSIVE MOBILE
@@ -71,9 +78,22 @@
   .diapoCover{
     display: flex;
     justify-content: center;
-    margin: 20px 0;
+    margin: 20px;
   }
   .diapoCover-img{
-    width: 90%;
+    width: 100%;
+    height: 25vh;
+  }
+
+  .cross-delete-mobile{
+    position: absolute;
+    top: -10px;
+    left: -15px;
+    margin: 0 0 0 0;
+    padding: 0;
+
+    img{
+      width: 25px;
+    }
   }
 }

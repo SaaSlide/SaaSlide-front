@@ -30,7 +30,7 @@ export const PdfList = () => {
     const deleteResponse = await DeleteDiapoById(userToken, diapoId)
 
     if (deleteResponse) {
-      setOnDeleteMessage('Fichier supprimé')
+      setOnDeleteMessage('Fichier supprimé !')
     } else {
       setOnDeleteMessage('Une erreur est survenu, veuillez réesseyer')
     }
@@ -48,7 +48,7 @@ export const PdfList = () => {
       }
     >
       <div className="diapo_list_title">
-        <h4>RECENT</h4>
+        <h4>RÉCENT</h4>
         {onDeleteMessage && (
           <span
             className={
@@ -72,7 +72,6 @@ export const PdfList = () => {
                     className="diapoCover"
                     onMouseEnter={() => setIsDiapoHovered(diapo._id)}
                     onMouseLeave={() => setIsDiapoHovered(false)}
-                    {...(isMobile ? () => setIsDiapoHovered(false) : <></>)}
                   >
                     <img
                       className="diapoCover-img"
@@ -103,13 +102,7 @@ export const PdfList = () => {
           {pdfs &&
             pdfs.map((diapo) => {
               return (
-                <div
-                  key={diapo._id}
-                  className="diapoCover"
-                  onMouseEnter={() => setIsDiapoHovered(diapo._id)}
-                  onMouseLeave={() => setIsDiapoHovered(false)}
-                  {...(isMobile ? () => setIsDiapoHovered(false) : <></>)}
-                >
+                <div key={diapo._id} className="diapoCover">
                   <img
                     className="diapoCover-img"
                     src={
@@ -118,17 +111,16 @@ export const PdfList = () => {
                     }
                     alt="Première page diaporama"
                   />
-                  {isDiapoHovered === diapo._id && (
-                    <button
-                      onClick={() => deleteDiapo(diapo._id)}
-                      className="cross-delete"
-                    >
-                      <img
-                        src="/assets/icons/cross-delete.svg"
-                        alt="Croix de suppression"
-                      />
-                    </button>
-                  )}
+
+                  <button
+                    onClick={() => deleteDiapo(diapo._id)}
+                    className="cross-delete-mobile"
+                  >
+                    <img
+                      src="/assets/icons/cross-delete.svg"
+                      alt="Croix de suppression"
+                    />
+                  </button>
                 </div>
               )
             })}
