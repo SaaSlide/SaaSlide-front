@@ -39,65 +39,63 @@ export const ImportPdf = () => {
   }
 
   return (
-    <div className="importpdfContainer-background">
-      <div
-        className={isMobile ? 'importpdfContainerMobile' : 'importpdfContainer'}
-      >
-        <div className="importpdfContainer-title">
-          {isMobile ? (
-            <>
-              <h5>Pour commencer,</h5>
-              <h5>Importer votre présentation PDF</h5>
-            </>
-          ) : (
-            <>
-              <h3>POUR COMMENCER,</h3>
-              <h3>IMPORTER VOTRE PRÉSENTATION PDF</h3>
-            </>
-          )}
-        </div>
-        <p className="importpdfContainer-subtitle">PDF de 20mo max</p>
-        <form onSubmit={handleSubmit} className="importpdfContainer-form">
-          <div>
-            <label
-              htmlFor="file"
-              className={
-                isMobile
-                  ? 'button-sm-label btn-secondary-label'
-                  : 'button-label btn-secondary-label'
-              }
-            >
-              <input
-                className="importpdfContainer-input"
-                onChange={(e) => onChange(e.target.files[0])}
-                type="file"
-                name="file"
-                accept=".pdf"
-                id="file"
-              />
-              Choisir le PDF
-            </label>
-            <p
-              className={
-                pdfName
-                  ? 'importpdfContainer-status'
-                  : 'importpdfContainer-status-failed'
-              }
-            >
-              {pdfName || errorOnImport}
-            </p>
-          </div>
-          <div>
-            <Button
-              type="submit"
-              className={
-                isMobile ? 'btn-secondary-sm-outline' : 'btn-secondary-outline'
-              }
-              title="Importer le PDF"
-            />
-          </div>
-        </form>
+    <div
+      className={isMobile ? 'importpdfContainerMobile' : 'importpdfContainer'}
+    >
+      <div className="importpdfContainer-title">
+        {isMobile ? (
+          <>
+            <h5>Pour commencer,</h5>
+            <h5>Importer votre présentation PDF</h5>
+          </>
+        ) : (
+          <>
+            <h3>POUR COMMENCER,</h3>
+            <h3>IMPORTER VOTRE PRÉSENTATION PDF</h3>
+          </>
+        )}
       </div>
+      <p className="importpdfContainer-subtitle">PDF de 20mo max</p>
+      <form onSubmit={handleSubmit} className="importpdfContainer-form">
+        <div>
+          <label
+            htmlFor="file"
+            className={
+              isMobile
+                ? 'button-sm-label btn-secondary-label'
+                : 'button-label btn-secondary-label'
+            }
+          >
+            <input
+              className="importpdfContainer-input"
+              onChange={(e) => onChange(e.target.files[0])}
+              type="file"
+              name="file"
+              accept=".pdf"
+              id="file"
+            />
+            Choisir le PDF
+          </label>
+          <p
+            className={
+              pdfName
+                ? 'importpdfContainer-status'
+                : 'importpdfContainer-status-failed'
+            }
+          >
+            {pdfName || errorOnImport}
+          </p>
+        </div>
+        <div>
+          <Button
+            type="submit"
+            className={
+              isMobile ? 'btn-secondary-sm-outline' : 'btn-secondary-outline'
+            }
+            title="Importer le PDF"
+          />
+        </div>
+      </form>
     </div>
   )
 }

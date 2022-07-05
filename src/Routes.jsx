@@ -5,6 +5,7 @@ import { ImportPdf } from './components/business/ImportPdf/importPdf'
 import { PdfList } from './components'
 import { useCookie } from './utils/cookie/cookie'
 import { SideBar } from './components/layout/nav/sidebar/sidebar'
+import ScreenWrapper from './components/layout/screenwrapper/ScreenWrapper'
 
 const RoutesApp = () => {
   useCookie()
@@ -17,10 +18,10 @@ const RoutesApp = () => {
       <Route
         path="/diapo-list"
         element={
-          <>
+          <ScreenWrapper>
             <ImportPdf />
             <PdfList />
-          </>
+          </ScreenWrapper>
         }
       ></Route>
       <Route path="/diapo/:id" element={<DiapoCreation />}></Route>
