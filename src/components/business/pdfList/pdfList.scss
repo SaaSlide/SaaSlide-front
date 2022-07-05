@@ -1,9 +1,29 @@
-.diapo-list {
+@import '../../../assets/styles/variables.scss';
+.diapo_list_container{
   display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 0 auto;
+  background-color: $color-white;
+  padding-top: 30px;
+  
+  .diapo-list {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 30px 100px;
+    width: 70%;
+    overflow: hidden;
+  }
+
+  .diapo_list_title{
+    margin-left: 100px;
+  }
 }
 
 .diapoCover {
   margin: 0 3vw 3vh 0;
+  position: relative;
 }
 
 .diapoCover-img {
@@ -13,7 +33,67 @@
 }
 
 .cross-delete {
-  position: relative;
-  top: 0px;
-  left: 0px;
+  position: absolute;
+  top: -25px;
+  left: -25px;
+  margin: 0 0 0 0;
+  padding: 0;
+}
+
+.simplebar-track.simplebar-vertical{
+  right: 18%;
+  background-color: $color-tertiary; 
+  border-radius: 25px;
+}
+
+.simplebar-track.simplebar-vertical .simplebar-scrollbar:before{
+  opacity: 1;
+}
+
+.simplebar-scrollbar.simplebar-visible:before{
+  background: $color-secondary;
+}
+
+.importpdfContainer-status-failed{
+  color: $color-danger  ;
+}
+
+// RESPONSIVE MOBILE
+
+.diapo_list_container_mobile{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: $color-white;
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
+  margin-top: 30px;
+
+  .diapo_list_title{
+    width: 75%;
+    margin: 20px 0;
+  }
+
+  .diapoCover{
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+  }
+  .diapoCover-img{
+    width: 100%;
+    height: 25vh;
+  }
+
+  .cross-delete-mobile{
+    position: absolute;
+    top: -10px;
+    left: -15px;
+    margin: 0 0 0 0;
+    padding: 0;
+
+    img{
+      width: 25px;
+    }
+  }
 }

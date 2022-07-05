@@ -5,68 +5,127 @@ import {
   GetAllDiapoForUser,
   DeleteDiapoById,
 } from '../../../services/apiService'
+import { useIsMobile } from '../../../utils/hooks'
+import SimpleBar from 'simplebar-react'
+import 'simplebar/dist/simplebar.min.css'
 
 export const PdfList = () => {
   const userToken = useContext(TokenContext)
   const [pdfs, setPdfs] = useState(undefined)
   const [isDiapoHovered, setIsDiapoHovered] = useState(false)
   const [onDeleteMessage, setOnDeleteMessage] = useState('')
+  const isMobile = useIsMobile()
 
-  const getAllDiapo = async () => {
-    let response = await GetAllDiapoForUser(userToken)
-    console.log(response)
-    setPdfs(response)
+  const getAllDiapo = async (token) => {
+    let response = await GetAllDiapoForUser(token)
+    if (response) {
+      setPdfs(response.reverse())
+    } else {
+      setPdfs(null)
+    }
   }
 
   const deleteDiapo = async (diapoId) => {
     console.log(diapoId)
     const deleteResponse = await DeleteDiapoById(userToken, diapoId)
-    // TODO: never go in if even status is 200
-    if (deleteResponse.status === 200) {
-      setOnDeleteMessage('Fichier supprimé')
+
+    if (deleteResponse) {
+      setOnDeleteMessage('Fichier supprimé !')
     } else {
       setOnDeleteMessage('Une erreur est survenu, veuillez réesseyer')
     }
-    getAllDiapo()
+    getAllDiapo(userToken)
   }
 
   useEffect(() => {
-    getAllDiapo()
-  }, [])
+    userToken[0] && getAllDiapo(userToken)
+  }, [userToken])
 
   return (
-    <div>
-      <h4>RECENT</h4>
-      {onDeleteMessage && <span>{onDeleteMessage}</span>}
-      <div className="diapo-list">
-        {pdfs &&
-          pdfs.map((diapo, index) => (
-            <div
-              key={index}
-              className="diapoCover"
-              onMouseEnter={() => setIsDiapoHovered(true)}
-              onMouseLeave={() => setIsDiapoHovered(false)}
-            >
-              <img
-                className="diapoCover-img"
-                src={
-                  'http://localhost:4000/' +
-                  diapo.infoDiapo[0].path.substring(2)
-                }
-                alt="Première page diaporama"
-              />
-              {isDiapoHovered && (
-                <button onClick={() => deleteDiapo(diapo._id)}>
-                  <img
-                    className="cross-delete"
-                    src="/assets/icons/cross-delete.svg"
-                    alt="Croix de suppression"
-                  />
-                </button>
-              )}
-            </div>
-          ))}
+    <div
+      className={
+        isMobile ? 'diapo_list_container_mobile' : 'diapo_list_container'
+      }
+    >
+      <div className="diapo_list_title">
+        <h4>RÉCENT</h4>
+        {onDeleteMessage && (
+          <span
+            className={
+              onDeleteMessage
+                ? 'importpdfContainer-status-failed'
+                : 'importpdfContainer-status'
+            }
+          >
+            {onDeleteMessage}
+          </span>
+        )}
       </div>
+      {!isMobile ? (
+        <SimpleBar autoHide={false} style={{ maxHeight: 370 }}>
+          <div className="diapo-list">
+            {pdfs &&
+              pdfs.map((diapo) => {
+                return (
+                  <div
+                    key={diapo._id}
+                    className="diapoCover"
+                    onMouseEnter={() => setIsDiapoHovered(diapo._id)}
+                    onMouseLeave={() => setIsDiapoHovered(false)}
+                  >
+                    <img
+                      className="diapoCover-img"
+                      src={
+                        'http://localhost:4000/' +
+                        diapo.infoDiapo[0].path.substring(2)
+                      }
+                      alt="Première page diaporama"
+                    />
+                    {isDiapoHovered === diapo._id && (
+                      <button
+                        onClick={() => deleteDiapo(diapo._id)}
+                        className="cross-delete"
+                      >
+                        <img
+                          src="/assets/icons/cross-delete.svg"
+                          alt="Croix de suppression"
+                        />
+                      </button>
+                    )}
+                  </div>
+                )
+              })}
+          </div>
+        </SimpleBar>
+      ) : (
+        <div className="diapo-list">
+          {pdfs &&
+            pdfs.map((diapo) => {
+              return (
+                <div key={diapo._id} className="diapoCover">
+                  <img
+                    className="diapoCover-img"
+                    src={
+                      'http://localhost:4000/' +
+                      diapo.infoDiapo[0].path.substring(2)
+                    }
+                    alt="Première page diaporama"
+                  />
+
+                  <button
+                    onClick={() => deleteDiapo(diapo._id)}
+                    className="cross-delete-mobile"
+                  >
+                    <img
+                      src="/assets/icons/cross-delete.svg"
+                      alt="Croix de suppression"
+                    />
+                  </button>
+                </div>
+              )
+            })}
+        </div>
+      )}
     </div>
   )
 }

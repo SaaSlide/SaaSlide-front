@@ -1,14 +1,23 @@
 import './header.scss'
+import { useContext } from 'react'
+import { TokenContext } from '../../../../App'
 
 export const HeaderHome = () => {
+  let userToken = useContext(TokenContext)
   return (
     <header className="header">
       <nav>
         <img src="/assets/images/logo_blanc.png" alt="logo" />
-        <div>
-          <a href="/signup">S'inscrire</a>
-          <a href="/signin">Se connecter</a>
-        </div>
+        {!userToken ? (
+          <div>
+            <a href="/signup">S'inscrire</a>
+            <a href="/signin">Se connecter</a>
+          </div>
+        ) : (
+          <div className="user-space-button">
+            <a href="/diapo-list">Votre espace</a>
+          </div>
+        )}
       </nav>
       <div className="grid">
         <div className="bg bg1">

@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { useState } from 'react'
 axios.defaults.baseURL = 'http://localhost:4000'
 
 export const Register = (name, email, password) => {
@@ -69,6 +70,8 @@ export const GetAllDiapoForUser = (userToken) => {
   const headers = {
     'Authorization': `Bearer ${userToken[0]}`
   }
+
+  console.log(userToken[0])
 
   return axios
     .get('/api/diapo', {
