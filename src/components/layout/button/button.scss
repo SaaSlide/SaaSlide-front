@@ -98,21 +98,21 @@ button{
 
 // Button small outline
 .btn-primary-sm-outline{
-    background-color: $color-white;
+    background-color: transparent;
     border: 1px solid $color-primary;
     color: $color-primary; 
     padding: 5px 25px;
 }
 
 .btn-secondary-sm-outline{
-    background-color: $color-white;
+    background-color: transparent;
     border: 1px solid $color-secondary;
     color: $color-secondary;
     padding: 5px 25px;
 }
 
 .btn-danger-sm-outline{
-    background-color: $color-white;
+    background-color: transparent;
     border: 1px solid $color-danger;
     color: $color-danger;
     padding: 5px 25px;

@@ -1,0 +1,89 @@
+@use '../../../../assets/styles/variable.scss' as var;
+@use '../../../../assets/styles/mixin.scss' as mix;
+
+.quizzContainer {
+  .inputQuestion {
+    width: 50%;
+    max-width: 400px;
+  }
+  input {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 7px;
+    filter: drop-shadow(4px 4px 15px rgba(0, 0, 0, 0.05));
+  }
+
+  .subtitle {
+    font-size: 12px;
+    font-weight: 400;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+
+  .propositionsContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+
+    .inputContainerProposition {
+      display: flex;
+      gap: 10px;
+      max-width: 400px;
+      align-items: center;
+      img {
+        cursor: pointer;
+      }
+      input {
+        width: 100%;
+      }
+      .checkboxInput {
+        cursor: pointer;
+        appearance: none;
+        background-color: #fff;
+        margin: 0;
+        padding: 20px;
+        font: inherit;
+        color: currentColor;
+        width: 30px;
+        height: 30px;
+
+        border: none;
+        border-radius: 7px;
+
+        display: grid;
+        place-content: center;
+
+        &::before {
+          content: '';
+          width: 25px;
+          height: 25px;
+          transform: scale(0);
+          transition: 120ms transform ease-in-out;
+          box-shadow: inset 25px 25px var.$color-primary;
+          border-radius: 3px;
+        }
+        &:checked::before {
+          transform: scale(1);
+        }
+      }
+    }
+  }
+
+  .addProposition {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+
+    margin-top: 20px;
+
+    color: var.$color-secondary;
+
+    transition: 0.3s;
+  }
+  .disabledProp {
+    filter: grayscale(1);
+  }
+}

@@ -13,10 +13,45 @@ export const ProfileModal = (props) => {
   const [name, setName] = useState(props.profile.name)
   const [email, setEmail] = useState(props.profile.mail)
   const [context, setContext] = useContext(TokenContext)
+  const [errorOnImport, setErrorOnImport] = useState('')
+  const [avatarName, setAvatarName] = useState('')
+
   const navigate = useNavigate()
 
-  const updateProfile = (event) => {
-    UpdateUserProfile()
+  const onChange = (file) => {
+    if (file.size > 20000000) {
+      setErrorOnImport('Fichier trop gros !')
+      setAvatarName('')
+      return false
+    }
+    setErrorOnImport('')
+    setAvatarName(file.name)
+    return true
+  }
+
+  const updateProfile = async (e) => {
+    e.preventDefault()
+    console.log('path', e.target[1].value)
+    console.log('pseudo', avatarName)
+    console.log('mail', e.target[3].value)
+    let newPassword = ''
+    if (e.target[4].value === e.target[6].value) {
+      newPassword = e.target[6].value
+    }
+    console.log('NewPass', newPassword)
+    console.log('token', context)
+    const updateResponse = await UpdateUserProfile(
+      context,
+      e.target[2].value,
+      e.target[3].value,
+      e.target[1].value,
+      e.target[4].value,
+    )
+    if (updateResponse.status === 200) {
+      console.log('Profile updated')
+    } else {
+      console.log('Error while trying to update profile')
+    }
   }
 
   const LogOut = () => {
@@ -47,11 +82,11 @@ export const ProfileModal = (props) => {
         <div className="modal">
           <div className="modal-buttons">
             <div className="modal-buttons">
-              <Button
-                form="edit-profile"
+              <input
+                form="editprofile"
                 type="submit"
                 className="btn-secondary"
-                title="Enregistrer"
+                value="Enregistrer"
               />
               <Button
                 type="button"
@@ -64,17 +99,19 @@ export const ProfileModal = (props) => {
                 title="Supprimer mon compte"
               />
             </div>
-            <img
-              onClick={() => props.closeModal(false)}
-              src="/assets/close.svg"
-              alt="close"
-              aria-hidden="true"
-            />
+            <div className="modal-close-button">
+              <img
+                onClick={() => props.closeModal(false)}
+                src="/assets/close.svg"
+                alt="close"
+                aria-hidden="true"
+              />
+            </div>
           </div>
           <div>
             <form
               onSubmit={updateProfile}
-              id="edit-profile"
+              id="editprofile"
               className="modal-form"
             >
               <div className="edit-profile-pic">
@@ -85,6 +122,7 @@ export const ProfileModal = (props) => {
                       id="avatar"
                       name="avatar"
                       accept="image/png, image/jpeg"
+                      onChange={(e) => onChange(e.target.files[0])}
                     />
                     <img src="/assets/icons/noteicon.svg" alt="test" />
                   </label>
@@ -97,19 +135,29 @@ export const ProfileModal = (props) => {
                     onChange={(e) => handleChangeName(e)}
                     value={name}
                     label="Nom d’utilisateur"
+                    className="correct-input-color"
                   />
                   <Input
                     onChange={(e) => handleChangeMail(e)}
                     value={email}
                     label="Votre email"
+                    className="correct-input-color"
                   />
                 </div>
               </div>
               <div className="modal-form-section">
                 <h1>Modifier votre mot de passe</h1>
                 <div className="modify-profile-inputs">
-                  <Input password={true} label="Nouveau mot de passe" />
-                  <Input password={true} label="Confirmer votre mot de passe" />
+                  <Input
+                    password={true}
+                    label="Nouveau mot de passe"
+                    className="correct-input-color"
+                  />
+                  <Input
+                    password={true}
+                    label="Confirmer votre mot de passe"
+                    className="correct-input-color"
+                  />
                 </div>
               </div>
             </form>

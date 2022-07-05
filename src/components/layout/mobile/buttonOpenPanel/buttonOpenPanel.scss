@@ -1,0 +1,30 @@
+@import '../../../../assets/styles/variables.scss';
+
+.bop {
+  width: 90vw;
+  height: 12vh;
+  margin-left: 5vw;
+  margin-top: 5vh;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  color: $color-white;
+}
+
+.bop-survey {
+  background-color: $color-primary;
+}
+
+.bop-quizz {
+  background-color: $color-secondary;
+}
+
+.bop-img-quizz {
+  margin-top: -4px;
+}
+
+.bop-title {
+  font-size: 18px;
+}

@@ -20,26 +20,22 @@ export const GetUserProfile = (userToken) => {
     })
 }
 
-export const UpdateUserProfile = (
-  userToken,
-  name,
-  email,
-  picture,
-  password,
-) => {
+export const UpdateUserProfile = (userToken, data) => {
+  console.log(userToken)
   // prettier-ignore
   const headers = {
-    'Authorization': `Bearer ${userToken[0]}`
+    'Content-Type': 'multipart/form-data',
+    'Authorization': `Bearer ${userToken}`
   }
 
   return axios
-    .post('/api/user/profile', {
-      headers: headers,
-      name: name,
-      mail: email,
-      picture: picture,
-      password: password,
-    })
+    .put(
+      '/api/user/profile',
+      { data },
+      {
+        headers: headers,
+      },
+    )
     .then((res) => {
       console.log(res)
       return res
