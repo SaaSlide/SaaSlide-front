@@ -12,9 +12,11 @@ const SocketProvider = ({ room, pseudo, children }) => {
     console.log(`${res} personne connecté à la session`),
   )
   */
-  socket.emit('join_room', room, (res) => {
-    console.log(res.value)
-  })
+  useEffect(() => {
+    socket.emit('join_room', room, (res) => {
+      console.log(res.value)
+    })
+  }, [])
 
   const sio = {
     /**
