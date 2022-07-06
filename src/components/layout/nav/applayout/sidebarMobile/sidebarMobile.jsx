@@ -2,21 +2,20 @@ import React, { useContext, useState } from 'react'
 import './sidebarMobile.scss'
 import { Links } from '../sidebar/links/links'
 import { useIsMobile } from '../../../../../utils/hooks/isMobile'
+import { LinksResponsive } from '../sidebar/links/linksResponsive'
 
 export const SidebarMobile = ({ category, setCategory }) => {
   const isMobile = useIsMobile()
   const [openLinks, setOpenLinks] = useState(false)
-  console.log(openLinks)
 
   const handleOpenLinks = () => {
-    console.log(openLinks)
     setOpenLinks(true)
   }
 
   const handleCloseLinks = () => {
-    console.log(openLinks)
     setOpenLinks(false)
   }
+
   return (
     <div>
       <div className="sidebarMobile">
@@ -34,17 +33,17 @@ export const SidebarMobile = ({ category, setCategory }) => {
                   alt="moins"
                 />
               </button>
+              <Links category={category} setCategory={setCategory} />
             </div>
           </>
         )}
-        <ul className="links">
+        <ul className="links_sidebar_responsive">
           <li className={openLinks && 'li_open_links'}>
             <img src="/assets/icons/home_alt_outline.svg" alt="logo home" />
             <p>Home</p>
           </li>
           <li className={openLinks && 'li_open_links'}>
-            <img src="/assets/icons/settings.svg" alt="logo settings" />
-            <p>Paramètre</p>
+            <LinksResponsive category={category} setCategory={setCategory} />
           </li>
         </ul>
       </div>

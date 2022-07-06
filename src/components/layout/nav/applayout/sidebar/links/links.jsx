@@ -1,3 +1,4 @@
+import { useIsMobile } from '../../../../../../utils/hooks'
 import './links.scss'
 
 export const Links = ({ category, setCategory }) => {
@@ -27,27 +28,53 @@ export const Links = ({ category, setCategory }) => {
   }
 
   const routes = [sondage, quizz, note, parametre]
+  const routesResponsive = [sondage, quizz, note]
+  const isMobile = useIsMobile()
 
   return (
-    <div className="links">
-      {routes.map((elem) => (
-        <div className="item" key={elem.tabIndex}>
-          <div></div>
-          <div className="link">
-            <div
-              className="onclick"
-              onClick={() => setCategory(elem.key)}
-              aria-hidden="true"
-            >
-              <div className="link-icon">
-                <img src={elem.icon} alt="icon" />
+    <>
+      {!isMobile ? (
+        <div className="links">
+          {routes.map((elem) => (
+            <div className="item" key={elem.tabIndex}>
+              <div></div>
+              <div className="link">
+                <div
+                  className="onclick"
+                  onClick={() => setCategory(elem.key)}
+                  aria-hidden="true"
+                >
+                  <div className="link-icon">
+                    <img src={elem.icon} alt="icon" />
+                  </div>
+                  <p className="navlink">{elem.value}</p>
+                </div>
+                <div className={category === elem.key && 'active'}></div>
               </div>
-              <p className="navlink">{elem.value}</p>
             </div>
-            <div className={category === elem.key && 'active'}></div>
-          </div>
+          ))}
         </div>
-      ))}
-    </div>
+      ) : (
+        <div className="links_responsive">
+          {routesResponsive.map((elem) => (
+            <div className="item" key={elem.tabIndex}>
+              <div></div>
+              <div className="link">
+                <div
+                  className="onclick"
+                  onClick={() => setCategory(elem.key)}
+                  aria-hidden="true"
+                >
+                  <div className="link-icon">
+                    <img src={elem.icon} alt="icon" />
+                  </div>
+                  <p className="navlink">{elem.value}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </>
   )
 }

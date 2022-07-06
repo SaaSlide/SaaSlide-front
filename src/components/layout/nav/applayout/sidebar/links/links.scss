@@ -52,3 +52,31 @@
         width: 4px;
     }
   }
+
+// RESPONSIVE MOBILE
+
+.links_responsive{
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+.links_responsive_params{
+    .item{
+        .link{
+            .onclick{
+                display: flex;
+                flex-direction: column;
+                cursor: pointer;
+                width: 150px;
+                gap: 0;
+
+                .navlink{
+                    margin: 0;
+                    font-size: 14px;
+                    color: grey;
+                }
+            }
+        }
+    }
+}
