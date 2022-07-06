@@ -85,7 +85,7 @@ export const ProfileModal = (props) => {
               <input
                 form="editprofile"
                 type="submit"
-                className="btn-secondary"
+                className="btn-secondary input-save"
                 value="Enregistrer"
               />
               <Button
