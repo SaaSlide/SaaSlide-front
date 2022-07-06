@@ -12,7 +12,9 @@ export const ViewerLogin = () => {
       <h1>BIENVENUE</h1>
       <Input onChange={(e) => setName(e.target.value)} label={'Nom'} />
       <button>
-        <Link to={`/mobile/presentation/${diapoId}`}>Commencer</Link>
+        <Link to={`/mobile/presentation/${diapoId}`} state={name}>
+          Commencer
+        </Link>
       </button>
     </>
   )
