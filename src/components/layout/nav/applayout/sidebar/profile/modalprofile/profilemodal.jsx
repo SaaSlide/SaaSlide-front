@@ -8,6 +8,7 @@ import {
 } from '../../../../../../../services/apiUser'
 import { useNavigate } from 'react-router-dom'
 import { TokenContext } from '../../../../../../../App'
+import { useIsMobile } from '../../../../../../../utils/hooks'
 
 export const ProfileModal = (props) => {
   const [name, setName] = useState(props.profile.name)
@@ -15,6 +16,7 @@ export const ProfileModal = (props) => {
   const [context, setContext] = useContext(TokenContext)
   const [errorOnImport, setErrorOnImport] = useState('')
   const [avatarName, setAvatarName] = useState('')
+  const isMobile = useIsMobile()
 
   const navigate = useNavigate()
 
@@ -77,11 +79,13 @@ export const ProfileModal = (props) => {
   }
 
   return (
-    <div className="modal-profile">
+    <div className={isMobile ? 'modal-profile-responsive' : 'modal-profile'}>
       <div className="modal-container">
-        <div className="modal">
-          <div className="modal-buttons">
-            <div className="modal-buttons">
+        <div className={isMobile ? 'modal-responsive' : 'modal'}>
+          <div
+            className={isMobile ? 'modal-buttons-responsive' : 'modal-buttons'}
+          >
+            <div className={!isMobile ? 'modal-buttons' : 'modal-buttons-none'}>
               <input
                 form="editprofile"
                 type="submit"
@@ -99,7 +103,24 @@ export const ProfileModal = (props) => {
                 title="Supprimer mon compte"
               />
             </div>
-            <div className="modal-close-button">
+            {isMobile && (
+              <div className="modal-button-signout-responsive">
+                <button
+                  type="button"
+                  className="btn_logout"
+                  onClick={() => LogOut()}
+                >
+                  <img src="/assets/icons/log_out.svg" alt="logout" />
+                </button>
+              </div>
+            )}
+            <div
+              className={
+                isMobile
+                  ? 'modal-close-button-responsive'
+                  : 'modal-close-button'
+              }
+            >
               <img
                 onClick={() => props.closeModal(false)}
                 src="/assets/close.svg"
@@ -114,7 +135,11 @@ export const ProfileModal = (props) => {
               id="editprofile"
               className="modal-form"
             >
-              <div className="edit-profile-pic">
+              <div
+                className={
+                  isMobile ? 'edit-profile-pic-responsive' : 'edit-profile-pic'
+                }
+              >
                 <div className="icon-profile-edit">
                   <label className="icon-profile-edit" htmlFor="avatar">
                     <input
@@ -128,9 +153,25 @@ export const ProfileModal = (props) => {
                   </label>
                 </div>
               </div>
-              <div className="modal-form-section">
-                <h1>Information Générale</h1>
-                <div className="modify-profile-inputs">
+              <div
+                className={
+                  isMobile
+                    ? 'modal-form-section-responsive'
+                    : 'modal-form-section'
+                }
+              >
+                {isMobile ? (
+                  <h4>Informations Générale</h4>
+                ) : (
+                  <h1>Information Générale</h1>
+                )}
+                <div
+                  className={
+                    isMobile
+                      ? 'modify-profile-inputs-responsive'
+                      : 'modify-profile-inputs'
+                  }
+                >
                   <Input
                     onChange={(e) => handleChangeName(e)}
                     value={name}
@@ -145,9 +186,25 @@ export const ProfileModal = (props) => {
                   />
                 </div>
               </div>
-              <div className="modal-form-section">
-                <h1>Modifier votre mot de passe</h1>
-                <div className="modify-profile-inputs">
+              <div
+                className={
+                  isMobile
+                    ? 'modal-form-section-responsive'
+                    : 'modal-form-section'
+                }
+              >
+                {isMobile ? (
+                  <h4>Modifier votre mot de passe</h4>
+                ) : (
+                  <h1>Modifier votre mot de passe</h1>
+                )}
+                <div
+                  className={
+                    isMobile
+                      ? 'modify-profile-inputs-responsive'
+                      : 'modify-profile-inputs'
+                  }
+                >
                   <Input
                     password={true}
                     label="Nouveau mot de passe"
@@ -162,6 +219,26 @@ export const ProfileModal = (props) => {
               </div>
             </form>
           </div>
+          <div
+            className={
+              isMobile ? 'modal-button-save-responsive' : 'modal-buttons-none'
+            }
+          >
+            <input
+              form="editprofile"
+              type="submit"
+              className="btn-secondary-sm input-save-sm"
+              value="Enregistrer"
+            />
+          </div>
+          {isMobile && (
+            <div className="modal-button-delete-responsive">
+              <Button
+                className="btn-danger-sm-outline"
+                title="Supprimer mon compte"
+              />
+            </div>
+          )}
         </div>
       </div>
     </div>
