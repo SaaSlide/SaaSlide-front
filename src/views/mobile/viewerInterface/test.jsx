@@ -1,11 +1,16 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { SocketContext } from '../../../utils/socket'
 
 const Test = () => {
   const { socket, sio } = useContext(SocketContext)
   const [nUser, setNUser] = useState(0)
 
-  socket.on('update_number_user', (res) => setNUser(res))
+  useEffect(() => {
+    socket.on('update_number_user', (res) => setNUser(res))
+    return () => {
+      socket.disconnect()
+    }
+  }, [])
 
   return <p>Nombre d'utilisateur {nUser}</p>
 }
