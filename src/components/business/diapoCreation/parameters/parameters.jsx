@@ -21,7 +21,7 @@ export const Parameters = () => {
           <label htmlFor="envoiQuestion" className={`inputApparence`}>
             <div
               className={`inputCircle ${
-                parametersTemp.sendAnswer ? 'inputActive' : 'inputInactive'
+                !parametersTemp.sendAnswer ? 'inputActive' : 'inputInactive'
               }`}
             />
           </label>
@@ -42,7 +42,7 @@ export const Parameters = () => {
           <label htmlFor="envoiSmiley" className={`inputApparence`}>
             <div
               className={`inputCircle ${
-                parametersTemp.sendEmoji ? 'inputActive' : 'inputInactive'
+                !parametersTemp.sendEmoji ? 'inputActive' : 'inputInactive'
               }`}
             />
           </label>

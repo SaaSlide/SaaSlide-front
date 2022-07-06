@@ -5,7 +5,11 @@ import { useManageDiapo } from '../../../../utils/hooks'
 
 export const Quizz = () => {
   const { quizz, saveQuizz, index } = useManageDiapo()
-  const [propositions, setPropositions] = useState(quizz)
+  const [propositions, setPropositions] = useState([
+    { choice: 'dbdsjkfbs', answer: true },
+    { choice: 'aaaaaa', answer: false },
+    { choice: 'eeeee', answer: true },
+  ])
 
   useEffect(() => {
     setPropositions(quizz)
@@ -36,10 +40,14 @@ export const Quizz = () => {
           {propositions.map((proposition, index) => {
             return (
               <div key={index} className="inputContainerProposition">
-                <input type="checkbox" className="checkboxInput" />
+                <input
+                  checked={proposition.answer}
+                  type="checkbox"
+                  className="checkboxInput"
+                />
                 <input
                   type="text"
-                  value={proposition}
+                  value={proposition.choice}
                   // onChange={(e) =>
                   //   setPropositions()
                   // }

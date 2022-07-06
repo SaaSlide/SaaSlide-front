@@ -40,11 +40,11 @@
 
   .inputActive {
     transform: translateX(0%);
-    background-color: var.$color-secondary;
+    background-color: rgb(117, 117, 117);
   }
   .inputInactive {
     transform: translateX(130%);
-    background-color: rgb(117, 117, 117);
+    background-color: var.$color-secondary;
   }
 
   input {
