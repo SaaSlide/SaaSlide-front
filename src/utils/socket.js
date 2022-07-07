@@ -80,7 +80,7 @@ const SocketProvider = ({ room, pseudo, children }) => {
   }
 
   return (
-    <SocketContext.Provider value={{ socket, sio, pseudo }}>
+    <SocketContext.Provider value={{ socket, sio, pseudo, diapoId: room }}>
       {children}
     </SocketContext.Provider>
   )

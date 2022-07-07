@@ -5,7 +5,7 @@ import Interface from '../../../components/layout/mobile/interface/interface'
 import './viewerInterface.scss'
 
 export const ViewerInterface = () => {
-  const params = { ...useParams(), name: useLocation().state }
+  const params = { ...useParams(), name: useLocation().state.userName }
 
   return (
     <SocketProvider room={params.diapoId} pseudo={params.name}>

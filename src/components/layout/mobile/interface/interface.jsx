@@ -1,13 +1,25 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import { SocketContext } from '../../../../utils/socket'
 import Question from '../question/question'
+import { GetDiapoById } from '../../../../services/apiService'
+import { DownloadPdf } from '../../../layout/mobile/downloadPdf/downloadPdf'
+import { ButtonOpenPanel } from '../buttonOpenPanel/buttonOpenPanel'
 
 import './interface.scss'
 
 const Interface = () => {
-  const { socket, pseudo } = useContext(SocketContext)
+  const { socket, pseudo, diapoId } = useContext(SocketContext)
   const [questions, setQuestions] = useState([])
   const [home, setHome] = useState(true)
+
+  const [diapo, setDiapo] = useState()
+  const [diapoName, setDiapoName] = useState()
+  const [surveyName, setSurveyName] = useState()
+  const [surveyOptions, setSurveyOptions] = useState()
+  const [quizzQuestion, setQuizzQuestion] = useState()
+  const [quizzOptions, setQuizzOptions] = useState()
+  const [pageNumber, setPageNumber] = useState(1)
 
   const fill = (element) => {
     setQuestions([element, ...questions])
@@ -17,14 +29,69 @@ const Interface = () => {
     fill({ text: `${pseudo} : ${question}`, me: false })
   })
 
+  const getDiapoInfo = async () => {
+    const response = await GetDiapoById(diapoId)
+    setDiapo(response)
+    setDiapoName(response.infoDiapo[0].pathPdf.substring(2))
+  }
+
+  // when socket emit changing slide event
+  const onNewSlide = () => {
+    setPageNumber(pageNumber + 1)
+    console.log(diapo.infoDiapo.length)
+    if (pageNumber < diapo.infoDiapo.length) {
+      console.log(pageNumber)
+      let currentSlide = diapo.infoDiapo[pageNumber - 1]
+      if (currentSlide.surveys.length) {
+        setSurveyName(currentSlide.surveys[0].name)
+        setSurveyOptions(currentSlide.surveys[0].survey)
+      } else {
+        setSurveyName()
+        setSurveyOptions()
+      }
+      if (currentSlide.quizzs.length) {
+        console.log(currentSlide.quizzs[0].possibilities)
+        setQuizzQuestion(currentSlide.quizzs[0].question)
+        setQuizzOptions(currentSlide.quizzs[0].possibilities)
+      } else {
+        setQuizzQuestion()
+        setQuizzOptions()
+      }
+    }
+  }
+
+  useEffect(() => {
+    getDiapoInfo()
+  }, [diapoId])
+
   /* eslint-disable */
   return (
     <>
       <div className="interface-container">
         {home ? (
-          <h1>Bienvenue {pseudo}</h1>
+          <div>
+            <h1>Bienvenue {pseudo}</h1>
+            {surveyName && surveyOptions && (
+              <ButtonOpenPanel
+                type="survey"
+                question={surveyName}
+                options={surveyOptions}
+              />
+            )}
+            {quizzQuestion && quizzOptions && (
+              <ButtonOpenPanel
+                type="quizz"
+                question={quizzQuestion}
+                options={quizzOptions}
+              />
+            )}
+            {diapo && (
+              <DownloadPdf diapoName={diapoName} emoji={diapo.sendEmoji} />
+            )}
+            <button onClick={() => onNewSlide()}>console.log</button>
+          </div>
         ) : (
-          <Question viewer={false} questions={questions} setQuestions={fill} />
+          <Question viewer={true} questions={questions} setQuestions={fill} />
         )}
       </div>
       <nav className="navMobile">
