@@ -22,7 +22,11 @@ export const ButtonOpenPanel = ({ type, question, options }) => {
         </div>
       )) ||
         (type === 'quizz' && (
-          <div className="bop bop-quizz">
+          <div
+            onClick={() => setIsAnswerModalShown(true)}
+            aria-hidden="true"
+            className="bop bop-quizz"
+          >
             <p className="bop-title">Quizz</p>
             <img
               className="bop-img bop-img-quizz"

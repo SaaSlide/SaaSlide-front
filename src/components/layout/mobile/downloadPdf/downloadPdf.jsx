@@ -1,7 +1,7 @@
 import React from 'react'
 import './downloadPdf.scss'
 
-export const DownloadPdf = ({ diapoName, emoji }) => {
+export const DownloadPdf = ({ diapoPath, emoji }) => {
   // give info to emoji modal if they are available
   console.log(emoji)
   return (
@@ -20,7 +20,7 @@ export const DownloadPdf = ({ diapoName, emoji }) => {
         <div className="dld-pdf-btn">
           <a
             className="btn-secondary-sm-outline"
-            href={`http://localhost:4000/${diapoName}`}
+            href={`http://localhost:4000/${diapoPath}`}
             download="Présentation"
             target="_blank"
             rel="noreferrer"
