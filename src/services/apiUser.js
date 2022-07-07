@@ -54,15 +54,6 @@ export const UpdateUserProfile = (userToken, name, mail, picture, password) => {
 }
 
 export const DeleteUserProfile = (userToken, idUser) => {
-  console.log(userToken, idUser)
-  // prettier-ignore
-  const headers = {
-    Authorization: `Bearer ${userToken}`
-  }
-  const config = {
-    headers: { Authorization: `Bearer ${userToken}` },
-  }
-
   return axios
     .delete('/api/user', {
       headers: {
