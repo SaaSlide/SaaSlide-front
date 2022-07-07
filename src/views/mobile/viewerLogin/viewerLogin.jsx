@@ -1,21 +1,29 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import Button from '../../../components/layout/button/button'
 import Input from '../../../components/layout/input/input'
 import './viewerLogin.scss'
 
 export const ViewerLogin = () => {
-  const [name, setName] = useState('')
-  let diapoId = 1234567890
+  const [userName, setUserName] = useState('')
+  let diapoId = '62c4a467d5e918f74b996dbe'
+
   return (
     <>
-      <h1>BIENVENUE</h1>
-      <Input onChange={(e) => setName(e.target.value)} label={'Nom'} />
-      <button>
-        <Link to={`/mobile/presentation/${diapoId}`} state={name}>
-          Commencer
-        </Link>
-      </button>
+      <section className="viewer-login-container">
+        <h1>BIENVENUE</h1>
+        <Input onChange={(e) => setUserName(e.target.value)} label={'Nom'} />
+        <button className={userName ? '' : 'disabled'}>
+          <Link
+            to={`/mobile/presentation/${diapoId}`}
+            state={{ userName: userName }}
+          >
+            Commencer
+          </Link>
+        </button>
+        <div className="viewer-login-container-redirect">
+          <Link to={''}>Connexion</Link>
+        </div>
+      </section>
     </>
   )
 }

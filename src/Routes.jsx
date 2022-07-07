@@ -6,6 +6,7 @@ import { PdfList } from './components'
 import { useCookie } from './utils/cookie/cookie'
 import { ViewerLogin } from './views/mobile/viewerLogin/viewerLogin'
 import { ViewerInterface } from './views/mobile/viewerInterface/viewerInterface'
+import { SideBar } from './components/layout/nav/sidebar/sidebar'
 
 const RoutesApp = () => {
   useCookie()

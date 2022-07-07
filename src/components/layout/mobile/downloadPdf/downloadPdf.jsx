@@ -1,8 +1,9 @@
 import React from 'react'
 import './downloadPdf.scss'
-import Button from '../../button/button'
 
-export const DownloadPdf = () => {
+export const DownloadPdf = ({ diapoName, emoji }) => {
+  // give info to emoji modal if they are available
+  console.log(emoji)
   return (
     <>
       <div className="dld-pdf">
@@ -17,11 +18,15 @@ export const DownloadPdf = () => {
           />
         </div>
         <div className="dld-pdf-btn">
-          <Button
-            type="button"
-            title="Télécharger le PDF"
+          <a
             className="btn-secondary-sm-outline"
-          ></Button>
+            href={`http://localhost:4000/${diapoName}`}
+            download="Présentation"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Télécharger le PDF
+          </a>
         </div>
       </div>
     </>

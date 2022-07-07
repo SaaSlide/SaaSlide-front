@@ -87,6 +87,19 @@ export const GetAllDiapoForUser = (userToken) => {
     })
 }
 
+export const GetDiapoById = (diapoId) => {
+  return axios
+    .get('/diapo/' + diapoId)
+    .then((res) => {
+      console.log(res)
+      return res.data
+    })
+    .catch((err) => {
+      console.log(err)
+      return err
+    })
+}
+
 export const DeleteDiapoById = (userToken, diapoId) => {
   // prettier-ignore
   const headers = {
