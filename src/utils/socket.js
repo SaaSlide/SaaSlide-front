@@ -1,4 +1,4 @@
-import { createContext } from 'react'
+import { createContext, useEffect } from 'react'
 import { io } from 'socket.io-client'
 
 export const SocketContext = createContext({})
@@ -12,9 +12,15 @@ const SocketProvider = ({ room, pseudo, children }) => {
     console.log(`${res} personne connecté à la session`),
   )
   */
-  socket.emit('join_room', room, (res) => {
-    console.log(res.value)
-  })
+  // socket.emit('join_room', room, (res) => {
+  //   console.log(res.value)
+  // })
+
+  useEffect(() => {
+    socket.emit('join_room', room, (res) => {
+      console.log(res.value)
+    })
+  }, [])
 
   const sio = {
     /**
