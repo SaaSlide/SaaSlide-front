@@ -12,6 +12,8 @@ export const ViewerInterface = () => {
   const [diapoName, setDiapoName] = useState()
   const [surveyName, setSurveyName] = useState()
   const [surveyOptions, setSurveyOptions] = useState()
+  const [quizzQuestion, setQuizzQuestion] = useState()
+  const [quizzOptions, setQuizzOptions] = useState()
   const [pageNumber, setPageNumber] = useState(1)
   const params = useParams()
   const location = useLocation()
@@ -37,6 +39,14 @@ export const ViewerInterface = () => {
         setSurveyName()
         setSurveyOptions()
       }
+      if (currentSlide.quizzs.length) {
+        console.log(currentSlide.quizzs[0].possibilities)
+        setQuizzQuestion(currentSlide.quizzs[0].question)
+        setQuizzOptions(currentSlide.quizzs[0].possibilities)
+      } else {
+        setQuizzQuestion()
+        setQuizzOptions()
+      }
     }
   }
 
@@ -52,6 +62,13 @@ export const ViewerInterface = () => {
           type="survey"
           question={surveyName}
           options={surveyOptions}
+        />
+      )}
+      {quizzQuestion && quizzOptions && (
+        <ButtonOpenPanel
+          type="quizz"
+          question={quizzQuestion}
+          options={quizzOptions}
         />
       )}
       {diapo && <DownloadPdf diapoName={diapoName} emoji={diapo.sendEmoji} />}

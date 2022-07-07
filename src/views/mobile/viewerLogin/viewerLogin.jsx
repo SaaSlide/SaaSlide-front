@@ -2,10 +2,11 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Input from '../../../components/layout/input/input'
 import './viewerLogin.scss'
+import Logo from '../../../components/layout/logo/logo'
 
 export const ViewerLogin = () => {
   const [userName, setUserName] = useState('')
-  let diapoId = '62c4a467d5e918f74b996dbe'
+  let diapoId = '62c6aa9ed2d2a5dbab9fe0f8'
 
   return (
     <>
@@ -24,6 +25,9 @@ export const ViewerLogin = () => {
           <Link to={''}>Connexion</Link>
         </div>
       </section>
+      <div className="viewer-login-container-logo">
+        <Logo width="120px" />
+      </div>
     </>
   )
 }
