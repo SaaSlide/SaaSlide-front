@@ -64,16 +64,14 @@ export const DeleteUserProfile = (userToken, idUser) => {
   }
 
   return axios
-    .delete(
-      '/api/user',
-      {
+    .delete('/api/user', {
+      headers: {
+        Authorization: `Bearer ${userToken}`,
+      },
+      data: {
         userId: idUser,
       },
-      {
-        headers: headers,
-      },
-      config,
-    )
+    })
     .then((res) => {
       console.log(res)
       return res

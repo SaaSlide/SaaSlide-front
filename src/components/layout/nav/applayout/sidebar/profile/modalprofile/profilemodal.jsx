@@ -60,9 +60,11 @@ export const ProfileModal = (props) => {
   }
 
   const deleteAccount = (token, idUser) => {
-    console.log('idUser', idUser)
-    console.log('token', token)
     DeleteUserProfile(token, idUser)
+    DeleteCookie()
+    console.log('cookie deleted')
+    setContext('')
+    navigate('/signin')
   }
 
   const handleChangeName = (event) => {
