@@ -11,7 +11,7 @@ import 'simplebar/dist/simplebar.min.css'
 
 export const PdfList = () => {
   const userToken = useContext(TokenContext)
-  const [pdfs, setPdfs] = useState(null)
+  const [pdfs, setPdfs] = useState(undefined)
   const [isDiapoHovered, setIsDiapoHovered] = useState(false)
   const [onDeleteMessage, setOnDeleteMessage] = useState('')
   const isMobile = useIsMobile()
@@ -62,7 +62,7 @@ export const PdfList = () => {
         )}
       </div>
       {!isMobile ? (
-        <SimpleBar autoHide={false} style={{ maxHeight: 370 }}>
+        <SimpleBar autoHide={false} style={{ maxHeight: 300 }}>
           <div className="diapo-list">
             {pdfs &&
               pdfs.map((diapo) => {
