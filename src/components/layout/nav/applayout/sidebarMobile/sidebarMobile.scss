@@ -8,13 +8,17 @@
     width: 100%;
     height: 80px;
 
-    .plus{
+    .button_plus{
         display: block;
         margin: -15px auto 0 auto;
-        background-color: $color-secondary;
+        padding: 0;
         border-radius: 25px;
+        .plus{
+            background-color: $color-secondary;
+            border-radius: 25px;
+        }
     }
-    .links{
+    .links_sidebar_responsive{
         display: flex;
         justify-content: center;
         align-items: center;
@@ -28,15 +32,33 @@
             margin: 10px 32.5px 20px 32.5px;
 
             p{
-                margin-top: 5px;
+                margin-top: 4px;
                 color: $color-white;
             }
         }
 
-        .settings{
+        .li_open_links{
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            margin: 29px 32.5px 20px 32.5px;
+
             p{
-                color: rgb(154, 154, 154);
+                margin-top: 4.5px;
             }
         }
+    }
+
+    .open_links{
+        position: fixed;
+        bottom: 80px;
+        width: 100%;
+        background-color: $color-white;
+        box-shadow: 0px -5px 20px rgba(0, 0, 0, 0.1);
+        border-radius: 10px 10px 0px 0px;
+        height: 115px;
+        color: $color-black;
     }
 }

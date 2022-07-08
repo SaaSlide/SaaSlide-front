@@ -1,22 +1,49 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import './sidebarMobile.scss'
 import { Links } from '../sidebar/links/links'
 import { useIsMobile } from '../../../../../utils/hooks/isMobile'
+import { LinksResponsive } from '../sidebar/links/linksResponsive'
 
 export const SidebarMobile = ({ category, setCategory }) => {
   const isMobile = useIsMobile()
+  const [openLinks, setOpenLinks] = useState(false)
+
+  const handleOpenLinks = () => {
+    setOpenLinks(true)
+  }
+
+  const handleCloseLinks = () => {
+    setOpenLinks(false)
+  }
+
   return (
     <div>
       <div className="sidebarMobile">
-        <img className="plus" src="/assets/icons/plus.svg" alt="plus" />
-        <ul className="links">
-          <li>
+        {!openLinks ? (
+          <button className="button_plus" onClick={handleOpenLinks}>
+            <img className="plus" src="/assets/icons/plus.svg" alt="plus" />
+          </button>
+        ) : (
+          <>
+            <div className="open_links">
+              <button className="button_plus" onClick={handleCloseLinks}>
+                <img
+                  className="plus"
+                  src="/assets/icons/minus.svg"
+                  alt="moins"
+                />
+              </button>
+              <Links category={category} setCategory={setCategory} />
+            </div>
+          </>
+        )}
+        <ul className="links_sidebar_responsive">
+          <li className={openLinks && 'li_open_links'}>
             <img src="/assets/icons/home_alt_outline.svg" alt="logo home" />
             <p>Home</p>
           </li>
-          <li className="settings">
-            <img src="/assets/icons/settings.svg" alt="logo settings" />
-            <p>Paramètre</p>
+          <li className={openLinks && 'li_open_links'}>
+            <LinksResponsive category={category} setCategory={setCategory} />
           </li>
         </ul>
       </div>

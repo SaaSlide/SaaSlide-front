@@ -114,6 +114,88 @@
     cursor: pointer;
 }
 
+// RESPONSIVE MOBILE
+.modal-profile-responsive{
+    background: #00000060;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: 999;
+}
+.modal-responsive{
+    background-color: $color-white;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+}
+
+.modal-buttons-none{
+    display: none;
+}
+
+.input-save-sm {
+    border-radius: 7px;
+    padding: 5px 25px;
+    border: none;
+    color: $color-white;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.modify-profile-inputs-responsive{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 90%;
+    margin: 0 auto;
+    gap: 20px;
+}
+
+.modal-close-button-responsive{
+    margin: 10px;
+}
+
+.edit-profile-pic-responsive{
+    display: none;
+}
+
+.modal-button-save-responsive{
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 20px;
+}
+
+.modal-button-delete-responsive{
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+
+    .delete-account-modal{
+        position: absolute;
+        top: 25vh;
+    }
+}
+
+.modal-form-section-responsive{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.modal-buttons-responsive{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+
+    .btn_logout{
+        padding: 0;
+        margin-top: 5px;
+        cursor: pointer;
+    }
+}
+
 .delete-account-modal {
     position: absolute;
     margin-top: calc(18px + 47px);
