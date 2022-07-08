@@ -13,11 +13,8 @@ export const Profile = () => {
 
   const getUserInfo = async () => {
     let response = await GetUserProfile(userToken)
-    console.log(response)
     setProfile(response)
   }
-
-  console.log('current profile :', profile)
 
   useEffect(() => {
     getUserInfo()
