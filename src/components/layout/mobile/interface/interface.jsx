@@ -69,7 +69,7 @@ const Interface = () => {
     <>
       <div className="interface-container">
         {home ? (
-          <div>
+          <>
             <h1>Bienvenue {pseudo}</h1>
             {surveyName && surveyOptions && (
               <ButtonOpenPanel
@@ -89,7 +89,7 @@ const Interface = () => {
               <DownloadPdf diapoName={diapoName} emoji={diapo.sendEmoji} />
             )}
             <button onClick={() => onNewSlide()}>console.log</button>
-          </div>
+          </>
         ) : (
           <Question viewer={true} questions={questions} setQuestions={fill} />
         )}
