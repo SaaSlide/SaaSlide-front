@@ -46,8 +46,6 @@ export const SondageHome = () => {
     setPage(newPage)
   }
 
-  console.log(isMobile)
-
   return (
     <section className="sectionSondage">
       <div className="containerTextArrow">
