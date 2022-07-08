@@ -19,7 +19,7 @@ export const LayoutCreation = ({ children }) => {
             <a href="/diapo-list" className="buttonLeave">
               Quitter le projet
             </a>
-            <a href={`/presentation/${diapo._id}`}>
+            <a href={`/diapo/presentation/${diapo._id}`}>
               <img src="/assets/images/play.png" alt="play" />
             </a>
           </div>
