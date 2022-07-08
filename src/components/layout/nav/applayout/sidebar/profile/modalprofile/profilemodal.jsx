@@ -4,11 +4,13 @@ import Input from '../../../../../input/input'
 import { useState, useContext } from 'react'
 import {
   DeleteCookie,
+  DeleteUserProfile,
   UpdateUserProfile,
 } from '../../../../../../../services/apiUser'
 import { useNavigate } from 'react-router-dom'
 import { TokenContext } from '../../../../../../../App'
 import { useIsMobile } from '../../../../../../../utils/hooks'
+import { IconNote } from '../../../../../icons/note/iconnote'
 
 export const ProfileModal = (props) => {
   const [name, setName] = useState(props.profile.name)
@@ -17,6 +19,7 @@ export const ProfileModal = (props) => {
   const [errorOnImport, setErrorOnImport] = useState('')
   const [avatarName, setAvatarName] = useState('')
   const isMobile = useIsMobile()
+  const [toggleDeleteAccount, setToggleDeleteAccount] = useState(false)
 
   const navigate = useNavigate()
 
@@ -33,20 +36,15 @@ export const ProfileModal = (props) => {
 
   const updateProfile = async (e) => {
     e.preventDefault()
-    console.log('path', e.target[1].value)
-    console.log('pseudo', avatarName)
-    console.log('mail', e.target[3].value)
     let newPassword = ''
     if (e.target[4].value === e.target[6].value) {
       newPassword = e.target[6].value
     }
-    console.log('NewPass', newPassword)
-    console.log('token', context)
     const updateResponse = await UpdateUserProfile(
       context,
       e.target[2].value,
       e.target[3].value,
-      e.target[1].value,
+      e.target[1].files[0],
       e.target[4].value,
     )
     if (updateResponse.status === 200) {
@@ -58,14 +56,17 @@ export const ProfileModal = (props) => {
 
   const LogOut = () => {
     DeleteCookie()
+    console.log('cookie deleted')
     setContext('')
     navigate('/signin')
   }
 
-  const deleteAccount = () => {
+  const deleteAccount = (token, idUser) => {
+    DeleteUserProfile(token, idUser)
     DeleteCookie()
+    console.log('cookie deleted')
     setContext('')
-    navigate('/')
+    navigate('/signin')
   }
 
   const handleChangeName = (event) => {
@@ -89,19 +90,47 @@ export const ProfileModal = (props) => {
               <input
                 form="editprofile"
                 type="submit"
-                className="btn-secondary input-save"
+                className={`btn-secondary input-save ${
+                  toggleDeleteAccount && 'disable-button'
+                }`}
                 value="Enregistrer"
+                disabled={!toggleDeleteAccount}
               />
               <Button
                 type="button"
                 onClick={() => LogOut()}
-                className="btn-danger"
+                className={`btn-danger ${
+                  toggleDeleteAccount && 'disable-button'
+                }`}
                 title="Déconnexion"
+                disabled={!toggleDeleteAccount}
               />
               <Button
-                className="btn-danger-outline"
+                onClick={() => setToggleDeleteAccount(!toggleDeleteAccount)}
+                className={`btn-danger-outline ${
+                  toggleDeleteAccount && 'disable-button'
+                }`}
                 title="Supprimer mon compte"
               />
+              {toggleDeleteAccount && (
+                <div className="delete-account-modal">
+                  <p>Êtes vous sur de vouloir supprimer votre compte ?</p>
+                  <div className="delete-account-button">
+                    <Button
+                      onClick={() =>
+                        setToggleDeleteAccount(!toggleDeleteAccount)
+                      }
+                      className="btn-secondary-outline button-fix-height"
+                      title="Annuler"
+                    />
+                    <Button
+                      onClick={() => deleteAccount(context, props.profile._id)}
+                      className="btn-danger button-fix-height"
+                      title="Supprimer"
+                    />
+                  </div>
+                </div>
+              )}
             </div>
             {isMobile && (
               <div className="modal-button-signout-responsive">
@@ -149,7 +178,11 @@ export const ProfileModal = (props) => {
                       accept="image/png, image/jpeg"
                       onChange={(e) => onChange(e.target.files[0])}
                     />
-                    <img src="/assets/icons/noteicon.svg" alt="test" />
+                    <IconNote
+                      onClick={() => props.closeModal(false)}
+                      color={'white'}
+                      size={20}
+                    />
                   </label>
                 </div>
               </div>
@@ -227,16 +260,41 @@ export const ProfileModal = (props) => {
             <input
               form="editprofile"
               type="submit"
-              className="btn-secondary-sm input-save-sm"
+              className={`btn-secondary-sm input-save-sm ${
+                toggleDeleteAccount && 'disable-button'
+              }`}
               value="Enregistrer"
+              disabled={!toggleDeleteAccount}
             />
           </div>
           {isMobile && (
             <div className="modal-button-delete-responsive">
               <Button
-                className="btn-danger-sm-outline"
+                onClick={() => setToggleDeleteAccount(!toggleDeleteAccount)}
+                className={`btn-danger-outline ${
+                  toggleDeleteAccount && 'disable-button'
+                }`}
                 title="Supprimer mon compte"
               />
+              {toggleDeleteAccount && (
+                <div className="delete-account-modal">
+                  <p>Êtes vous sur de vouloir supprimer votre compte ?</p>
+                  <div className="delete-account-button">
+                    <Button
+                      onClick={() =>
+                        setToggleDeleteAccount(!toggleDeleteAccount)
+                      }
+                      className="btn-secondary-sm-outline button-fix-height"
+                      title="Annuler"
+                    />
+                    <Button
+                      onClick={() => deleteAccount(context, props.profile._id)}
+                      className="btn-danger-sm button-fix-height"
+                      title="Supprimer"
+                    />
+                  </div>
+                </div>
+              )}
             </div>
           )}
         </div>
