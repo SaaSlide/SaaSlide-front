@@ -1,9 +1,13 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './answerModal.scss'
 import { ButtonAnswer } from '../buttonAnswer/buttonAnswer'
 
 export const AnswerModal = ({ type, question, options, setIsModalShown }) => {
   const [showAnswer, setShownAnswer] = useState(false)
+  let [isButtonSelected, setIsButtonSelected] = useState(false)
+  useEffect(() => {
+    console.log(isButtonSelected)
+  }, [isButtonSelected])
   console.log(type, question, options)
   return (
     <>
@@ -19,6 +23,8 @@ export const AnswerModal = ({ type, question, options, setIsModalShown }) => {
               option={option}
               index={index + 1}
               type={type}
+              isButtonSelected={isButtonSelected}
+              setIsButtonSelected={setIsButtonSelected}
             />
           ))) ||
           (type === 'quizz' &&
@@ -30,6 +36,8 @@ export const AnswerModal = ({ type, question, options, setIsModalShown }) => {
                 option={option.choice}
                 index={index + 1}
                 type={type}
+                isButtonSelected={isButtonSelected}
+                setIsButtonSelected={setIsButtonSelected}
               />
             )))}
       </div>
