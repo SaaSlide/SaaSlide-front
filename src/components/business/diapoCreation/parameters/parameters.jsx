@@ -1,16 +1,19 @@
 import './parameters.scss'
 import { LayoutWindow } from '../layoutWindow/layoutWindow'
 import { useState } from 'react'
+import { useManageDiapo } from '../../../../utils/hooks'
 
-export const Parameters = ({ setCategory }) => {
-  const [isChecked, setIsChecked] = useState(false)
-  const [isChecked2, setIsChecked2] = useState(false)
+export const Parameters = () => {
+  const { saveParams, parameters } = useManageDiapo()
+
+  const [parametersTemp, setParametersTemp] = useState(parameters)
 
   return (
     <LayoutWindow
-      setCategory={setCategory}
-      title={'Paramètre de personnalisation'}
+      title={'Paramètrage de la présentation'}
+      onSave={() => saveParams(parametersTemp)}
       btnDelete={false}
+      parameters
     >
       <div className="inputsContainer">
         <div className={'inputContainer'}>
@@ -18,15 +21,20 @@ export const Parameters = ({ setCategory }) => {
           <label htmlFor="envoiQuestion" className={`inputApparence`}>
             <div
               className={`inputCircle ${
-                isChecked ? 'inputActive' : 'inputInactive'
+                !parametersTemp.sendAnswer ? 'inputActive' : 'inputInactive'
               }`}
             />
           </label>
           <input
             id="envoiQuestion"
             type="checkbox"
-            checked={isChecked}
-            onChange={(e) => setIsChecked(e.currentTarget.checked)}
+            checked={parametersTemp.sendAnswer}
+            onChange={(e) =>
+              setParametersTemp({
+                ...parametersTemp,
+                sendAnswer: e.currentTarget.checked,
+              })
+            }
           />
         </div>
         <div className="inputContainer">
@@ -34,15 +42,20 @@ export const Parameters = ({ setCategory }) => {
           <label htmlFor="envoiSmiley" className={`inputApparence`}>
             <div
               className={`inputCircle ${
-                isChecked2 ? 'inputActive' : 'inputInactive'
+                !parametersTemp.sendEmoji ? 'inputActive' : 'inputInactive'
               }`}
             />
           </label>
           <input
             id="envoiSmiley"
             type="checkbox"
-            checked={isChecked2}
-            onChange={(e) => setIsChecked2(e.currentTarget.checked)}
+            checked={parametersTemp.sendEmoji}
+            onChange={(e) =>
+              setParametersTemp({
+                ...parametersTemp,
+                sendEmoji: e.currentTarget.checked,
+              })
+            }
           />
         </div>
       </div>

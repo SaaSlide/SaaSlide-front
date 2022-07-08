@@ -1,11 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './buttonOpenPanel.scss'
+import { AnswerModal } from '../answerModal/answerModal'
 
-export const ButtonOpenPanel = ({ type }) => {
+export const ButtonOpenPanel = ({ type, question, options }) => {
+  const [isAnswerModalShown, setIsAnswerModalShown] = useState(false)
+
   return (
     <>
       {(type === 'survey' && (
-        <div className="bop bop-survey">
+        <div
+          onClick={() => setIsAnswerModalShown(true)}
+          aria-hidden="true"
+          className="bop bop-survey"
+        >
           <p className="bop-title">Sondage</p>
           <img
             className="bop-img"
@@ -24,6 +31,14 @@ export const ButtonOpenPanel = ({ type }) => {
             />
           </div>
         ))}
+      {isAnswerModalShown && (
+        <AnswerModal
+          type={type}
+          question={question}
+          options={options}
+          setIsModalShown={setIsAnswerModalShown}
+        />
+      )}
     </>
   )
 }
