@@ -26,6 +26,12 @@ h5 {
   font-size: 18px;
 }
 
+p,
+span,
+label {
+  font-weight: 500;
+}
+
 p {
   font-size: 14px;
 }
@@ -42,7 +48,11 @@ button {
   cursor: pointer;
 }
 
-a{
+a {
   list-style: none;
   text-decoration: none;
+}
+
+li {
+  list-style: none;
 }
