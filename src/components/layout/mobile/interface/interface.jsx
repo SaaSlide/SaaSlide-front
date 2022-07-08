@@ -14,12 +14,12 @@ const Interface = () => {
   const [home, setHome] = useState(true)
 
   const [diapo, setDiapo] = useState()
-  const [diapoName, setDiapoName] = useState()
+  const [diapoPath, setDiapoPath] = useState()
   const [surveyName, setSurveyName] = useState()
   const [surveyOptions, setSurveyOptions] = useState()
   const [quizzQuestion, setQuizzQuestion] = useState()
   const [quizzOptions, setQuizzOptions] = useState()
-  const [pageNumber, setPageNumber] = useState(1)
+  const [pageNumber, setPageNumber] = useState(0)
 
   const fill = (element) => {
     setQuestions([element, ...questions])
@@ -32,30 +32,29 @@ const Interface = () => {
   const getDiapoInfo = async () => {
     const response = await GetDiapoById(diapoId)
     setDiapo(response)
-    setDiapoName(response.infoDiapo[0].pathPdf.substring(2))
+    setDiapoPath(response.infoDiapo[0].pathPdf.substring(2))
   }
 
   // when socket emit changing slide event
   const onNewSlide = () => {
-    setPageNumber(pageNumber + 1)
-    console.log(diapo.infoDiapo.length)
-    if (pageNumber < diapo.infoDiapo.length) {
-      console.log(pageNumber)
-      let currentSlide = diapo.infoDiapo[pageNumber - 1]
-      if (currentSlide.surveys.length) {
-        setSurveyName(currentSlide.surveys[0].name)
-        setSurveyOptions(currentSlide.surveys[0].survey)
-      } else {
-        setSurveyName()
-        setSurveyOptions()
-      }
-      if (currentSlide.quizzs.length) {
-        console.log(currentSlide.quizzs[0].possibilities)
-        setQuizzQuestion(currentSlide.quizzs[0].question)
-        setQuizzOptions(currentSlide.quizzs[0].possibilities)
-      } else {
-        setQuizzQuestion()
-        setQuizzOptions()
+    if (pageNumber >= 1 && diapo) {
+      if (pageNumber <= diapo.infoDiapo.length) {
+        console.log(pageNumber)
+        let currentSlide = diapo.infoDiapo[pageNumber - 1]
+        if (currentSlide.surveys.length) {
+          setSurveyName(currentSlide.surveys[0].name)
+          setSurveyOptions(currentSlide.surveys[0].survey)
+        } else {
+          setSurveyName()
+          setSurveyOptions()
+        }
+        if (currentSlide.quizzs.length) {
+          setQuizzQuestion(currentSlide.quizzs[0].question)
+          setQuizzOptions(currentSlide.quizzs[0].possibilities)
+        } else {
+          setQuizzQuestion()
+          setQuizzOptions()
+        }
       }
     }
   }
@@ -64,12 +63,16 @@ const Interface = () => {
     getDiapoInfo()
   }, [diapoId])
 
+  useEffect(() => {
+    onNewSlide()
+  }, [pageNumber])
+
   /* eslint-disable */
   return (
     <>
       <div className="interface-container">
         {home ? (
-          <>
+          <div>
             <h1>Bienvenue {pseudo}</h1>
             {surveyName && surveyOptions && (
               <ButtonOpenPanel
@@ -86,10 +89,16 @@ const Interface = () => {
               />
             )}
             {diapo && (
-              <DownloadPdf diapoName={diapoName} emoji={diapo.sendEmoji} />
+              <DownloadPdf diapoPath={diapoPath} emoji={diapo.sendEmoji} />
             )}
-            <button onClick={() => onNewSlide()}>console.log</button>
-          </>
+            {/* FIXME: for testing only ! */}
+            <button onClick={() => setPageNumber(1)}>11111111111111</button>
+            <button onClick={() => setPageNumber(2)}>22222222222222</button>
+            <button onClick={() => setPageNumber(3)}>33333333333333</button>
+            <button onClick={() => setPageNumber(4)}>44444444444444</button>
+            <button onClick={() => setPageNumber(5)}>55555555555555</button>
+            <button onClick={() => setPageNumber(6)}>66666666666666</button>
+          </div>
         ) : (
           <Question viewer={true} questions={questions} setQuestions={fill} />
         )}
