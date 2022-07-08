@@ -4,8 +4,9 @@ import { SignIn, SignUp, Home, DiapoCreation } from './views'
 import { useCookie } from './utils/cookie/cookie'
 import { ViewerLogin } from './views/mobile/viewerLogin/viewerLogin'
 import { ViewerInterface } from './views/mobile/viewerInterface/viewerInterface'
-import { SideBar } from './components/layout/nav/sidebar/sidebar'
 import { ManagePdf } from './views/ManagePdf'
+import { ImportPdf } from './components/business/ImportPdf/importPdf'
+import { PdfList } from './components/business/pdfList/pdfList'
 
 const RoutesApp = () => {
   useCookie()
