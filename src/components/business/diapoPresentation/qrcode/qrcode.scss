@@ -1,0 +1,24 @@
+@use '../../../../assets/styles/variable.scss' as var;
+@use '../../../../assets/styles/mixin.scss' as mix;
+
+.QRCodeContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  min-height: 100vh;
+
+  .QRCode {
+    margin-bottom: 50px;
+  }
+
+  p {
+    text-align: center;
+    font-size: 30px;
+    font-family: 'Raleway';
+    font-weight: 500;
+    color: var.$color-secondary;
+    text-transform: uppercase;
+  }
+}

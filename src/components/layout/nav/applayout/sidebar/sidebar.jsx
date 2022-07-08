@@ -5,14 +5,14 @@ import Logo from '../../../logo/logo'
 import { Links } from './links/links'
 import { useIsMobile } from '../../../../../utils/hooks/isMobile'
 
-export const SideBar = ({ category, setCategory }) => {
+export const SideBar = () => {
   const isMobile = useIsMobile()
   return (
     <div>
       {!isMobile ? (
         <div className="sidebar">
           <Logo width="140px" />
-          <Links category={category} setCategory={setCategory} />
+          <Links />
           <Profile />
         </div>
       ) : (

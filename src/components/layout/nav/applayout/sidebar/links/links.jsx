@@ -1,7 +1,9 @@
-import { useIsMobile } from '../../../../../../utils/hooks'
+import { useIsMobile, useManageDiapo } from '../../../../../../utils/hooks'
 import './links.scss'
 
-export const Links = ({ category, setCategory }) => {
+export const Links = () => {
+  const { category, setCategory } = useManageDiapo()
+
   const sondage = {
     key: 'SONDAGE',
     value: 'Sondage',

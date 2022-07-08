@@ -13,13 +13,13 @@ export const Quizz = () => {
 
   const addProposition = () => {
     const newQuizz = { ...quizzTemp }
-    newQuizz.possibilties.push({ choice: 'Nouveau choix', answer: false })
+    newQuizz.possibilities.push({ choice: 'Nouveau choix', answer: false })
     setQuizzTemp(newQuizz)
   }
 
   const deleteProposition = (index) => {
     const newQuizz = { ...quizzTemp }
-    newQuizz.possibilties.splice(index, 1)
+    newQuizz.possibilities.splice(index, 1)
     setQuizzTemp(newQuizz)
   }
 
@@ -30,12 +30,12 @@ export const Quizz = () => {
   }
   const onChangeChoice = (index, value) => {
     const newQuizz = { ...quizzTemp }
-    newQuizz.possibilties[index].choice = value
+    newQuizz.possibilities[index].choice = value
     setQuizzTemp(newQuizz)
   }
   const onChangeAnswer = (index, value) => {
     const newQuizz = { ...quizzTemp }
-    newQuizz.possibilties[index].answer = value
+    newQuizz.possibilities[index].answer = value
     setQuizzTemp(newQuizz)
   }
 
@@ -56,7 +56,7 @@ export const Quizz = () => {
         />
         <p className="subtitle">Cocher le/les réponse(s) vrai</p>
         <div className="propositionsContainer">
-          {quizzTemp.possibilties?.map((proposition, index) => {
+          {quizzTemp.possibilities?.map((proposition, index) => {
             return (
               <div key={index} className="inputContainerProposition">
                 <input
@@ -75,9 +75,9 @@ export const Quizz = () => {
                 <button
                   onClick={() => deleteProposition(index)}
                   style={{
-                    opacity: quizzTemp.possibilties.length === 2 ? 0 : 1,
+                    opacity: quizzTemp.possibilities.length === 2 ? 0 : 1,
                     pointerEvents:
-                      quizzTemp.possibilties.length === 2 ? 'none' : 'auto',
+                      quizzTemp.possibilities.length === 2 ? 'none' : 'auto',
                   }}
                 >
                   <img src="/assets/images/close_big.png" alt="close" />

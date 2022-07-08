@@ -4,7 +4,7 @@ import { Links } from '../sidebar/links/links'
 import { useIsMobile } from '../../../../../utils/hooks/isMobile'
 import { LinksResponsive } from '../sidebar/links/linksResponsive'
 
-export const SidebarMobile = ({ category, setCategory }) => {
+export const SidebarMobile = () => {
   const isMobile = useIsMobile()
   const [openLinks, setOpenLinks] = useState(false)
 
@@ -33,7 +33,7 @@ export const SidebarMobile = ({ category, setCategory }) => {
                   alt="moins"
                 />
               </button>
-              <Links category={category} setCategory={setCategory} />
+              <Links />
             </div>
           </>
         )}
@@ -43,7 +43,7 @@ export const SidebarMobile = ({ category, setCategory }) => {
             <p>Home</p>
           </li>
           <li className={openLinks && 'li_open_links'}>
-            <LinksResponsive category={category} setCategory={setCategory} />
+            <LinksResponsive />
           </li>
         </ul>
       </div>
