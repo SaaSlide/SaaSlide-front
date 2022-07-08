@@ -1,4 +1,7 @@
-import { LayoutCreation, ContentCreation } from '../components'
+import {
+  LayoutCreation,
+  ContentCreation,
+} from '../components/business/diapoCreation'
 import { ProvideManageDiapo } from '../utils/hooks'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'

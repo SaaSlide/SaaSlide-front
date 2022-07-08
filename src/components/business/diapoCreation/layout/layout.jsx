@@ -1,5 +1,4 @@
 import './layout.scss'
-import { SideBar } from '../../../layout/nav/sidebar/sidebar'
 import { useManageDiapo } from '../../../../utils/hooks'
 
 export const LayoutCreation = ({ children }) => {
@@ -13,7 +12,6 @@ export const LayoutCreation = ({ children }) => {
   if (diapo)
     return (
       <div className="container">
-        <SideBar />
         <div className="contentContainer">
           <div className="buttonsContainer">
             <a href="/diapo-list" className="buttonLeave">

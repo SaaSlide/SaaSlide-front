@@ -7,3 +7,10 @@
     align-items: center;
     height: 100vh;
 }
+
+.sidebar_responsive{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    margin-bottom: 20px;
+}

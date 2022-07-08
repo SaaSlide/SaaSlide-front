@@ -1,12 +1,11 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { SignIn, SignUp, Home, DiapoCreation } from './views'
-import { ImportPdf } from './components/business/ImportPdf/importPdf'
-import { PdfList } from './components'
 import { useCookie } from './utils/cookie/cookie'
 import { ViewerLogin } from './views/mobile/viewerLogin/viewerLogin'
 import { ViewerInterface } from './views/mobile/viewerInterface/viewerInterface'
 import { SideBar } from './components/layout/nav/sidebar/sidebar'
+import { ManagePdf } from './views/ManagePdf'
 
 const RoutesApp = () => {
   useCookie()
@@ -31,6 +30,7 @@ const RoutesApp = () => {
         path="/mobile/presentation/:diapoId"
         element={<ViewerInterface />}
       />
+      <Route path="/managepdf" element={<ManagePdf />} />
     </Routes>
   )
 }
