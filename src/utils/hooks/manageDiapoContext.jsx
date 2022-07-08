@@ -1,4 +1,4 @@
-import { createContext, useState, useContext, useEffect } from 'react'
+import { createContext, useState, useContext, useEffect, useMemo } from 'react'
 import { TokenContext } from '../../App'
 import { useLocation } from 'react-router-dom'
 import axios from 'axios'
@@ -22,12 +22,28 @@ export const useManageDiapo = () => {
 }
 
 function useProvideManageDiapo() {
+  const surveyModel = useMemo(() => {
+    return {
+      name: '',
+      survey: ['Proposition 1', 'Proposition 2'],
+    }
+  })
+
+  const quizzModel = useMemo(() => {
+    return {
+      question: '',
+      possibilties: [
+        { choice: 'Choix 1', answer: true },
+        { choice: 'Choix 2', answer: false },
+      ],
+    }
+  })
   const [diapo, setDiapo] = useState()
   const [index, setIndex] = useState(0)
   const [category, setCategory] = useState('')
   const [parameters, setParameters] = useState({})
-  const [sondage, setSondage] = useState([])
-  const [quizz, setQuizz] = useState({})
+  const [sondage, setSondage] = useState(surveyModel)
+  const [quizz, setQuizz] = useState(quizzModel)
   const [note, setNote] = useState('')
 
   const [userToken] = useContext(TokenContext)
@@ -38,8 +54,6 @@ function useProvideManageDiapo() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        //vide le localstorage
-
         // prettier-ignore
         const headers = {
           'Authorization': `Bearer ${userToken}`
@@ -52,9 +66,7 @@ function useProvideManageDiapo() {
           sendAnswer: res.data.sendAnswer,
           sendEmoji: res.data.sendEmoji,
         })
-        setSondage(res.data.infoDiapo[index].surveys)
-        setQuizz(res.data.infoDiapo[index].quizzs)
-        setNote(res.data.infoDiapo[index].notes)
+        checkExistence(res.data)
       } catch (error) {
         console.log(error)
       }
@@ -63,16 +75,32 @@ function useProvideManageDiapo() {
   }, [userToken])
 
   useEffect(() => {
-    //check if not in localstorage
+    checkExistence(diapo)
+  }, [index, category, diapo])
+
+  const updateDiapo = (type, newValue) => {
+    let newDiapo = { ...diapo }
+    newDiapo.infoDiapo[index][type][0] = newValue
+    setDiapo(newDiapo)
+  }
+  const checkExistence = (diapo) => {
     if (diapo) {
-      setSondage(diapo.infoDiapo[index].surveys)
-      setQuizz(diapo.infoDiapo[index].quizzs)
+      if (diapo.infoDiapo[index].surveys.length > 0) {
+        setSondage(diapo.infoDiapo[index].surveys[0])
+      } else {
+        setSondage(surveyModel)
+      }
+      if (diapo.infoDiapo[index].quizzs.length > 0) {
+        setQuizz(diapo.infoDiapo[index].quizzs[0])
+      } else {
+        setQuizz(quizzModel)
+      }
       setNote(diapo.infoDiapo[index].notes)
     }
-  }, [index, diapo])
+  }
 
-  const saveSondage = async (body, remove = false) => {
-    if (body.length < 2 && !remove) {
+  const saveSondage = async (body) => {
+    if (body.length < 2) {
       toast.warn('Veuillez au moins ajoutez 2 propositions', {
         position: 'bottom-center',
         autoClose: 3000,
@@ -89,14 +117,25 @@ function useProvideManageDiapo() {
       const headers = {
       'Authorization': `Bearer ${userToken}`
     }
-      const res = await axios.put(
-        `/api/survey/${diapo.infoDiapo[index]._id}`,
-        body,
-        {
+      let res
+      if (body._id) {
+        res = await axios.put(`/api/survey/${body._id}`, body, {
           headers,
-        },
-      )
-      setSondage(body)
+        })
+      } else {
+        res = await axios.post(
+          `/api/survey/${diapo.infoDiapo[index]._id}`,
+          body,
+          {
+            headers,
+          },
+        )
+      }
+
+      console.log(res)
+      // updateDiapo('surveys', res.data)
+      updateDiapo('surveys', body)
+
       toast.success('Sondage mis à jour !', {
         position: 'bottom-center',
         autoClose: 3000,
@@ -119,6 +158,135 @@ function useProvideManageDiapo() {
       console.log(error)
     }
   }
+  const removeSondage = async (id) => {
+    try {
+      // prettier-ignore
+      const headers = {
+      'Authorization': `Bearer ${userToken}`
+    }
+      const res = await axios.delete(`/api/survey/${id}`, {
+        headers,
+      })
+      setCategory('')
+      setSondage(surveyModel)
+      updateDiapo('surveys', surveyModel)
+      toast.success('Sondage supprimé', {
+        position: 'bottom-center',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      })
+    } catch (error) {
+      toast.error('Une erreur est survenu...', {
+        position: 'bottom-center',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      })
+      console.log(error)
+    }
+  }
+
+  const saveQuizz = async (body) => {
+    if (body.length < 2) {
+      toast.warn('Veuillez au moins ajoutez 2 propositions', {
+        position: 'bottom-center',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      })
+      return
+    }
+    try {
+      // prettier-ignore
+      const headers = {
+      'Authorization': `Bearer ${userToken}`
+    }
+      let res
+      if (body._id) {
+        res = await axios.put(`/api/quizz/${body._id}`, body, {
+          headers,
+        })
+      } else {
+        res = await axios.post(
+          `/api/quizz/${diapo.infoDiapo[index]._id}`,
+          body,
+          {
+            headers,
+          },
+        )
+      }
+
+      console.log(res)
+      // updateDiapo('quizzs', res.data)
+      updateDiapo('quizzs', body)
+
+      toast.success('Quizz mis à jour !', {
+        position: 'bottom-center',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      })
+    } catch (error) {
+      toast.error('Une erreur est survenu...', {
+        position: 'bottom-center',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      })
+      console.log(error)
+    }
+  }
+  const removeQuizz = async (id) => {
+    try {
+      // prettier-ignore
+      const headers = {
+      'Authorization': `Bearer ${userToken}`
+    }
+      const res = await axios.delete(`/api/quizz/${id}`, {
+        headers,
+      })
+      setCategory('')
+      setQuizz(quizzModel)
+      updateDiapo('quizzs', quizzModel)
+      toast.success('Quizz supprimé', {
+        position: 'bottom-center',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      })
+    } catch (error) {
+      toast.error('Une erreur est survenu...', {
+        position: 'bottom-center',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      })
+      console.log(error)
+    }
+  }
+
   const saveNote = async (body) => {
     try {
       // prettier-ignore
@@ -163,6 +331,7 @@ function useProvideManageDiapo() {
       }
       const res = await axios.put(
         `/api/diapo/params/${diapo._id}?emoji=${body.sendEmoji}&answer=${body.sendAnswer}`,
+        '',
         {
           headers,
         },
@@ -190,7 +359,6 @@ function useProvideManageDiapo() {
       console.log(error)
     }
   }
-
   return {
     diapo,
     category,
@@ -199,7 +367,10 @@ function useProvideManageDiapo() {
     setIndex,
     sondage,
     saveSondage,
+    removeSondage,
     quizz,
+    saveQuizz,
+    removeQuizz,
     note,
     saveNote,
     parameters,

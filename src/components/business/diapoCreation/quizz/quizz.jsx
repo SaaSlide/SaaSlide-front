@@ -4,55 +4,82 @@ import { useState, useEffect } from 'react'
 import { useManageDiapo } from '../../../../utils/hooks'
 
 export const Quizz = () => {
-  const { quizz, saveQuizz, index } = useManageDiapo()
-  const [propositions, setPropositions] = useState([
-    { choice: 'dbdsjkfbs', answer: true },
-    { choice: 'aaaaaa', answer: false },
-    { choice: 'eeeee', answer: true },
-  ])
+  const { quizz, saveQuizz, removeQuizz } = useManageDiapo()
+  const [quizzTemp, setQuizzTemp] = useState(quizz)
 
   useEffect(() => {
-    setPropositions(quizz)
-  }, [index])
+    setQuizzTemp(quizz)
+  }, [quizz])
 
   const addProposition = () => {
-    const newPropositions = [...propositions]
-    newPropositions.push('')
-    setPropositions(newPropositions)
+    const newQuizz = { ...quizzTemp }
+    newQuizz.possibilties.push({ choice: 'Nouveau choix', answer: false })
+    setQuizzTemp(newQuizz)
   }
 
   const deleteProposition = (index) => {
-    const newPropositions = [...propositions]
-    newPropositions.splice(index, 1)
-    setPropositions(newPropositions)
+    const newQuizz = { ...quizzTemp }
+    newQuizz.possibilties.splice(index, 1)
+    setQuizzTemp(newQuizz)
+  }
+
+  const onChangeQuestion = (value) => {
+    const newQuizz = { ...quizzTemp }
+    newQuizz.question = value
+    setQuizzTemp(newQuizz)
+  }
+  const onChangeChoice = (index, value) => {
+    const newQuizz = { ...quizzTemp }
+    newQuizz.possibilties[index].choice = value
+    setQuizzTemp(newQuizz)
+  }
+  const onChangeAnswer = (index, value) => {
+    const newQuizz = { ...quizzTemp }
+    newQuizz.possibilties[index].answer = value
+    setQuizzTemp(newQuizz)
   }
 
   return (
-    <LayoutWindow title={'Ajouter un quizz à votre slide'}>
+    <LayoutWindow
+      title={'Ajouter un quizz à votre slide'}
+      onSave={() => saveQuizz(quizzTemp)}
+      onDelete={() => removeQuizz(quizzTemp._id)}
+      btnDelete={quizzTemp._id ? true : false}
+    >
       <div className="quizzContainer">
         <input
           type="text"
           placeholder="Votre question"
+          value={quizzTemp.question}
+          onChange={(e) => onChangeQuestion(e.target.value)}
           className="inputQuestion"
         />
         <p className="subtitle">Cocher le/les réponse(s) vrai</p>
         <div className="propositionsContainer">
-          {propositions.map((proposition, index) => {
+          {quizzTemp.possibilties?.map((proposition, index) => {
             return (
               <div key={index} className="inputContainerProposition">
                 <input
-                  checked={proposition.answer}
                   type="checkbox"
                   className="checkboxInput"
+                  checked={proposition.answer}
+                  onChange={(e) =>
+                    onChangeAnswer(index, e.currentTarget.checked)
+                  }
                 />
                 <input
                   type="text"
                   value={proposition.choice}
-                  // onChange={(e) =>
-                  //   setPropositions()
-                  // }
+                  onChange={(e) => onChangeChoice(index, e.target.value)}
                 />
-                <button onClick={() => deleteProposition(index)}>
+                <button
+                  onClick={() => deleteProposition(index)}
+                  style={{
+                    opacity: quizzTemp.possibilties.length === 2 ? 0 : 1,
+                    pointerEvents:
+                      quizzTemp.possibilties.length === 2 ? 'none' : 'auto',
+                  }}
+                >
                   <img src="/assets/images/close_big.png" alt="close" />
                 </button>
               </div>
@@ -60,9 +87,9 @@ export const Quizz = () => {
           })}
         </div>
         <button
-          disabled={propositions.length === 4}
+          disabled={quizzTemp.length === 4}
           className={`addProposition ${
-            propositions.length === 4 ? 'disabledProp' : ''
+            quizzTemp.length === 4 ? 'disabledProp' : ''
           }`}
           onClick={addProposition}
         >
