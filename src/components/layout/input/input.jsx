@@ -1,10 +1,17 @@
 import React, { useState } from 'react'
 import './input.scss'
 
-const Input = ({ password, label, placeholder, animation, ...rest }) => {
+const Input = ({
+  className,
+  password,
+  label,
+  placeholder,
+  animation,
+  ...rest
+}) => {
   const [visible, setVisible] = useState(!password)
   return (
-    <div className={`input_container ${animation}`}>
+    <div className={`input_container ${animation} ${className}`}>
       <label>{label}</label>
       <input
         {...rest}

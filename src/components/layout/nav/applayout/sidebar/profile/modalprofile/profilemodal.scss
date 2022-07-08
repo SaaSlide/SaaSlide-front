@@ -1,0 +1,236 @@
+@import '../../../../../../../assets/styles/variables.scss';
+
+.modal-profile {
+    background: #00000060;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: 999;
+    animation: onload 0.5s;
+}
+
+.modal-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.modal {
+    width: 60vw;
+    background-color: white;
+    border-radius: 20px;
+    padding: 50px 100px;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+}
+
+.modal-form {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.modal-form-section{
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+}
+
+.modify-profile-inputs {
+    display: flex;
+    gap: 25px;
+}
+
+.edit-profile-pic {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    border-radius: 100%;
+}
+
+.icon-profile-edit {
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #00000050;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.icon-profile-edit:hover {
+    opacity: 100%;
+}
+
+.input-save {
+    border-radius: 7px;
+    padding: 10px 30px;
+    border: none;
+    color: $color-white;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.btn-secondary{
+    background-color: $color-secondary; 
+    border: 3px solid $color-secondary;
+    
+    &:hover{
+        background-color: $hover-secondary;
+        border: 3px solid $hover-secondary;
+
+    }
+
+    &:focus{
+        border-color: $focus-secondary;
+    }
+}
+
+
+.correct-input-color {
+    input {
+        background-color: #F2F3F3 !important;
+    }
+}
+
+.modal-close-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+// RESPONSIVE MOBILE
+.modal-profile-responsive{
+    background: #00000060;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: 999;
+}
+.modal-responsive{
+    background-color: $color-white;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+}
+
+.modal-buttons-none{
+    display: none;
+}
+
+.input-save-sm {
+    border-radius: 7px;
+    padding: 5px 25px;
+    border: none;
+    color: $color-white;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.modify-profile-inputs-responsive{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 90%;
+    margin: 0 auto;
+    gap: 20px;
+}
+
+.modal-close-button-responsive{
+    margin: 10px;
+}
+
+.edit-profile-pic-responsive{
+    display: none;
+}
+
+.modal-button-save-responsive{
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 20px;
+}
+
+.modal-button-delete-responsive{
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+
+    .delete-account-modal{
+        position: absolute;
+        top: 25vh;
+    }
+}
+
+.modal-form-section-responsive{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.modal-buttons-responsive{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+
+    .btn_logout{
+        padding: 0;
+        margin-top: 5px;
+        cursor: pointer;
+    }
+}
+
+.delete-account-modal {
+    position: absolute;
+    margin-top: calc(18px + 47px);
+    background-color: white;
+    border-radius: 20px;
+    filter: drop-shadow(-4px 0px 20px rgba(0, 0, 0, 0.1));
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 10px;
+    animation: onload 0.2s;
+}
+
+.delete-account-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.button-fix-height {
+    height: 50px;
+}
+
+.disable-button {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+@keyframes onload {
+    from {
+        opacity: 0;
+    }
+  
+    to {
+        opacity: 1;
+    }
+  }
