@@ -1,22 +1,13 @@
 import React from 'react'
+import Smiley from '../smiley/smiley'
 import './downloadPdf.scss'
 
-export const DownloadPdf = ({ diapoPath, emoji }) => {
+export const DownloadPdf = ({ diapoPath, emoji = true }) => {
   // give info to emoji modal if they are available
-  console.log(emoji)
   return (
     <>
       <div className="dld-pdf">
-        <div>
-          <a className="dld-pdf-smiley" href="">
-            Smiley
-          </a>
-          <img
-            className="dld-pdf-img"
-            src="/assets/icons/chevron_big_right.svg"
-            alt=""
-          />
-        </div>
+        <Smiley />
         <div className="dld-pdf-btn">
           <a
             className="btn-secondary-sm-outline"

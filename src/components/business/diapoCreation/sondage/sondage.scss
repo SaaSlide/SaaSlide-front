@@ -1,42 +1,49 @@
 @use '../../../../assets/styles/variable.scss' as var;
 @use '../../../../assets/styles/mixin.scss' as mix;
 
-.propositionsContainer {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-
-  .inputContainerProposition {
-    display: flex;
-    gap: 10px;
+.sondageContainer {
+  .inputQuestion {
+    width: 50%;
     max-width: 400px;
-    img {
-      cursor: pointer;
-    }
-    input {
-      width: 100%;
-      font-family: 'Poppins', sans-serif;
-      font-weight: 500;
-      padding: 15px 20px;
-      border: none;
-      border-radius: 7px;
-      filter: drop-shadow(4px 4px 15px rgba(0, 0, 0, 0.05));
+    margin-bottom: 20px;
+  }
+  input {
+    width: 100%;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 7px;
+    filter: drop-shadow(4px 4px 15px rgba(0, 0, 0, 0.05));
+  }
+  .propositionsContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+
+    .inputContainerProposition {
+      display: flex;
+      gap: 10px;
+      max-width: 400px;
+      img {
+        cursor: pointer;
+      }
     }
   }
-}
 
-.addProposition {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 10px;
+  .addProposition {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
 
-  margin-top: 20px;
+    margin-top: 20px;
 
-  color: var.$color-secondary;
+    color: var.$color-secondary;
 
-  transition: 0.3s;
-}
-.disabledProp {
-  filter: grayscale(1);
+    transition: 0.3s;
+  }
+  .disabledProp {
+    filter: grayscale(1);
+  }
 }
