@@ -1,0 +1,36 @@
+.profile-picture-empty {
+    width: 120px;
+    height: 120px;
+    background-image: url('../../../../../../../public/assets/images/empty-profile-pic.png');
+    background-size: cover;
+    border-radius: 100%;
+}
+
+.sidebar-edit-profile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    cursor: pointer;
+}
+
+
+// RESPONSIVE MOBILE
+.profile-picture-empty-mobile{
+    width: 60px;
+    height: 60px;
+    background-image: url('../../../../../../../public/assets/images/empty-profile-pic.png');
+    background-size: cover;
+    border-radius: 100%;
+}
+
+.sidebar-edit-profile-mobile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 20px 0 0;
+    gap: 5px;
+    cursor: pointer;
+}

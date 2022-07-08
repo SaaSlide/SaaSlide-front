@@ -2,7 +2,7 @@ import React from 'react'
 import Smiley from '../smiley/smiley'
 import './downloadPdf.scss'
 
-export const DownloadPdf = ({ diapoName, emoji = true }) => {
+export const DownloadPdf = ({ diapoPath, emoji = true }) => {
   // give info to emoji modal if they are available
   return (
     <>
@@ -11,7 +11,7 @@ export const DownloadPdf = ({ diapoName, emoji = true }) => {
         <div className="dld-pdf-btn">
           <a
             className="btn-secondary-sm-outline"
-            href={`http://localhost:4000/${diapoName}`}
+            href={`http://localhost:4000/${diapoPath}`}
             download="Présentation"
             target="_blank"
             rel="noreferrer"
