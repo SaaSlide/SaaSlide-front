@@ -1,0 +1,20 @@
+.slider-controller-broadcaster {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.separator-slide-controller {
+    width: 40px;
+    height: 4px;
+    background-color: black;
+}
+
+.actualslide-counter {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    gap: 20px;
+}
