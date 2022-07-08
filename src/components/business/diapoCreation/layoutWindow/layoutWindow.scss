@@ -35,9 +35,12 @@
 
     button {
       padding: 10px 25px;
+      border-radius: 7px;
+      font-size: 18px;
     }
 
     .btnSave {
+      color: white;
       background-color: var.$color-secondary;
     }
     .btnDelete {
