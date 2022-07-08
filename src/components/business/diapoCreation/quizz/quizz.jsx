@@ -11,6 +11,8 @@ export const Quizz = () => {
     setQuizzTemp(quizz)
   }, [quizz])
 
+  console.log(quizzTemp)
+
   const addProposition = () => {
     const newQuizz = { ...quizzTemp }
     newQuizz.possibilities.push({ choice: 'Nouveau choix', answer: false })
@@ -87,9 +89,9 @@ export const Quizz = () => {
           })}
         </div>
         <button
-          disabled={quizzTemp.length === 4}
+          disabled={quizzTemp.possibilities.length === 4}
           className={`addProposition ${
-            quizzTemp.length === 4 ? 'disabledProp' : ''
+            quizzTemp.possibilities.length === 4 ? 'disabledProp' : ''
           }`}
           onClick={addProposition}
         >
