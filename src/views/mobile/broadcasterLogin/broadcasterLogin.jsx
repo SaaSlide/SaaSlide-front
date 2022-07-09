@@ -2,15 +2,28 @@ import './broadcasterLogin.scss'
 import Input from '../../../components/layout/input/input'
 import { useState } from 'react'
 import Button from '../../../components/layout/button/button'
+import { Login } from '../../../services/apiService'
+import { useNavigate } from 'react-router-dom'
 
 export const BroadcasterLogin = () => {
   const [emailValue, setEmailValue] = useState()
   const [passwordValue, setPasswordValue] = useState()
-  let diapoId = '62c6cb88d6bbbcb67b887b12'
+  const [inputError, setInputError] = useState()
+  let navigate = useNavigate()
 
-  const handleSubmit = (e) => {
+  let diapoId = '62c9b703a11c9881a7922083'
+
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log('bonjour')
+    const loginResponse = await Login(emailValue, passwordValue)
+    if (loginResponse.status === 200) {
+      console.log('connected as admin')
+      navigate(`/mobile/broadcasterPage/${diapoId}`, { replace: true })
+    } else {
+      setInputError(
+        'Mot de passe et/ou Email est incorrect, veuillez réessayer',
+      )
+    }
   }
 
   return (
@@ -22,9 +35,11 @@ export const BroadcasterLogin = () => {
           label={'E-mail'}
         />
         <Input
+          password={true}
           onChange={(e) => setPasswordValue(e.target.value)}
           label={'Password'}
         />
+        <p className="error-input">{inputError}</p>
         <Button type="submit" className="btn-secondary" title="Se connecter" />
       </form>
     </div>

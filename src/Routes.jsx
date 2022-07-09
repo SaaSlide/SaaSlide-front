@@ -33,7 +33,10 @@ const RoutesApp = () => {
         path="/mobile/presentation/:diapoId"
         element={<ViewerInterface />}
       />
-      <Route path="/mobile/broadcasterPage" element={<BroadcasterPage />} />
+      <Route
+        path="/mobile/broadcasterPage/:diapoId"
+        element={<BroadcasterPage />}
+      />
       <Route path="/mobile/broadcasterLogin" element={<BroadcasterLogin />} />
       <Route path="/managepdf" element={<ManagePdf />} />
     </Routes>

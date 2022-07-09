@@ -5,6 +5,7 @@ import { useParams, useLocation } from 'react-router-dom'
 
 export const BroadcasterPage = () => {
   const params = { ...useParams(), name: 'Bastian' }
+
   return (
     <>
       <SocketProvider room={params.diapoId} pseudo={params.name}>
