@@ -1,6 +1,6 @@
 import './topnav.scss'
 
-export const TopNav = () => {
+export const TopNav = ({ specCount }) => {
   return (
     <div className="topnav-broadcaster">
       <div className="topbar-broadcaster">
@@ -9,7 +9,7 @@ export const TopNav = () => {
         </button>
         <div className="number-spec">
           <img src="/assets/icons/user.svg" alt="" />
-          <p>12</p>
+          <p className="spectatorCount">{specCount}</p>
         </div>
       </div>
     </div>

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
 .topbar-broadcaster {
     display: flex;
     justify-content: space-between;
@@ -5,5 +7,5 @@
 
 .number-spec {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
 }
