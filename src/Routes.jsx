@@ -34,7 +34,7 @@ const RoutesApp = () => {
         element={<ViewerInterface />}
       />
       <Route path="/mobile/broadcasterPage" element={<BroadcasterPage />} />
-      <Route path="/mobile/broadcastLogin" element={<BroadcasterLogin />} />
+      <Route path="/mobile/broadcasterLogin" element={<BroadcasterLogin />} />
       <Route path="/managepdf" element={<ManagePdf />} />
     </Routes>
   )

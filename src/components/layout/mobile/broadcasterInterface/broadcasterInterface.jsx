@@ -6,8 +6,9 @@ import { ManageFeature } from './manageFeature/manageFeature'
 import { IconSondage } from '../../icons/sondage/sondage'
 import { IconQuizz } from '../../icons/quizz/quizz'
 import { SocketContext } from '../../../../utils/socket'
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import Question from '../question/question'
+import { GetDiapoById } from '../../../../services/apiService'
 
 const quizz = {
   color: '#3F53D9',
@@ -24,7 +25,10 @@ const sondage = {
 export const BroadcasterInterface = () => {
   const [activeSlide, SetActiveSlide] = useState()
   const [questions, setQuestions] = useState([])
-  const { socket } = useContext(SocketContext)
+  const [numberUser, SetNumberUser] = useState()
+  const [diapo, SetDiapo] = useState()
+  const [diapoPath, setDiapoPath] = useState()
+  const { socket, diapoId } = useContext(SocketContext)
 
   socket.on('get_slide', ({ action, value, prevSlide }) => {
     SetActiveSlide(prevSlide + value)
@@ -38,9 +42,21 @@ export const BroadcasterInterface = () => {
     fill({ text: `${pseudo} : ${question}`, me: false })
   })
 
+  socket.on('update_number_user', (res) => SetNumberUser(res))
+
+  const getDiapoInfo = async () => {
+    const response = await GetDiapoById(diapoId)
+    SetDiapo(response)
+    setDiapoPath(response.infoDiapo[0].pathPdf.substring(2))
+  }
+
+  useEffect(() => {
+    getDiapoInfo()
+  }, [diapoId])
+
   return (
     <>
-      <TopNav specCount={20} />
+      <TopNav specCount={numberUser} />
       <RemoteSlideController activeSlide={activeSlide} numberSlide={40} />
       <div>
         <Note />
