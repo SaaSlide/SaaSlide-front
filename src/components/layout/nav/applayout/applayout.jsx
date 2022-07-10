@@ -6,20 +6,19 @@ import { useIsMobile } from '../../../../utils/hooks/isMobile'
 import { SidebarMobile } from './sidebarMobile/sidebarMobile'
 
 export const AppLayout = ({ component }) => {
-  const [category, setCategory] = useState('')
   const isMobile = useIsMobile()
   return (
     <>
       {!isMobile ? (
         <div className={!isMobile && 'app-layout'}>
-          <SideBar category={category} setCategory={setCategory} />
-          <Content components={component} category={category} />
+          <SideBar />
+          <Content components={component} />
         </div>
       ) : (
         <div className={!isMobile && 'app-layout'}>
-          <SideBar category={category} setCategory={setCategory} />
-          <Content components={component} category={category} />
-          <SidebarMobile category={category} setCategory={setCategory} />
+          <SideBar />
+          <Content components={component} />
+          <SidebarMobile />
         </div>
       )}
     </>

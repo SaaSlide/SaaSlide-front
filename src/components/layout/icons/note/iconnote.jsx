@@ -1,5 +1,4 @@
 export const IconNote = ({ onclick, size, color }) => {
-  console.log(color)
   return (
     <div onClick={onclick} aria-hidden="true">
       <svg

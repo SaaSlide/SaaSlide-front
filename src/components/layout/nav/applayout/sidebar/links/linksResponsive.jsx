@@ -1,7 +1,9 @@
-import { useIsMobile } from '../../../../../../utils/hooks'
+import { useIsMobile, useManageDiapo } from '../../../../../../utils/hooks'
 import './links.scss'
 
-export const LinksResponsive = ({ category, setCategory }) => {
+export const LinksResponsive = () => {
+  const { category, setCategory } = useManageDiapo()
+
   const parametre = {
     key: 'PARAMETRE',
     value: 'Paramètres',

@@ -1,86 +1,79 @@
 @use '../../../../assets/styles/variable.scss' as var;
 @use '../../../../assets/styles/mixin.scss' as mix;
 
-.container {
-  min-height: 100vh;
-  display: flex;
+.contentContainer {
   width: 100%;
+  padding: 30px 15px;
+  border-radius: 30px 0px 0px 0px;
 
-  .contentContainer {
-    width: 100%;
-    padding: 30px 15px;
-    border-radius: 30px 0px 0px 0px;
-
-    background-color: var.$color-white;
-
-    .buttonsContainer {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 15px;
-
-      margin-bottom: 90px;
-      margin-right: 50px;
-
-      height: fit-content;
-
-      button {
-        padding: 0;
-      }
-
-      .buttonLeave {
-        color: var.$color-secondary;
-        border: 1px solid var.$color-secondary;
-        border-radius: 5px;
-        padding: 10px 30px;
-      }
-    }
-  }
-
-  .containerSlider {
-    position: relative;
+  background-color: var.$color-white;
+  .buttonsContainer {
     display: flex;
-    justify-content: center;
     align-items: center;
-    flex-direction: column;
+    justify-content: flex-end;
     gap: 15px;
+
+    margin-bottom: 90px;
+    margin-right: 50px;
+
+    height: fit-content;
 
     button {
       padding: 0;
     }
 
-    .containerDiapoButton {
-      position: relative;
+    .buttonLeave {
+      color: var.$color-secondary;
+      border: 1px solid var.$color-secondary;
+      border-radius: 5px;
+      padding: 10px 30px;
     }
+  }
+}
 
-    .numberSlider {
-      color: var.$color-black;
-      bottom: -30px;
-      left: 85px;
-      font-size: 14px;
-    }
+.containerSlider {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 15px;
 
-    .arrow {
-      position: absolute;
-      top: calc(50% - 30px);
-      width: 60px;
-    }
-    .arrowLeft {
-      left: -70px;
-    }
-    .arrowRight {
-      right: -70px;
-    }
+  button {
+    padding: 0;
+  }
 
-    .sliderImgContainer {
-      display: flex;
-      width: 65vw;
-      overflow: hidden;
+  .containerDiapoButton {
+    position: relative;
+  }
 
-      .imgSlider {
-        min-width: 100%;
-        transition: 0.3s;
-      }
+  .numberSlider {
+    color: var.$color-black;
+    bottom: -30px;
+    left: 85px;
+    font-size: 14px;
+  }
+
+  .arrow {
+    position: absolute;
+    top: calc(50% - 30px);
+    width: 60px;
+  }
+  .arrowLeft {
+    left: -70px;
+  }
+  .arrowRight {
+    right: -70px;
+  }
+
+  .sliderImgContainer {
+    display: flex;
+    width: 65vw;
+    overflow: hidden;
+
+    .imgSlider {
+      min-width: 100%;
+      transition: 0.3s;
     }
   }
 }

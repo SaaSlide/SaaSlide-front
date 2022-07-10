@@ -29,6 +29,11 @@ const Interface = () => {
     fill({ text: `${pseudo} : ${question}`, me: false })
   })
 
+  socket.on('get_slide', ({ action, value, prevSlide }) => {
+    console.log(value + prevSlide)
+    setPageNumber(value + prevSlide)
+  })
+
   const getDiapoInfo = async () => {
     const response = await GetDiapoById(diapoId)
     setDiapo(response)
