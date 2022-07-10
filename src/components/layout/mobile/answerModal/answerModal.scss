@@ -1,0 +1,23 @@
+@import '../../../../assets/styles/variables.scss';
+
+.answer-modal {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: $color-tertiary;
+  z-index: 5;
+
+  .modal-closer {
+    position: fixed;
+    top: 3vh;
+    right: 7vw;
+  }
+
+  .question-title {
+    font-size: 30px;
+    margin-left: 5vw;
+    margin-top: 10vh;
+  }
+}

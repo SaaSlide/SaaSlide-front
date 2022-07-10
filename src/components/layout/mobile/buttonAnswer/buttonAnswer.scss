@@ -22,3 +22,13 @@
 .btn-answer-name {
   font-size: 20px;
 }
+
+.btn-answer-right {
+  background-color: $color-success;
+  color: $color-black;
+}
+
+.btn-answer-wrong {
+  background-color: $color-danger;
+  color: $color-black;
+}

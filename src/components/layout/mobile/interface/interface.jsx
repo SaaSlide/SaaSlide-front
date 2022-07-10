@@ -72,7 +72,7 @@ const Interface = () => {
     <>
       <div className="interface-container">
         {home ? (
-          <div>
+          <div className="interface-container-home">
             <h1>Bienvenue {pseudo}</h1>
             {surveyName && surveyOptions && (
               <ButtonOpenPanel

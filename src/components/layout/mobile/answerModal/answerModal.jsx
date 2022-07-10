@@ -1,46 +1,57 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import './answerModal.scss'
 import { ButtonAnswer } from '../buttonAnswer/buttonAnswer'
 
-export const AnswerModal = ({ type, question, options, setIsModalShown }) => {
-  const [showAnswer, setShownAnswer] = useState(false)
-  let [isButtonSelected, setIsButtonSelected] = useState(false)
+export const AnswerModal = ({
+  type,
+  question,
+  options,
+  setIsModalShown,
+  isButtonSelected,
+  setIsButtonSelected,
+}) => {
   useEffect(() => {
     console.log(isButtonSelected)
-  }, [isButtonSelected])
-  console.log(type, question, options)
+  }, [question])
+  console.log('question', question)
   return (
     <>
-      <button onClick={() => setIsModalShown(false)}>close modal</button>
-      <p>{question}</p>
-      <div>
-        {(type === 'survey' &&
-          question &&
-          options &&
-          options.map((option, index) => (
-            <ButtonAnswer
-              key={index}
-              option={option}
-              index={index + 1}
-              type={type}
-              isButtonSelected={isButtonSelected}
-              setIsButtonSelected={setIsButtonSelected}
-            />
-          ))) ||
-          (type === 'quizz' &&
+      <section className="answer-modal">
+        <button className="modal-closer" onClick={() => setIsModalShown(false)}>
+          <img src="/assets/icons/close.svg" alt="" />
+        </button>
+        <p className="question-title">{question}</p>
+        <div>
+          {(type === 'survey' &&
             question &&
             options &&
             options.map((option, index) => (
               <ButtonAnswer
                 key={index}
-                option={option.choice}
+                option={option}
                 index={index + 1}
                 type={type}
                 isButtonSelected={isButtonSelected}
                 setIsButtonSelected={setIsButtonSelected}
+                isClickable={isButtonSelected}
               />
-            )))}
-      </div>
+            ))) ||
+            (type === 'quizz' &&
+              question &&
+              options &&
+              options.map((option, index) => (
+                <ButtonAnswer
+                  key={index}
+                  option={option.choice}
+                  index={index + 1}
+                  type={type}
+                  isButtonSelected={isButtonSelected}
+                  setIsButtonSelected={setIsButtonSelected}
+                  isClickable={isButtonSelected}
+                />
+              )))}
+        </div>
+      </section>
     </>
   )
 }

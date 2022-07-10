@@ -4,6 +4,7 @@ import { AnswerModal } from '../answerModal/answerModal'
 
 export const ButtonOpenPanel = ({ type, question, options }) => {
   const [isAnswerModalShown, setIsAnswerModalShown] = useState(false)
+  const [isButtonSelected, setIsButtonSelected] = useState()
 
   return (
     <>
@@ -41,6 +42,8 @@ export const ButtonOpenPanel = ({ type, question, options }) => {
           question={question}
           options={options}
           setIsModalShown={setIsAnswerModalShown}
+          isButtonSelected={isButtonSelected}
+          setIsButtonSelected={setIsButtonSelected}
         />
       )}
     </>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './buttonAnswer.scss'
 
 export const ButtonAnswer = ({
@@ -7,7 +7,12 @@ export const ButtonAnswer = ({
   type,
   isButtonSelected,
   setIsButtonSelected,
+  isClickable,
 }) => {
+  // FIXME: called for every component instance not only the selected one
+  useEffect(() => {
+    if (isButtonSelected) console.log('isButtonSelected')
+  }, [isButtonSelected])
   return (
     <>
       <div
@@ -16,6 +21,9 @@ export const ButtonAnswer = ({
           isButtonSelected === index
             ? 'btn-answer btn-answer-selected'
             : 'btn-answer'
+        }
+        style={
+          isClickable ? { pointerEvents: 'none' } : { pointerEvents: 'auto' }
         }
         onClick={() => setIsButtonSelected(index)}
         aria-hidden="true"

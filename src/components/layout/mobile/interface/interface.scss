@@ -5,6 +5,10 @@
   height: calc(100vh - 40px - 80px);
 }
 
+interface-container-home {
+  overflow-y: auto;
+}
+
 .navMobile {
   background-color: $color-black-light;
   height: 80px;
