@@ -7,6 +7,8 @@ import { ViewerInterface } from './views/mobile/viewerInterface/viewerInterface'
 import { ManagePdf } from './views/ManagePdf'
 import { ImportPdf } from './components/business/ImportPdf/importPdf'
 import { PdfList } from './components/business/pdfList/pdfList'
+import { BroadcasterPage } from './views/mobile/broadcasterPage/broadcasterPage'
+import { BroadcasterLogin } from './views/mobile/broadcasterLogin/broadcasterLogin'
 
 const RoutesApp = () => {
   useCookie()
@@ -35,6 +37,11 @@ const RoutesApp = () => {
         path="/mobile/presentation/:diapoId"
         element={<ViewerInterface />}
       />
+      <Route
+        path="/mobile/broadcasterPage/:diapoId"
+        element={<BroadcasterPage />}
+      />
+      <Route path="/mobile/broadcasterLogin" element={<BroadcasterLogin />} />
       <Route path="/managepdf" element={<ManagePdf />} />
     </Routes>
   )
