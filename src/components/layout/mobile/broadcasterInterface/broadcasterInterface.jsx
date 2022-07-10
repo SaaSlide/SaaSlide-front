@@ -9,6 +9,7 @@ import { SocketContext } from '../../../../utils/socket'
 import { useState, useContext, useEffect } from 'react'
 import Question from '../question/question'
 import { GetDiapoById } from '../../../../services/apiService'
+import { DisplayFeatures } from './displayFeatures/displayFeatures'
 
 const quizz = {
   color: '#3F53D9',
@@ -23,7 +24,7 @@ const sondage = {
 }
 
 export const BroadcasterInterface = () => {
-  const [activeSlide, SetActiveSlide] = useState()
+  const [activeSlide, setActiveSlide] = useState(0)
   const [questions, setQuestions] = useState([])
   const [numberUser, SetNumberUser] = useState()
   const [diapo, SetDiapo] = useState()
@@ -31,7 +32,8 @@ export const BroadcasterInterface = () => {
   const { socket, diapoId } = useContext(SocketContext)
 
   socket.on('get_slide', ({ action, value, prevSlide }) => {
-    SetActiveSlide(prevSlide + value)
+    setActiveSlide(prevSlide + value)
+    console.log('SetActiveSlide', prevSlide + value)
   })
 
   const fill = (element) => {
@@ -61,6 +63,9 @@ export const BroadcasterInterface = () => {
         activeSlide={activeSlide}
         numberSlide={diapo?.infoDiapo.length}
       />
+      <div className="diapo-elements">
+        <DisplayFeatures infoDiapo={diapo?.infoDiapo[activeSlide]} />
+      </div>
       <div>
         <Note />
         <ManageFeature type={sondage} />

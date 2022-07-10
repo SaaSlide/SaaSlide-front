@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import { SocketContext } from '../../../../../utils/socket'
 import './remoteSlideController.scss'
 
@@ -6,16 +6,14 @@ export const RemoteSlideController = ({ activeSlide, numberSlide }) => {
   const [slideIndex, setSlideIndex] = useState(1)
   const { sio } = useContext(SocketContext)
 
-  if (activeSlide) {
-    setSlideIndex(activeSlide)
-  }
-
   const nextSlide = (slideIndex, numberSlide) => {
     if (slideIndex < numberSlide) {
       sio.updateSlide('next', 1, slideIndex)
       setSlideIndex(slideIndex + 1)
     }
   }
+
+  console.log('activeSlide', activeSlide)
 
   const prevSlide = (slideIndex) => {
     if (slideIndex > 1) {
