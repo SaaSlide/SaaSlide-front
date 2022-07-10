@@ -15,8 +15,10 @@ const Interface = () => {
 
   const [diapo, setDiapo] = useState()
   const [diapoPath, setDiapoPath] = useState()
+  const [surveyId, setSurveyId] = useState()
   const [surveyName, setSurveyName] = useState()
   const [surveyOptions, setSurveyOptions] = useState()
+  const [quizzId, setQuizzId] = useState()
   const [quizzQuestion, setQuizzQuestion] = useState()
   const [quizzOptions, setQuizzOptions] = useState()
   const [pageNumber, setPageNumber] = useState(0)
@@ -47,16 +49,20 @@ const Interface = () => {
         console.log(pageNumber)
         let currentSlide = diapo.infoDiapo[pageNumber - 1]
         if (currentSlide.surveys.length) {
+          setSurveyId(currentSlide.surveys[0]._id)
           setSurveyName(currentSlide.surveys[0].name)
           setSurveyOptions(currentSlide.surveys[0].survey)
         } else {
+          setSurveyId()
           setSurveyName()
           setSurveyOptions()
         }
         if (currentSlide.quizzs.length) {
+          setQuizzId(currentSlide.quizzs[0]._id)
           setQuizzQuestion(currentSlide.quizzs[0].question)
           setQuizzOptions(currentSlide.quizzs[0].possibilities)
         } else {
+          setQuizzId()
           setQuizzQuestion()
           setQuizzOptions()
         }
@@ -77,32 +83,29 @@ const Interface = () => {
     <>
       <div className="interface-container">
         {home ? (
-          <div>
+          <div className="interface-container-home">
             <h1>Bienvenue {pseudo}</h1>
             {surveyName && surveyOptions && (
               <ButtonOpenPanel
                 type="survey"
+                interactId={surveyId}
                 question={surveyName}
                 options={surveyOptions}
+                pageNumber={pageNumber}
               />
             )}
             {quizzQuestion && quizzOptions && (
               <ButtonOpenPanel
                 type="quizz"
+                interactId={quizzId}
                 question={quizzQuestion}
                 options={quizzOptions}
+                pageNumber={pageNumber}
               />
             )}
             {diapo && (
               <DownloadPdf diapoPath={diapoPath} emoji={diapo.sendEmoji} />
             )}
-            {/* FIXME: for testing only ! */}
-            <button onClick={() => setPageNumber(1)}>11111111111111</button>
-            <button onClick={() => setPageNumber(2)}>22222222222222</button>
-            <button onClick={() => setPageNumber(3)}>33333333333333</button>
-            <button onClick={() => setPageNumber(4)}>44444444444444</button>
-            <button onClick={() => setPageNumber(5)}>55555555555555</button>
-            <button onClick={() => setPageNumber(6)}>66666666666666</button>
           </div>
         ) : (
           <Question viewer={true} questions={questions} setQuestions={fill} />
