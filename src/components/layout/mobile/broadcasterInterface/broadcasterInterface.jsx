@@ -57,7 +57,10 @@ export const BroadcasterInterface = () => {
   return (
     <>
       <TopNav specCount={numberUser} />
-      <RemoteSlideController activeSlide={activeSlide} numberSlide={40} />
+      <RemoteSlideController
+        activeSlide={activeSlide}
+        numberSlide={diapo?.infoDiapo.length}
+      />
       <div>
         <Note />
         <ManageFeature type={sondage} />
