@@ -1,19 +1,17 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import './answerModal.scss'
 import { ButtonAnswer } from '../buttonAnswer/buttonAnswer'
 
 export const AnswerModal = ({
   type,
+  pageNumber,
+  interactId,
   question,
   options,
   setIsModalShown,
   isButtonSelected,
   setIsButtonSelected,
 }) => {
-  useEffect(() => {
-    console.log(isButtonSelected)
-  }, [question])
-  console.log('question', question)
   return (
     <>
       <section className="answer-modal">
@@ -28,9 +26,11 @@ export const AnswerModal = ({
             options.map((option, index) => (
               <ButtonAnswer
                 key={index}
+                type={type}
+                pageNumber={pageNumber}
+                interactId={interactId}
                 option={option}
                 index={index + 1}
-                type={type}
                 isButtonSelected={isButtonSelected}
                 setIsButtonSelected={setIsButtonSelected}
                 isClickable={isButtonSelected}
@@ -42,9 +42,12 @@ export const AnswerModal = ({
               options.map((option, index) => (
                 <ButtonAnswer
                   key={index}
-                  option={option.choice}
-                  index={index + 1}
                   type={type}
+                  pageNumber={pageNumber}
+                  interactId={interactId}
+                  option={option.choice}
+                  answer={option.answer}
+                  index={index + 1}
                   isButtonSelected={isButtonSelected}
                   setIsButtonSelected={setIsButtonSelected}
                   isClickable={isButtonSelected}

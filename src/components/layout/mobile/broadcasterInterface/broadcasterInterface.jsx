@@ -36,6 +36,10 @@ export const BroadcasterInterface = () => {
     console.log('SetActiveSlide', prevSlide + value)
   })
 
+  socket.on('get_response', ({ slide, type, id, choice }) => {
+    console.log(slide, type, id, choice)
+  })
+
   const fill = (element) => {
     setQuestions([element, ...questions])
   }
