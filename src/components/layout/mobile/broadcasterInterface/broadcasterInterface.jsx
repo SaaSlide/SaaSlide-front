@@ -11,29 +11,20 @@ import Question from '../question/question'
 import { GetDiapoById } from '../../../../services/apiService'
 import { DisplayFeatures } from './displayFeatures/displayFeatures'
 
-const quizz = {
-  color: '#3F53D9',
-  title: 'Quizz',
-  icon: <IconQuizz size={80} color={'white'} />,
-}
-
-const sondage = {
-  color: '#F3A953',
-  title: 'Sondage',
-  icon: <IconSondage size={80} color={'white'} />,
-}
-
 export const BroadcasterInterface = () => {
   const [activeSlide, setActiveSlide] = useState(0)
   const [questions, setQuestions] = useState([])
   const [numberUser, SetNumberUser] = useState()
   const [diapo, SetDiapo] = useState()
   const [diapoPath, setDiapoPath] = useState()
+  const [slideIndex, setSlideIndex] = useState(0)
   const { socket, diapoId } = useContext(SocketContext)
 
   socket.on('get_slide', ({ action, value, prevSlide }) => {
+    console.log('ici')
+    // console.log('SetActiveSlide', prevSlide + value)
     setActiveSlide(prevSlide + value)
-    console.log('SetActiveSlide', prevSlide + value)
+    console.log(activeSlide)
   })
 
   socket.on('get_response', ({ slide, type, id, choice }) => {
@@ -60,19 +51,18 @@ export const BroadcasterInterface = () => {
     getDiapoInfo()
   }, [diapoId])
 
+  console.log('hell11o', diapo?.infoDiapo[slideIndex])
+
   return (
     <>
       <TopNav specCount={numberUser} />
       <RemoteSlideController
         activeSlide={activeSlide}
+        setActiveSlide={setSlideIndex}
         numberSlide={diapo?.infoDiapo.length}
       />
       <div className="diapo-elements">
-        <DisplayFeatures infoDiapo={diapo?.infoDiapo[activeSlide]} />
-      </div>
-      <div>
-        <Note />
-        <ManageFeature type={sondage} />
+        <DisplayFeatures infoDiapo={diapo?.infoDiapo[slideIndex]} />
       </div>
       <Question viewer={false} questions={questions} setQuestions={fill} />
     </>
