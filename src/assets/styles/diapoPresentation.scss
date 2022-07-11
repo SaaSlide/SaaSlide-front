@@ -1,0 +1,14 @@
+.containerDiapoPres {
+  position: relative;
+  background-color: white;
+
+  .iconFullScreen {
+    position: absolute;
+    top: 35px;
+    right: 35px;
+    width: 35px;
+    img {
+      width: 100%;
+    }
+  }
+}
