@@ -19,6 +19,7 @@ const FloatSmiley = () => {
     this.x = Math.round(randomize(20, 60))
     this.y = h - Math.round(randomize(40, 50))
     this.speed = randomize(0.2, 0.5)
+    this.opacity = 1
     this.size = Math.round(randomize(2, 5))
     this.delay = Math.round(randomize(3, 6))
   }
@@ -45,7 +46,7 @@ const FloatSmiley = () => {
       p.y -= p.speed * 10
 
       ctx.save()
-
+      ctx.globalAlpha = p.opacity
       ctx.setTransform(p.size, 0, 0, p.size, p.x, p.y)
       ctx.fillText(p.smiley, 0, 40, 40, 0, 0, 40, 40)
 
