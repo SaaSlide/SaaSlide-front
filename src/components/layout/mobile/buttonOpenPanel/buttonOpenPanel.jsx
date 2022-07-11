@@ -1,9 +1,21 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './buttonOpenPanel.scss'
 import { AnswerModal } from '../answerModal/answerModal'
 
-export const ButtonOpenPanel = ({ type, question, options }) => {
+export const ButtonOpenPanel = ({
+  type,
+  interactId,
+  question,
+  options,
+  pageNumber,
+}) => {
   const [isAnswerModalShown, setIsAnswerModalShown] = useState(false)
+  const [isButtonSelected, setIsButtonSelected] = useState()
+
+  useEffect(() => {
+    console.log('setIsButtonSelected reset called')
+    setIsButtonSelected()
+  }, [pageNumber])
 
   return (
     <>
@@ -38,9 +50,13 @@ export const ButtonOpenPanel = ({ type, question, options }) => {
       {isAnswerModalShown && (
         <AnswerModal
           type={type}
+          pageNumber={pageNumber}
+          interactId={interactId}
           question={question}
           options={options}
           setIsModalShown={setIsAnswerModalShown}
+          isButtonSelected={isButtonSelected}
+          setIsButtonSelected={setIsButtonSelected}
         />
       )}
     </>
