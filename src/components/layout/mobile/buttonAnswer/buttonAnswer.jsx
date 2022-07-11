@@ -21,8 +21,6 @@ export const ButtonAnswer = ({
     console.log(pageNumber, type, interactId, index)
   }
 
-  // FIXME: called for every component instance not only the selected one
-
   return (
     <>
       <div
@@ -30,7 +28,7 @@ export const ButtonAnswer = ({
         className={
           type === 'survey' && isButtonSelected === index
             ? 'btn-answer btn-answer-selected'
-            : type === 'quizz' && answer && isButtonSelected === index
+            : type === 'quizz' && answer && isButtonSelected
             ? 'btn-answer btn-answer-right'
             : type === 'quizz' && !answer && isButtonSelected === index
             ? 'btn-answer btn-answer-wrong'
