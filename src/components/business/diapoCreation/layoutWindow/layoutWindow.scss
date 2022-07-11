@@ -33,19 +33,45 @@
 
     margin-top: 20px;
 
-    button {
+    .btnSave {
+      color: white;
+      background-color: var.$color-secondary;
       padding: 10px 25px;
       border-radius: 7px;
       font-size: 18px;
     }
-
-    .btnSave {
-      color: white;
-      background-color: var.$color-secondary;
-    }
     .btnDelete {
       color: var.$color-danger;
       border: 1px solid var.$color-danger;
+      padding: 10px 25px;
+      border-radius: 7px;
+      font-size: 18px;
     }
+  }
+}
+
+// RESPONSIVE MOBILE
+
+.btnContainerResponsive {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 20px;
+
+  margin-top: 20px;
+
+  .btnSaveResponsive {
+    color: white;
+    background-color: var.$color-secondary;
+    padding: 5px 10px;
+    border-radius: 7px;
+    font-size: 16px;
+  }
+  .btnDeleteResponsive {
+    color: var.$color-danger;
+    border: 1px solid var.$color-danger;
+    padding: 5px 10px;
+    border-radius: 7px;
+    font-size: 16px;
   }
 }

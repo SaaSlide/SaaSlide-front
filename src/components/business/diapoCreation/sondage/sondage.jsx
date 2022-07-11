@@ -1,11 +1,12 @@
 import './sondage.scss'
 import { LayoutWindow } from '../layoutWindow/layoutWindow'
 import { useEffect, useState } from 'react'
-import { useManageDiapo } from '../../../../utils/hooks'
+import { useIsMobile, useManageDiapo } from '../../../../utils/hooks'
 
 export const Sondage = () => {
   const { sondage, saveSondage, removeSondage } = useManageDiapo()
   const [sondageTemp, setSondageTemp] = useState(sondage)
+  const isMobile = useIsMobile()
 
   useEffect(() => {
     setSondageTemp(sondage)
@@ -45,25 +46,39 @@ export const Sondage = () => {
         <input
           type="text"
           placeholder="Votre question"
-          className="inputQuestion"
+          className={isMobile ? 'inputQuestionResponsive' : 'inputQuestion'}
           value={sondageTemp.name}
           onChange={(e) => onChangeName(e.target.value)}
         />
-        <div className="propositionsContainer">
+        <div
+          className={
+            isMobile
+              ? 'propositionContainerResponsive'
+              : 'propositionsContainer'
+          }
+        >
           {sondageTemp.survey.map((proposition, index) => {
             return (
-              <div key={index} className="inputContainerProposition">
+              <div
+                key={index}
+                className={
+                  isMobile
+                    ? 'inputContainerPropositionResponsive'
+                    : 'inputContainerProposition'
+                }
+              >
                 <input
                   type="text"
                   value={proposition}
+                  className="input"
                   onChange={(e) => onChangeProposition(index, e.target.value)}
                 />
                 <button
                   onClick={() => deleteProposition(index)}
                   style={{
-                    opacity: sondageTemp.survey.length === 2 ? 0 : 1,
+                    opacity: sondageTemp.survey.length === 1 ? 0 : 1,
                     pointerEvents:
-                      sondageTemp.survey.length === 2 ? 'none' : 'auto',
+                      sondageTemp.survey.length === 1 ? 'none' : 'auto',
                   }}
                 >
                   <img src="/assets/images/close_big.png" alt="close" />

@@ -1,5 +1,5 @@
 import './layoutWindow.scss'
-import { useManageDiapo } from '../../../../utils/hooks'
+import { useIsMobile, useManageDiapo } from '../../../../utils/hooks'
 
 export const LayoutWindow = ({
   children,
@@ -10,6 +10,7 @@ export const LayoutWindow = ({
   parameters = false,
 }) => {
   const { setCategory } = useManageDiapo()
+  const isMobile = useIsMobile()
 
   return (
     <div className="containerModify">
@@ -18,12 +19,18 @@ export const LayoutWindow = ({
       </button>
       <h5>{title}</h5>
       {children}
-      <div className="btnContainer">
-        <button className="btnSave" onClick={onSave}>
+      <div className={isMobile ? 'btnContainerResponsive' : 'btnContainer'}>
+        <button
+          className={isMobile ? 'btnSaveResponsive' : 'btnSave'}
+          onClick={onSave}
+        >
           {parameters ? 'Enregistrer' : 'Ajouter à la slide'}
         </button>
         {btnDelete && (
-          <button className="btnDelete" onClick={onDelete}>
+          <button
+            className={isMobile ? 'btnDeleteResponsive' : 'btnDelete'}
+            onClick={onDelete}
+          >
             Supprimer de la slide
           </button>
         )}
