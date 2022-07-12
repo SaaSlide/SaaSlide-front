@@ -49,7 +49,6 @@ export const FloatSmiley = () => {
       ctx.globalAlpha = p.opacity
       ctx.setTransform(p.size, 0, 0, p.size, p.x, p.y)
       ctx.fillText(p.smiley, 0, 40, 40, 0, 0, 40, 40)
-
       ctx.restore()
     })
 
@@ -65,10 +64,10 @@ export const FloatSmiley = () => {
     canvas.height = h
 
     draw()
-  })
 
-  socket.on('get_smiley', (smiley) => {
-    emojis.push(new randomReaction(smiley))
+    socket.on('get_smiley', (smiley) => {
+      emojis.push(new randomReaction(smiley))
+    })
   })
 
   return <canvas id="canvas-smiley" className="canvas-smiley"></canvas>
