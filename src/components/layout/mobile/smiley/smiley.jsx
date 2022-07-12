@@ -21,6 +21,11 @@ const Smiley = () => {
     '🤫',
   ]
 
+  const send = (e) => {
+    console.log('envoi')
+    sio.sendSmiley(e.target.innerHTML)
+  }
+
   return (
     <div className="smiley-container">
       <h5>
@@ -34,15 +39,9 @@ const Smiley = () => {
       <div className="smiley-list">
         {emoji.map((e, i) => {
           return (
-            <span
-              key={i}
-              tabIndex={0}
-              role="button"
-              onClick={sio.sendSmiley(e)}
-              onKeyDown={sio.sendSmiley(e)}
-            >
+            <button key={i} onClick={send}>
               {e}
-            </span>
+            </button>
           )
         })}
       </div>
