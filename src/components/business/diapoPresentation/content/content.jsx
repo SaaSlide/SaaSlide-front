@@ -1,7 +1,12 @@
 import './content.scss'
 import { SocketContext } from '../../../../utils/socket'
 import { useRef, useContext, useState, useEffect } from 'react'
-import { QRCodePresentation, SliderPresentation, FloatSmiley } from '../'
+import {
+  QRCodePresentation,
+  SliderPresentation,
+  FloatSmiley,
+  ResponsePercents,
+} from '../'
 import { TokenContext } from '../../../../App'
 import axios from 'axios'
 
@@ -70,19 +75,38 @@ export const ContentPresentation = ({ id }) => {
       setFullscreen(false)
     }
   }
-
+  // console.log(diapo.quizzs[index - 1] ? diapo.quizzs[index - 1] : [])
   return (
-    <div ref={ref} className="containerDiapoPres">
-      <button className="iconFullScreen" onClick={changeFullscreen}>
-        <img src="/assets/icons/fullscreen.svg" alt="fullscreen icon" />
-      </button>
-      <FloatSmiley />
+    diapo && (
+      <div ref={ref} className="containerDiapoPres">
+        <button className="iconFullScreen" onClick={changeFullscreen}>
+          <img src="/assets/icons/fullscreen.svg" alt="fullscreen icon" />
+        </button>
+        <FloatSmiley />
 
-      {index === 0 ? (
-        <QRCodePresentation id={id} />
-      ) : (
-        <SliderPresentation diapo={diapo} index={index} />
-      )}
-    </div>
+        {index === 0 ? (
+          <QRCodePresentation id={id} />
+        ) : (
+          <>
+            {diapo[index - 1].quizzs.length > 0 && (
+              <ResponsePercents
+                index={index}
+                resType="quizz"
+                data={diapo[index - 1].quizzs[0]}
+              />
+            )}
+
+            {/* {diapo[index - 1].surveys.length > 0 && (
+              <ResponsePercents
+                index={index}
+                resType="survey"
+                data={diapo[index - 1].surveys[0]}
+              />
+            )} */}
+            <SliderPresentation diapo={diapo} index={index} />
+          </>
+        )}
+      </div>
+    )
   )
 }

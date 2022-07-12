@@ -6,7 +6,7 @@ export const TopNav = ({ specCount }) => {
   const navigation = useNavigate()
   const Logout = () => {
     DeleteCookie()
-    navigation('/mobile/broadcastLogin')
+    navigation('/mobile/broadcasterLogin')
   }
 
   return (
