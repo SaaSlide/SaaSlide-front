@@ -3,7 +3,7 @@ import { SocketContext } from '../../../../utils/socket'
 
 import './floatSmiley.scss'
 
-const FloatSmiley = () => {
+export const FloatSmiley = () => {
   const { socket } = useContext(SocketContext)
 
   let canvas, ctx, w, h
@@ -73,5 +73,3 @@ const FloatSmiley = () => {
 
   return <canvas id="canvas-smiley" className="canvas-smiley"></canvas>
 }
-
-export default FloatSmiley

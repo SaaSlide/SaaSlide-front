@@ -1,4 +1,3 @@
-import '../assets/styles/diapoPresentation.scss'
 import SocketProvider from '../utils/socket'
 import { useLocation } from 'react-router-dom'
 import { ContentPresentation } from '../components/business/diapoPresentation'
