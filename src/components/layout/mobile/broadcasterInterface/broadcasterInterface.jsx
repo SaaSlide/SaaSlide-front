@@ -11,68 +11,107 @@ import Question from '../question/question'
 import { GetDiapoById } from '../../../../services/apiService'
 import { DisplayFeatures } from './displayFeatures/displayFeatures'
 
-const quizz = {
-  color: '#3F53D9',
-  title: 'Quizz',
-  icon: <IconQuizz size={80} color={'white'} />,
-}
-
-const sondage = {
-  color: '#F3A953',
-  title: 'Sondage',
-  icon: <IconSondage size={80} color={'white'} />,
-}
-
 export const BroadcasterInterface = () => {
   const [activeSlide, setActiveSlide] = useState(0)
   const [questions, setQuestions] = useState([])
   const [numberUser, SetNumberUser] = useState()
-  const [diapo, SetDiapo] = useState()
-  const [diapoPath, setDiapoPath] = useState()
+  const [diapo, setDiapo] = useState()
+  const [slideIndex, setSlideIndex] = useState(0)
   const { socket, diapoId } = useContext(SocketContext)
-
-  socket.on('get_slide', ({ action, value, prevSlide }) => {
-    setActiveSlide(prevSlide + value)
-    console.log('SetActiveSlide', prevSlide + value)
-  })
-
-  socket.on('get_response', ({ slide, type, id, choice }) => {
-    console.log(slide, type, id, choice)
-  })
+  const [quizzQuestion, setQuizzQuestion] = useState()
+  const [quizzOptions, setQuizzOptions] = useState()
+  const [quizzResponse, setQuizzResponse] = useState([])
+  const [quizzId, setQuizzId] = useState()
+  const [surveyQuestion, setSurveyQuestion] = useState()
+  const [surveyOptions, setSurveyOptions] = useState()
+  const [surveyResponse, setSurveyResponse] = useState([])
+  const [surveyId, setSurveyId] = useState()
 
   const fill = (element) => {
     setQuestions([element, ...questions])
   }
 
-  socket.on('get_question', ({ pseudo, question }) => {
-    fill({ text: `${pseudo} : ${question}`, me: false })
-  })
-
-  socket.on('update_number_user', (res) => SetNumberUser(res))
-
   const getDiapoInfo = async () => {
     const response = await GetDiapoById(diapoId)
-    SetDiapo(response)
-    setDiapoPath(response.infoDiapo[0].pathPdf.substring(2))
+    setDiapo(response)
+  }
+
+  const onNewSlide = () => {
+    if (diapo && slideIndex >= 1 && diapo?.infoDiapo.length) {
+      let currentSlide = diapo.infoDiapo[slideIndex - 1]
+      if (currentSlide.surveys.length > 0) {
+        setSurveyId(currentSlide.surveys[0]._id)
+        setSurveyQuestion(currentSlide.surveys[0].name)
+        setSurveyOptions(currentSlide.surveys[0].survey)
+      } else {
+        setSurveyId()
+        setSurveyQuestion()
+        setSurveyOptions()
+      }
+      if (currentSlide.quizzs.length > 0) {
+        setQuizzId(currentSlide.quizzs[0]._id)
+        setQuizzQuestion(currentSlide.quizzs[0].question)
+        setQuizzOptions(currentSlide.quizzs[0].possibilities)
+      } else {
+        setQuizzId()
+        setQuizzQuestion()
+        setQuizzOptions()
+      }
+    }
   }
 
   useEffect(() => {
     getDiapoInfo()
+
+    socket.on('get_question', ({ pseudo, question }) => {
+      fill({ text: `${pseudo} : ${question}`, me: false })
+    })
+
+    socket.on('update_number_user', (res) => SetNumberUser(res))
+
+    socket.on('get_response', ({ slide, type, id, choice }) => {
+      if (type === 'survey') {
+        setSurveyResponse([...surveyResponse, choice])
+      } else if (type === 'quizz') {
+        setQuizzResponse([...quizzResponse, choice])
+      }
+      console.log(surveyResponse, quizzResponse)
+    })
+
+    socket.on('get_slide', ({ action, value, prevSlide }) => {
+      setActiveSlide(prevSlide + value)
+      console.log(activeSlide)
+    })
   }, [diapoId])
+
+  useEffect(() => {
+    onNewSlide()
+    setSurveyResponse()
+    setQuizzResponse()
+  }, [slideIndex])
 
   return (
     <>
       <TopNav specCount={numberUser} />
       <RemoteSlideController
         activeSlide={activeSlide}
+        setActiveSlide={setSlideIndex}
         numberSlide={diapo?.infoDiapo.length}
       />
       <div className="diapo-elements">
-        <DisplayFeatures infoDiapo={diapo?.infoDiapo[activeSlide]} />
-      </div>
-      <div>
-        <Note />
-        <ManageFeature type={sondage} />
+        <DisplayFeatures
+          slideIndex={slideIndex}
+          diapoInfo={diapo?.infoDiapo[slideIndex - 1]}
+          quizzId={quizzId}
+          quizzQuestion={quizzQuestion}
+          quizzOptions={quizzOptions}
+          quizzResponse={quizzResponse}
+          surveyId={surveyId}
+          surveyQuestion={surveyQuestion}
+          surveyOptions={surveyOptions}
+          surveyResponse={surveyResponse}
+          numberUser={numberUser}
+        />
       </div>
       <Question viewer={false} questions={questions} setQuestions={fill} />
     </>
