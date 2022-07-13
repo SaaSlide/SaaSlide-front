@@ -32,7 +32,6 @@ const SocketProvider = ({ room, pseudo, children }) => {
      * @param {number} prevSlide - previous slide number
      */
     updateSlide: (action, value, prevSlide) => {
-      console.log('test')
       socket.emit('update_slide', { action, value, prevSlide })
     },
     /**

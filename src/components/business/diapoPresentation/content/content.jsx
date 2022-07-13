@@ -11,11 +11,11 @@ import { TokenContext } from '../../../../App'
 import axios from 'axios'
 
 export const ContentPresentation = ({ id }) => {
+  const { socket, sio } = useContext(SocketContext)
   const ref = useRef()
   const [fullscreen, setFullscreen] = useState(false)
   const [index, setIndex] = useState(0)
   const [diapo, setDiapo] = useState([])
-  const { socket, sio } = useContext(SocketContext)
   const [userToken] = useContext(TokenContext)
 
   useEffect(() => {
@@ -44,21 +44,33 @@ export const ContentPresentation = ({ id }) => {
   }, [socket, index])
 
   useEffect(() => {
-    document.addEventListener('keyup', pressKey)
+    if (diapo.length > 0) {
+      document.addEventListener('keyup', pressKey)
 
-    return () => document.removeEventListener('keyup', pressKey)
-  }, [])
+      return () => document.removeEventListener('keyup', pressKey)
+    }
+  }, [index, diapo.length])
 
   const pressKey = (e) => {
+    let newIndex
     switch (e.key) {
       case 'Escape':
         changeFullscreen()
         break
       case 'ArrowRight':
-        sio.updateSlide('next', 1, index)
+        newIndex = index + 1
+        if (newIndex < diapo.length + 1) {
+          console.log('tes')
+          setIndex(newIndex)
+          sio.updateSlide('next', 1, newIndex)
+        }
         break
       case 'ArrowLeft':
-        sio.updateSlide('previous', -1, index)
+        newIndex = index - 1
+        if (newIndex >= 0) {
+          setIndex(newIndex)
+          sio.updateSlide('previous', -1, newIndex)
+        }
         break
       default:
         break
@@ -75,7 +87,7 @@ export const ContentPresentation = ({ id }) => {
       setFullscreen(false)
     }
   }
-  // console.log(diapo.quizzs[index - 1] ? diapo.quizzs[index - 1] : [])
+
   return (
     diapo && (
       <div ref={ref} className="containerDiapoPres">
