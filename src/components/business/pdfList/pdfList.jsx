@@ -67,32 +67,33 @@ export const PdfList = () => {
             {pdfs &&
               pdfs.map((diapo) => {
                 return (
-                  <div
-                    key={diapo._id}
-                    className="diapoCover"
-                    onMouseEnter={() => setIsDiapoHovered(diapo._id)}
-                    onMouseLeave={() => setIsDiapoHovered(false)}
-                  >
-                    <img
-                      className="diapoCover-img"
-                      src={
-                        'http://localhost:4000/' +
-                        diapo.infoDiapo[0].path.substring(2)
-                      }
-                      alt="Première page diaporama"
-                    />
-                    {isDiapoHovered === diapo._id && (
-                      <button
-                        onClick={() => deleteDiapo(diapo._id)}
-                        className="cross-delete"
-                      >
-                        <img
-                          src="/assets/icons/cross-delete.svg"
-                          alt="Croix de suppression"
-                        />
-                      </button>
-                    )}
-                  </div>
+                  <a key={diapo._id} href={`/diapo/${diapo._id}`}>
+                    <div
+                      className="diapoCover"
+                      onMouseEnter={() => setIsDiapoHovered(diapo._id)}
+                      onMouseLeave={() => setIsDiapoHovered(false)}
+                    >
+                      <img
+                        className="diapoCover-img"
+                        src={
+                          'http://localhost:4000/' +
+                          diapo.infoDiapo[0].path.substring(2)
+                        }
+                        alt="Première page diaporama"
+                      />
+                      {isDiapoHovered === diapo._id && (
+                        <button
+                          onClick={() => deleteDiapo(diapo._id)}
+                          className="cross-delete"
+                        >
+                          <img
+                            src="/assets/icons/cross-delete.svg"
+                            alt="Croix de suppression"
+                          />
+                        </button>
+                      )}
+                    </div>
+                  </a>
                 )
               })}
           </div>

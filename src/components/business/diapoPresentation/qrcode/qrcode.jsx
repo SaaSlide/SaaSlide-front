@@ -1,11 +1,7 @@
 import './qrcode.scss'
 import QRCode from 'react-qr-code'
-import { useLocation } from 'react-router-dom'
 
-export const QRCodePresentation = () => {
-  const location = useLocation()
-
-  const id = location.pathname.replace('/diapo/presentation/', '')
+export const QRCodePresentation = ({ id }) => {
   return (
     <div className="QRCodeContainer">
       <div className="QRCode">
