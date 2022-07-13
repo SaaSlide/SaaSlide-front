@@ -1,9 +1,21 @@
 import './featureModal.scss'
-import { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import Button from '../../../../button/button'
+import { ProgressBar } from '../../../progressBar/progressBar'
+import { SocketContext } from '../../../../../../utils/socket'
 
-export const FeatureModal = ({ closeModal, numberSpec, numberResp }) => {
+export const FeatureModal = ({
+  slideIndex,
+  type,
+  featureId,
+  closeModal,
+  question,
+  options,
+  numberResponse,
+  numberUser,
+}) => {
   const [displayFeature, setDisplayFeature] = useState(false)
+  const { sio } = useContext(SocketContext)
 
   const displayFeatureOperations = () => {
     setDisplayFeature(!displayFeature)
@@ -11,8 +23,11 @@ export const FeatureModal = ({ closeModal, numberSpec, numberResp }) => {
 
   const closeFeature = () => {
     console.log('closing feature')
+    console.log(slideIndex, type.title, featureId, false, false)
+    sio.sendParams(slideIndex, type.title, featureId, false, false)
   }
 
+  // prettier-ignore
   return (
     <div className="feature-modal-mobile">
       <button onClick={() => closeModal(false)}>
@@ -20,11 +35,33 @@ export const FeatureModal = ({ closeModal, numberSpec, numberResp }) => {
       </button>
       <h1>Réponses du sondage :</h1>
       <div>
-        <p>titleQuestion</p>
-        <div>les progress bar</div>
+        <p>{question}</p>
+        {options &&
+          options.map((option, index) => (
+            <div key={index}>
+              <ProgressBar
+                width="70vw"
+                height="5vh"
+                color={
+                  option.answer
+                    ? '#58BF28'
+                    : !option.answer && type.title === 'Quizz'
+                    ? '#b33030'
+                    : type.color
+                }
+                value={
+                  numberResponse
+                    ? numberResponse.filter((item) => item === index + 1).length
+                    : 0
+                }
+                numberSpec={numberUser}
+              />
+              <p>{option.choice ? option.choice : option}</p>
+            </div>
+          ))}
         <div>
           <p>
-            Participation total : {numberResp}/{numberSpec}
+            Participation total : {numberResponse}/{numberUser}
           </p>
         </div>
       </div>

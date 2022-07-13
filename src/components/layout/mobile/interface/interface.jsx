@@ -27,28 +27,17 @@ const Interface = () => {
     setQuestions([element, ...questions])
   }
 
-  socket.on('get_question', ({ pseudo, question }) => {
-    fill({ text: `${pseudo} : ${question}`, me: false })
-  })
-
-  socket.on('get_slide', ({ action, value, prevSlide }) => {
-    console.log(value + prevSlide)
-    setPageNumber(value + prevSlide)
-  })
-
   const getDiapoInfo = async () => {
     const response = await GetDiapoById(diapoId)
     setDiapo(response)
     setDiapoPath(response.infoDiapo[0].pathPdf.substring(2))
   }
 
-  // when socket emit changing slide event
   const onNewSlide = () => {
     if (pageNumber >= 1 && diapo) {
       if (pageNumber <= diapo.infoDiapo.length) {
-        console.log(pageNumber)
         let currentSlide = diapo.infoDiapo[pageNumber - 1]
-        if (currentSlide.surveys.length) {
+        if (currentSlide.surveys.length > 0) {
           setSurveyId(currentSlide.surveys[0]._id)
           setSurveyName(currentSlide.surveys[0].name)
           setSurveyOptions(currentSlide.surveys[0].survey)
@@ -57,7 +46,7 @@ const Interface = () => {
           setSurveyName()
           setSurveyOptions()
         }
-        if (currentSlide.quizzs.length) {
+        if (currentSlide.quizzs.length > 0) {
           setQuizzId(currentSlide.quizzs[0]._id)
           setQuizzQuestion(currentSlide.quizzs[0].question)
           setQuizzOptions(currentSlide.quizzs[0].possibilities)
@@ -72,6 +61,19 @@ const Interface = () => {
 
   useEffect(() => {
     getDiapoInfo()
+
+    socket.on('get_question', ({ pseudo, question }) => {
+      fill({ text: `${pseudo} : ${question}`, me: false })
+    })
+
+    socket.on('get_slide', ({ action, value, prevSlide }) => {
+      console.log(value + prevSlide)
+      setPageNumber(value + prevSlide)
+    })
+
+    return () => {
+      socket.disconnect()
+    }
   }, [diapoId])
 
   useEffect(() => {

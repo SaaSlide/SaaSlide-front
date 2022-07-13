@@ -18,8 +18,6 @@ export const RemoteSlideController = ({
     }
   }
 
-  console.log('activeSlide', activeSlide)
-
   const prevSlide = (slideIndex) => {
     if (slideIndex > 0) {
       sio.updateSlide('previous', -1, slideIndex)

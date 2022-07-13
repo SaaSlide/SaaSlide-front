@@ -5,38 +5,39 @@ import { ManageFeature } from '../manageFeature/manageFeature'
 import { IconQuizz } from '../../../icons/quizz/quizz'
 import { IconSondage } from '../../../icons/sondage/sondage'
 
-export const DisplayFeatures = ({ diapoInfo }) => {
+export const DisplayFeatures = ({
+  slideIndex,
+  diapoInfo,
+  quizzId,
+  quizzQuestion,
+  quizzOptions,
+  quizzResponse,
+  surveyId,
+  surveyQuestion,
+  surveyOptions,
+  surveyResponse,
+  numberUser,
+}) => {
   const [actualPage, setActualPage] = useState()
 
   const quizz = {
     color: '#3F53D9',
-    title: 'Quizz',
+    title: 'quizz',
     icon: <IconQuizz size={80} color={'white'} />,
   }
 
   const sondage = {
     color: '#F3A953',
-    title: 'Sondage',
+    title: 'survey',
     icon: <IconSondage size={80} color={'white'} />,
   }
 
-  const getDiapoInfo = async () => {
-    console.log('hello je suis ici')
-    const response = await GetDiapoById(diapoInfo.id)
-    console.log('res', response)
-    setActualPage(response)
-  }
-
-  useEffect(() => {
-    getDiapoInfo()
-  }, [diapoInfo])
-
   return (
     <div>
-      {actualPage && (
+      {diapoInfo && (
         <div>
           <h1>{diapoInfo?.page}</h1>
-          {actualPage?.notes && (
+          {diapoInfo?.notes && (
             <div>
               <h3>Notes :</h3>
               <p>
@@ -46,8 +47,28 @@ export const DisplayFeatures = ({ diapoInfo }) => {
               </p>
             </div>
           )}
-          {actualPage?.surveys.length > 0 && <ManageFeature type={sondage} />}
-          {actualPage?.quizzs.length > 0 && <ManageFeature type={quizz} />}
+          {diapoInfo?.surveys.length > 0 && (
+            <ManageFeature
+              slideIndex={slideIndex}
+              type={sondage}
+              featureId={surveyId}
+              question={surveyQuestion}
+              options={surveyOptions}
+              featureResponse={surveyResponse}
+              numberUser={numberUser}
+            />
+          )}
+          {diapoInfo?.quizzs.length > 0 && (
+            <ManageFeature
+              slideIndex={slideIndex}
+              type={quizz}
+              featureId={quizzId}
+              question={quizzQuestion}
+              options={quizzOptions}
+              featureResponse={quizzResponse}
+              numberUser={numberUser}
+            />
+          )}
         </div>
       )}
     </div>
