@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import './buttonOpenPanel.scss'
 import { AnswerModal } from '../answerModal/answerModal'
+import { SocketContext } from '../../../../utils/socket'
 
 export const ButtonOpenPanel = ({
   type,
@@ -12,10 +13,24 @@ export const ButtonOpenPanel = ({
   const [isAnswerModalShown, setIsAnswerModalShown] = useState(false)
   const [isButtonSelected, setIsButtonSelected] = useState()
 
+  const [isFeatureOpen, setIsFeatureOpen] = useState()
+  const { socket, diapoId } = useContext(SocketContext)
+
   useEffect(() => {
     console.log('setIsButtonSelected reset called')
     setIsButtonSelected()
   }, [pageNumber])
+
+  useEffect(() => {
+    socket.on('get_params', ({ display, open }) => {
+      console.log(display, open)
+      setIsFeatureOpen(open)
+    })
+
+    return () => {
+      socket.off('get_params')
+    }
+  }, [diapoId])
 
   return (
     <>

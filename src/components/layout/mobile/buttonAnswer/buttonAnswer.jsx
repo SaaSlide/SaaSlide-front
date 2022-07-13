@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { SocketContext } from '../../../../utils/socket'
 import './buttonAnswer.scss'
 
@@ -18,19 +18,15 @@ export const ButtonAnswer = ({
   const sendAnswer = () => {
     setIsButtonSelected(index)
     sio.sendResponse(pageNumber, type, interactId, index)
-    console.log(pageNumber, type, interactId, index)
   }
-
-  // FIXME: called for every component instance not only the selected one
 
   return (
     <>
       <div
-        // TODO: if question -> set good answer to green and if bad set red
         className={
           type === 'survey' && isButtonSelected === index
             ? 'btn-answer btn-answer-selected'
-            : type === 'quizz' && answer && isButtonSelected === index
+            : type === 'quizz' && answer && isButtonSelected
             ? 'btn-answer btn-answer-right'
             : type === 'quizz' && !answer && isButtonSelected === index
             ? 'btn-answer btn-answer-wrong'

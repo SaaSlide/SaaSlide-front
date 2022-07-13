@@ -1,0 +1,14 @@
+@use '../../../../assets/styles/variable.scss' as var;
+@use '../../../../assets/styles/mixin.scss' as mix;
+
+.sliderPresContainer {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+
+  img {
+    min-width: 100%;
+    transition: 0.3s;
+  }
+}
