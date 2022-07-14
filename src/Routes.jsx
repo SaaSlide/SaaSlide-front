@@ -32,16 +32,19 @@ const RoutesApp = () => {
         path="/diapo/presentation/:id"
         element={<DiapoPresentation />}
       ></Route>
-      <Route path="/mobile/presentation" element={<ViewerLogin />} />
+      <Route path="/mobile/presentation/:diapoId" element={<ViewerLogin />} />
       <Route
-        path="/mobile/presentation/:diapoId"
+        path="/mobile/presentation/interface/:diapoId"
         element={<ViewerInterface />}
       />
       <Route
-        path="/mobile/broadcasterPage/:diapoId"
+        path="/mobile/broadcasterPage/interface/:diapoId"
         element={<BroadcasterPage />}
       />
-      <Route path="/mobile/broadcasterLogin" element={<BroadcasterLogin />} />
+      <Route
+        path="/mobile/broadcasterLogin/:diapoId"
+        element={<BroadcasterLogin />}
+      />
       <Route path="/managepdf" element={<ManagePdf />} />
     </Routes>
   )

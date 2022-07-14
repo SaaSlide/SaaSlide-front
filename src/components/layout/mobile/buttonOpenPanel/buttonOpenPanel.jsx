@@ -17,14 +17,15 @@ export const ButtonOpenPanel = ({
   const { socket, diapoId } = useContext(SocketContext)
 
   useEffect(() => {
-    console.log('setIsButtonSelected reset called')
     setIsButtonSelected()
+    setIsFeatureOpen(false)
   }, [pageNumber])
 
   useEffect(() => {
-    socket.on('get_params', ({ display, open }) => {
-      console.log(display, open)
-      setIsFeatureOpen(open)
+    socket.on('get_params', ({ slide, type, id, display, open }) => {
+      if (interactId === id) {
+        setIsFeatureOpen(open)
+      }
     })
 
     return () => {
@@ -34,7 +35,7 @@ export const ButtonOpenPanel = ({
 
   return (
     <>
-      {(type === 'survey' && (
+      {(isFeatureOpen && type === 'survey' && (
         <div
           onClick={() => setIsAnswerModalShown(true)}
           aria-hidden="true"
@@ -48,7 +49,7 @@ export const ButtonOpenPanel = ({
           />
         </div>
       )) ||
-        (type === 'quizz' && (
+        (isFeatureOpen && type === 'quizz' && (
           <div
             onClick={() => setIsAnswerModalShown(true)}
             aria-hidden="true"

@@ -16,7 +16,6 @@ export const ManageFeature = ({
   const { sio } = useContext(SocketContext)
 
   const startFeature = () => {
-    console.log(slideIndex, type.title, featureId, true, true)
     sio.sendParams(slideIndex, type.title, featureId, true, true)
     setOpenModal(!openModal)
   }

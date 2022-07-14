@@ -14,7 +14,7 @@ export const RemoteSlideController = ({
     if (slideIndex < numberSlide) {
       sio.updateSlide('next', 1, slideIndex)
       setSlideIndex(slideIndex + 1)
-      setActiveSlide(slideIndex)
+      setActiveSlide(slideIndex + 1)
     }
   }
 
@@ -22,7 +22,7 @@ export const RemoteSlideController = ({
     if (slideIndex > 0) {
       sio.updateSlide('previous', -1, slideIndex)
       setSlideIndex(slideIndex - 1)
-      setActiveSlide(slideIndex)
+      setActiveSlide(slideIndex - 1)
     }
   }
 
