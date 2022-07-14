@@ -87,3 +87,54 @@
     filter: grayscale(1);
   }
 }
+
+// RESPONSIVE MOBILE
+.propositionsContainerResponsive{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 15px;
+
+  .inputContainerProposition {
+    display: flex;
+    gap: 10px;
+    max-width: 400px;
+    align-items: center;
+    img {
+      cursor: pointer;
+    }
+    input {
+      width: 100%;
+    }
+    .checkboxInput {
+      cursor: pointer;
+      appearance: none;
+      background-color: #fff;
+      margin: 0;
+      padding: 20px;
+      font: inherit;
+      color: currentColor;
+      width: 30px;
+      height: 30px;
+
+      border: none;
+      border-radius: 7px;
+
+      display: grid;
+      place-content: center;
+
+      &::before {
+        content: '';
+        width: 25px;
+        height: 25px;
+        transform: scale(0);
+        transition: 120ms transform ease-in-out;
+        box-shadow: inset 25px 25px var.$color-primary;
+        border-radius: 3px;
+      }
+      &:checked::before {
+        transform: scale(1);
+      }
+    }
+  }
+}

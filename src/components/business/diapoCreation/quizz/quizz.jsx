@@ -1,11 +1,12 @@
 import './quizz.scss'
 import { LayoutWindow } from '../layoutWindow/layoutWindow'
 import { useState, useEffect } from 'react'
-import { useManageDiapo } from '../../../../utils/hooks'
+import { useIsMobile, useManageDiapo } from '../../../../utils/hooks'
 
 export const Quizz = () => {
   const { quizz, saveQuizz, removeQuizz } = useManageDiapo()
   const [quizzTemp, setQuizzTemp] = useState(quizz)
+  const isMobile = useIsMobile()
 
   useEffect(() => {
     setQuizzTemp(quizz)
@@ -54,10 +55,16 @@ export const Quizz = () => {
           placeholder="Votre question"
           value={quizzTemp.question}
           onChange={(e) => onChangeQuestion(e.target.value)}
-          className="inputQuestion"
+          className={isMobile ? 'inputQuestionResponsive' : 'inputQuestion'}
         />
         <p className="subtitle">Cocher le/les réponse(s) vrai</p>
-        <div className="propositionsContainer">
+        <div
+          className={
+            isMobile
+              ? 'propositionsContainerResponsive'
+              : 'propositionsContainer'
+          }
+        >
           {quizzTemp.possibilities?.map((proposition, index) => {
             return (
               <div key={index} className="inputContainerProposition">

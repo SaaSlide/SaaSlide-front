@@ -99,7 +99,11 @@ input[type='file'] {
   padding: 7px 25px;
   border: none;
   color: $color-white;
-  font-size: 18px;
+  font-size: 15px;
   cursor: pointer;
   margin-right: 3vw;
+}
+
+.font-sm{
+  font-size: 15px;
 }

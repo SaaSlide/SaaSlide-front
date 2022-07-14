@@ -6,8 +6,14 @@
     width: 50%;
     max-width: 400px;
     margin-bottom: 20px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 7px;
+    filter: drop-shadow(4px 4px 15px rgba(0, 0, 0, 0.05));
   }
-  input {
+  .input {
     width: 100%;
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
@@ -46,4 +52,34 @@
   .disabledProp {
     filter: grayscale(1);
   }
+}
+
+
+// RESPONSIVE MOBILE 
+.propositionContainerResponsive{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.inputContainerPropositionResponsive{
+  display: flex;
+  justify-content: center;
+  flex-direction: row-reverse;
+  gap: 10px;
+}
+
+.inputQuestionResponsive{
+    width: 75vw;
+    display: block;
+    margin: -10px 0 20px 0;
+    max-width: 400px;
+    margin-bottom: 20px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 7px;
+    filter: drop-shadow(4px 4px 15px rgba(0, 0, 0, 0.05));
 }

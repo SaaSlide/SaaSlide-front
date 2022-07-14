@@ -15,7 +15,7 @@ export const HeaderHome = () => {
           </div>
         ) : (
           <div className="user-space-button">
-            <a href="/diapo-list">Votre espace</a>
+            <a href="/managepdf">Votre espace</a>
           </div>
         )}
       </nav>

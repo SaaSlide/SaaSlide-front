@@ -91,7 +91,9 @@ export const ImportPdf = () => {
             <Button
               type="submit"
               className={
-                isMobile ? 'btn-secondary-sm-outline' : 'btn-secondary-outline'
+                isMobile
+                  ? 'btn-secondary-sm-outline font-sm'
+                  : 'btn-secondary-outline'
               }
               title="Importer le PDF"
             />
