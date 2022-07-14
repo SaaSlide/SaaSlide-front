@@ -17,20 +17,24 @@ export const FeatureModal = ({
   const [displayFeature, setDisplayFeature] = useState(false)
   const { sio } = useContext(SocketContext)
 
-  const displayFeatureOperations = () => {
+  const showFeature = () => {
     setDisplayFeature(!displayFeature)
+    sio.sendParams(slideIndex, type.title, featureId, true, false)
+  }
+
+  const hideFeature = () => {
+    setDisplayFeature(!displayFeature)
+    sio.sendParams(slideIndex, type.title, featureId, false, false)
   }
 
   const closeFeature = () => {
-    console.log('closing feature')
-    console.log(slideIndex, type.title, featureId, false, false)
     sio.sendParams(slideIndex, type.title, featureId, false, false)
   }
 
   // prettier-ignore
   return (
     <div className="feature-modal-mobile">
-      <button onClick={() => closeModal(false)}>
+      <button onClick={() => closeModal(false)}> 
         <img src="/assets/icons/close.svg" alt="" />
       </button>
       <h1>Réponses du sondage :</h1>
@@ -56,7 +60,7 @@ export const FeatureModal = ({
                 }
                 numberSpec={numberUser}
               />
-              <p>{option.choice ? option.choice : option}</p>
+              <p>{option.choice ? option.choice : option.proposition}</p>
             </div>
           ))}
         <div>
@@ -70,14 +74,14 @@ export const FeatureModal = ({
           <Button
             type="button"
             className="btn-secondary"
-            onClick={() => displayFeatureOperations()}
+            onClick={() => showFeature()}
             title="Afficher le sondage"
           />
         ) : (
           <Button
             type="button"
             className="btn-primary"
-            onClick={() => displayFeatureOperations()}
+            onClick={() => hideFeature()}
             title="Fermer le sondage"
           />
         )}

@@ -92,7 +92,7 @@ export const BroadcasterInterface = () => {
 
   return (
     <>
-      <TopNav specCount={numberUser} />
+      <TopNav specCount={numberUser} diapoId={diapoId} />
       <RemoteSlideController
         activeSlide={activeSlide}
         setActiveSlide={setSlideIndex}
