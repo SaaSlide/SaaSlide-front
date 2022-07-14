@@ -2,11 +2,11 @@ import { useNavigate } from 'react-router-dom'
 import { DeleteCookie } from '../../../../../services/apiUser'
 import './topnav.scss'
 
-export const TopNav = ({ specCount }) => {
+export const TopNav = ({ specCount, diapoId }) => {
   const navigation = useNavigate()
   const Logout = () => {
     DeleteCookie()
-    navigation('/mobile/broadcasterLogin')
+    navigation(`/mobile/broadcasterLogin/${diapoId}`)
   }
 
   return (

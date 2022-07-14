@@ -48,6 +48,7 @@ const Interface = () => {
         }
         if (currentSlide.quizzs.length > 0) {
           setQuizzId(currentSlide.quizzs[0]._id)
+          console.log(currentSlide.quizzs[0]._id)
           setQuizzQuestion(currentSlide.quizzs[0].question)
           setQuizzOptions(currentSlide.quizzs[0].possibilities)
         } else {
@@ -59,15 +60,14 @@ const Interface = () => {
     }
   }
 
+  socket.on('get_question', ({ pseudo, question }) => {
+    fill({ text: `${pseudo} : ${question}`, me: false })
+  })
+
   useEffect(() => {
     getDiapoInfo()
 
-    socket.on('get_question', ({ pseudo, question }) => {
-      fill({ text: `${pseudo} : ${question}`, me: false })
-    })
-
     socket.on('get_slide', ({ action, value, prevSlide }) => {
-      console.log(value + prevSlide)
       setPageNumber(value + prevSlide)
     })
 
