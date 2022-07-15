@@ -67,7 +67,7 @@ export const PdfList = () => {
             {pdfs &&
               pdfs.map((diapo) => {
                 return (
-                  <a key={diapo._id} href={`/diapo/${diapo._id}`}>
+                  <a key={diapo._id} href={`/diapo/create/${diapo._id}`}>
                     <div
                       className="diapoCover"
                       onMouseEnter={() => setIsDiapoHovered(diapo._id)}

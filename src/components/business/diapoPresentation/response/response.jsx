@@ -33,6 +33,15 @@ export const ResponsePercents = ({ index, resType, data }) => {
             setNbAnswers(nbAnswers + 1)
             setTempData(newQuizz)
           }
+          if (type === 'survey') {
+            const newSurvey = { ...tempData }
+            const indexToUpdate = newSurvey.survey.findIndex(
+              (possi) => possi.possibilitie === choice,
+            )
+            newSurvey.survey[indexToUpdate].count++
+            setNbAnswers(nbAnswers + 1)
+            setTempData(newSurvey)
+          }
         }
       })
     }
@@ -48,9 +57,9 @@ export const ResponsePercents = ({ index, resType, data }) => {
 
   const resetSurvey = () => {
     const newSurvey = { ...tempData }
-    // newSurvey.possibilities.forEach((possibilitie) => {
-    //   possibilitie.count = 0
-    // })
+    newSurvey.survey.forEach((possibilitie) => {
+      possibilitie.count = 0
+    })
     setTempData(newSurvey)
   }
 
@@ -69,13 +78,12 @@ export const ResponsePercents = ({ index, resType, data }) => {
               />
             )
           })
-        : tempData.survey.map((value, i) => {
+        : tempData.survey.map((possibilitie, i) => {
             return (
               <ProgressBar
                 key={i}
-                name={value}
-                // value={possibilitie.count}
-                value={3}
+                name={possibilitie.proposition}
+                value={possibilitie.count}
                 max={nbAnswers}
               />
             )

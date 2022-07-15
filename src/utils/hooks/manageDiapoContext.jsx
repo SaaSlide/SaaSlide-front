@@ -57,7 +57,7 @@ function useProvideManageDiapo() {
   const [userToken] = useContext(TokenContext)
   const location = useLocation()
 
-  const id = location.pathname.replace('/diapo/', '')
+  const id = location.pathname.replace('/diapo/create/', '')
 
   useEffect(() => {
     const fetchData = async () => {

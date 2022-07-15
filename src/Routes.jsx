@@ -27,7 +27,7 @@ const RoutesApp = () => {
           </>
         }
       ></Route>
-      <Route path="/diapo/:id" element={<DiapoCreation />}></Route>
+      <Route path="/diapo/create/:id" element={<DiapoCreation />}></Route>
       <Route
         path="/diapo/presentation/:id"
         element={<DiapoPresentation />}
