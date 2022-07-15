@@ -25,7 +25,10 @@ function useProvideManageDiapo() {
   const surveyModel = useMemo(() => {
     return {
       name: '',
-      survey: ['Proposition 1', 'Proposition 2'],
+      survey: [
+        { proposition: 'Proposition 1' },
+        { proposition: 'Proposition 2' },
+      ],
     }
   })
 

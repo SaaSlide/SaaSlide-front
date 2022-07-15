@@ -92,7 +92,6 @@ const ProgressBar = ({ name, value, max, quizz = false, answer }) => {
     percentWidth = Math.round((value / max) * 100 * 100) / 100
     percentRounded = Math.round((value / max) * 100)
   }
-  console.log(percentRounded)
   return (
     <div className="progressContainer">
       <p className="name">{name}</p>
