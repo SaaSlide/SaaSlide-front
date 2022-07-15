@@ -12,9 +12,6 @@ const SocketProvider = ({ room, pseudo, children }) => {
     console.log(`${res} personne connecté à la session`),
   )
   */
-  // socket.emit('join_room', room, (res) => {
-  //   console.log(res.value)
-  // })
 
   useEffect(() => {
     socket.emit('join_room', room, (res) => {
@@ -32,7 +29,7 @@ const SocketProvider = ({ room, pseudo, children }) => {
      * @param {number} prevSlide - previous slide number
      */
     updateSlide: (action, value, prevSlide) => {
-      socket.emit('update_slide', { action, value, prevSlide })
+      socket.emit('update_slide', { room, action, value, prevSlide })
     },
     /**
      * Sending to all clients in room except sender
@@ -41,7 +38,7 @@ const SocketProvider = ({ room, pseudo, children }) => {
      * @param {string} question
      */
     sendQuestion: (question) => {
-      socket.emit('send_question', { pseudo, question })
+      socket.emit('send_question', { room, pseudo, question })
     },
     /**
      * Sending to all clients in room except sender
@@ -54,7 +51,7 @@ const SocketProvider = ({ room, pseudo, children }) => {
      * @param {boolean} open
      */
     sendParams: (slide, type, id, display, open) => {
-      socket.emit('send_params', { slide, type, id, display, open })
+      socket.emit('send_params', { room, slide, type, id, display, open })
     },
     /**
      * Sending to all clients in room except sender
@@ -66,7 +63,7 @@ const SocketProvider = ({ room, pseudo, children }) => {
      * @param {string|number} choice
      */
     sendResponse: (slide, type, id, choice) => {
-      socket.emit('send_response', { slide, type, id, choice })
+      socket.emit('send_response', { room, slide, type, id, choice })
     },
     /**
      * Sending to all clients in room includes sender
@@ -75,7 +72,7 @@ const SocketProvider = ({ room, pseudo, children }) => {
      * @param {string} smiley
      */
     sendSmiley: (smiley) => {
-      socket.emit('send_smiley', smiley)
+      socket.emit('send_smiley', { room, smiley })
     },
   }
 
