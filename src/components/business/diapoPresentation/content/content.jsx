@@ -58,17 +58,16 @@ export const ContentPresentation = ({ id }) => {
         changeFullscreen()
         break
       case 'ArrowRight':
-        newIndex = index + 1
-        if (newIndex < diapo.length + 1) {
-          console.log('tes')
-          setIndex(newIndex)
+        newIndex = index
+        if (newIndex < diapo.length) {
+          setIndex(newIndex + 1)
           sio.updateSlide('next', 1, newIndex)
         }
         break
       case 'ArrowLeft':
-        newIndex = index - 1
-        if (newIndex >= 0) {
-          setIndex(newIndex)
+        newIndex = index
+        if (newIndex > 0) {
+          setIndex(newIndex - 1)
           sio.updateSlide('previous', -1, newIndex)
         }
         break

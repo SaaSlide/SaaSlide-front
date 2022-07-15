@@ -3,18 +3,26 @@ import { SocketContext } from '../../../../../utils/socket'
 import './remoteSlideController.scss'
 
 export const RemoteSlideController = ({
-  activeSlide,
-  setActiveSlide,
+  slideIndex,
+  setSlideIndex,
   numberSlide,
 }) => {
-  const [slideIndex, setSlideIndex] = useState(0)
-  const { sio } = useContext(SocketContext)
+  const { socket, sio } = useContext(SocketContext)
+
+  useEffect(() => {
+    socket.on('get_slide', ({ value, prevSlide }) => {
+      let newSlideIndex = prevSlide + value
+      console.log('proc', newSlideIndex)
+      setSlideIndex(newSlideIndex)
+    })
+
+    return () => socket.off('get_slide')
+  }, [])
 
   const nextSlide = (slideIndex, numberSlide) => {
     if (slideIndex < numberSlide) {
       sio.updateSlide('next', 1, slideIndex)
       setSlideIndex(slideIndex + 1)
-      setActiveSlide(slideIndex + 1)
     }
   }
 
@@ -22,7 +30,6 @@ export const RemoteSlideController = ({
     if (slideIndex > 0) {
       sio.updateSlide('previous', -1, slideIndex)
       setSlideIndex(slideIndex - 1)
-      setActiveSlide(slideIndex - 1)
     }
   }
 

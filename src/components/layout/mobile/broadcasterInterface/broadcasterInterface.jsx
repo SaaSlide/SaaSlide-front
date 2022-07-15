@@ -12,11 +12,10 @@ import { GetDiapoById } from '../../../../services/apiService'
 import { DisplayFeatures } from './displayFeatures/displayFeatures'
 
 export const BroadcasterInterface = () => {
-  const [activeSlide, setActiveSlide] = useState(0)
+  const [slideIndex, setSlideIndex] = useState(0)
   const [questions, setQuestions] = useState([])
   const [numberUser, SetNumberUser] = useState()
   const [diapo, setDiapo] = useState()
-  const [slideIndex, setSlideIndex] = useState(0)
   const { socket, diapoId } = useContext(SocketContext)
   const [quizzQuestion, setQuizzQuestion] = useState()
   const [quizzOptions, setQuizzOptions] = useState()
@@ -78,11 +77,7 @@ export const BroadcasterInterface = () => {
       console.log(surveyResponse, quizzResponse)
     })
 
-    socket.on('get_slide', ({ action, value, prevSlide }) => {
-      setActiveSlide(prevSlide + value)
-      console.log('proc')
-      console.log(activeSlide)
-    })
+    return () => socket.disconnect()
   }, [diapoId])
 
   useEffect(() => {
@@ -95,8 +90,8 @@ export const BroadcasterInterface = () => {
     <>
       <TopNav specCount={numberUser} diapoId={diapoId} />
       <RemoteSlideController
-        activeSlide={activeSlide}
-        setActiveSlide={setSlideIndex}
+        slideIndex={slideIndex}
+        setSlideIndex={setSlideIndex}
         numberSlide={diapo?.infoDiapo.length}
       />
       <div className="diapo-elements">
