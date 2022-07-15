@@ -7,6 +7,7 @@ export const Sondage = () => {
   const { sondage, saveSondage, removeSondage } = useManageDiapo()
   const [sondageTemp, setSondageTemp] = useState(sondage)
   const isMobile = useIsMobile()
+  console.log(sondage)
 
   useEffect(() => {
     setSondageTemp(sondage)
@@ -14,7 +15,7 @@ export const Sondage = () => {
 
   const addProposition = () => {
     const newSondage = { ...sondageTemp }
-    newSondage.survey.push('')
+    newSondage.survey.push({ proposition: '' })
     setSondageTemp(newSondage)
   }
 
@@ -31,7 +32,7 @@ export const Sondage = () => {
   }
   const onChangeProposition = (index, value) => {
     const newSondage = { ...sondageTemp }
-    newSondage.survey[index] = value
+    newSondage.survey[index].proposition = value
     setSondageTemp(newSondage)
   }
 
@@ -57,7 +58,7 @@ export const Sondage = () => {
               : 'propositionsContainer'
           }
         >
-          {sondageTemp.survey.map((proposition, index) => {
+          {sondageTemp.survey.map((proposi, index) => {
             return (
               <div
                 key={index}
@@ -69,7 +70,7 @@ export const Sondage = () => {
               >
                 <input
                   type="text"
-                  value={proposition}
+                  value={proposi.proposition}
                   className="input"
                   onChange={(e) => onChangeProposition(index, e.target.value)}
                 />

@@ -42,6 +42,8 @@ export const Quizz = () => {
     setQuizzTemp(newQuizz)
   }
 
+  console.log(quizzTemp)
+
   return (
     <LayoutWindow
       title={'Ajouter un quizz à votre slide'}

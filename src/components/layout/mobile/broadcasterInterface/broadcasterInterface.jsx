@@ -80,6 +80,7 @@ export const BroadcasterInterface = () => {
 
     socket.on('get_slide', ({ action, value, prevSlide }) => {
       setActiveSlide(prevSlide + value)
+      console.log('proc')
       console.log(activeSlide)
     })
   }, [diapoId])
