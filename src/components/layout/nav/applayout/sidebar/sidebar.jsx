@@ -16,7 +16,7 @@ export const SideBar = () => {
       {!isMobile ? (
         <div className="sidebar">
           <Logo width="140px" />
-          {location.pathname !== '/managepdf' && <Links />}
+          {location.pathname.includes('/diapo/create/') && <Links />}
           <Profile />
         </div>
       ) : (

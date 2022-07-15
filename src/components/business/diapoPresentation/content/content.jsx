@@ -115,7 +115,7 @@ export const ContentPresentation = ({ id }) => {
                 data={diapo[index - 1].surveys[0]}
               />
             )} */}
-            <SliderPresentation diapo={diapo} index={index} />
+            <SliderPresentation diapo={diapo} />
           </>
         )}
       </div>
