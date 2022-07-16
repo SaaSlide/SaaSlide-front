@@ -76,12 +76,12 @@ export const FloatSmiley = () => {
     })
   }, [])
 
-  document.addEventListener('fullscreenchange', () => {
-    w = window.innerWidth
-    h = window.innerHeight
-    canvas.width = w
-    canvas.height = h
-  })
+  // document.addEventListener('fullscreenchange', () => {
+  //   w = window.innerWidth
+  //   h = window.innerHeight
+  //   canvas.width = w
+  //   canvas.height = h
+  // })
 
   return (
     <canvas ref={ref} id="canvas-smiley" className="canvas-smiley"></canvas>

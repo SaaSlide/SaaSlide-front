@@ -1,4 +1,5 @@
 import SocketProvider from '../utils/socket'
+import React from 'react'
 import { useLocation } from 'react-router-dom'
 import { ContentPresentation } from '../components/business/diapoPresentation'
 
@@ -9,7 +10,9 @@ export const DiapoPresentation = () => {
 
   return (
     <SocketProvider room={id} pseudo={'Bastian'}>
-      <ContentPresentation id={id} />
+      <React.StrictMode>
+        <ContentPresentation id={id} />
+      </React.StrictMode>
     </SocketProvider>
   )
 }

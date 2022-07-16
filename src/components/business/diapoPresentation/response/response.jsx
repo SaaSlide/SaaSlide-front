@@ -1,93 +1,102 @@
 import './response.scss'
-import { SocketContext } from '../../../../utils/socket'
 import { useContext, useState, useEffect } from 'react'
 
-export const ResponsePercents = ({ index, resType, data }) => {
-  const { socket } = useContext(SocketContext)
-  const [isVisible, setIsVisible] = useState(true)
-  const [nbAnswers, setNbAnswers] = useState(0)
-  const [tempData, setTempData] = useState(data)
+export const ResponsePercents = ({ type, data }) => {
+  console.log(data)
+  // const [isVisible, setIsVisible] = useState(true)
+  // const [nbAnswers, setNbAnswers] = useState(0)
+  // const [tempData, setTempData] = useState(data)
 
-  useEffect(() => {
-    // setIsVisible(false)
-    setNbAnswers(0)
-    if (resType === 'quizz') resetQuizz()
-    else resetSurvey()
-    setTempData(data)
-  }, [index])
+  // useEffect(() => {
+  //   // setIsVisible(false)
+  //   setNbAnswers(0)
+  //   if (resType === 'quizz') resetQuizz()
+  //   else resetSurvey()
+  //   setTempData(data)
+  // }, [index])
 
-  useEffect(() => {
-    if (socket) {
-      socket.on('get_params', ({ display, type }) => {
-        if (resType === type) setIsVisible(display)
-      })
-      socket.on('get_response', ({ slide, type, id, choice }) => {
-        if (resType === type) {
-          console.log('test')
-          if (type === 'quizz') {
-            const newQuizz = { ...tempData }
-            const indexToUpdate = newQuizz.possibilities.findIndex(
-              (possibilitie) => possibilitie.choice === choice,
-            )
-            newQuizz.possibilities[indexToUpdate].count++
-            setNbAnswers(nbAnswers + 1)
-            setTempData(newQuizz)
-          }
-          if (type === 'survey') {
-            const newSurvey = { ...tempData }
-            const indexToUpdate = newSurvey.survey.findIndex(
-              (possi) => possi.possibilitie === choice,
-            )
-            newSurvey.survey[indexToUpdate].count++
-            setNbAnswers(nbAnswers + 1)
-            setTempData(newSurvey)
-          }
-        }
-      })
-    }
-  }, [socket])
+  // useEffect(() => {
+  //   if (socket) {
+  //     socket.on('get_params', ({ display, type }) => {
+  //       if (resType === type) setIsVisible(display)
+  //     })
+  //     socket.on('get_response', ({ slide, type, id, choice }) => {
+  //       if (resType === type) {
+  //         console.log('test')
+  //         if (type === 'quizz') {
+  //           const newQuizz = { ...tempData }
+  //           const indexToUpdate = newQuizz.possibilities.findIndex(
+  //             (possibilitie) => possibilitie.choice === choice,
+  //           )
+  //           newQuizz.possibilities[indexToUpdate].count++
+  //           setNbAnswers(nbAnswers + 1)
+  //           setTempData(newQuizz)
+  //         }
+  //         if (type === 'survey') {
+  //           const newSurvey = { ...tempData }
+  //           const indexToUpdate = newSurvey.survey.findIndex(
+  //             (possi) => possi.possibilitie === choice,
+  //           )
+  //           newSurvey.survey[indexToUpdate].count++
+  //           setNbAnswers(nbAnswers + 1)
+  //           setTempData(newSurvey)
+  //         }
+  //       }
+  //     })
+  //   }
+  // }, [socket])
 
-  const resetQuizz = () => {
-    const newQuizz = { ...tempData }
-    newQuizz.possibilities.forEach((possibilitie) => {
-      possibilitie.count = 0
-    })
-    setTempData(newQuizz)
-  }
+  // const resetQuizz = () => {
+  //   const newQuizz = { ...tempData }
+  //   newQuizz.possibilities.forEach((possibilitie) => {
+  //     possibilitie.count = 0
+  //   })
+  //   setTempData(newQuizz)
+  // }
 
-  const resetSurvey = () => {
-    const newSurvey = { ...tempData }
-    newSurvey.survey.forEach((possibilitie) => {
-      possibilitie.count = 0
-    })
-    setTempData(newSurvey)
-  }
+  // const resetSurvey = () => {
+  //   const newSurvey = { ...tempData }
+  //   newSurvey.survey.forEach((possibilitie) => {
+  //     possibilitie.count = 0
+  //   })
+  //   setTempData(newSurvey)
+  // }
+
+  console.log('render')
 
   return (
-    <div className="responsePercents" style={{ opacity: isVisible ? 1 : 0 }}>
-      {resType === 'quizz'
-        ? tempData.possibilities.map((possibilitie, i) => {
-            return (
-              <ProgressBar
-                key={i}
-                name={possibilitie.choice}
-                value={possibilitie.count}
-                max={nbAnswers}
-                quizz
-                answer={possibilitie.answer}
-              />
-            )
-          })
-        : tempData.survey.map((possibilitie, i) => {
-            return (
-              <ProgressBar
-                key={i}
-                name={possibilitie.proposition}
-                value={possibilitie.count}
-                max={nbAnswers}
-              />
-            )
-          })}
+    <div className="responsePercents" style={{ opacity: 1 }}>
+      {data
+        ? type === 'quizz'
+          ? data.possibilities.map((possibilitie, i) => {
+              return (
+                <ProgressBar
+                  key={i}
+                  name={possibilitie.choice}
+                  value={possibilitie.count}
+                  max={data.possibilities.reduce(
+                    (a, { count }) => a + count,
+                    0,
+                  )}
+                  quizz
+                  answer={possibilitie.answer}
+                />
+              )
+            })
+          : data.possibilities.survey.map((possibilitie, i) => {
+              return (
+                <ProgressBar
+                  key={i}
+                  name={possibilitie.proposition}
+                  value={possibilitie.count}
+                  max={data.possibilities.reduce(
+                    (a, { count }) => a + count,
+                    0,
+                  )}
+                />
+              )
+            })
+        : ''}
     </div>
   )
 }
