@@ -1,4 +1,4 @@
-# Comment lancer le front
+# Comment lancer le front ?
 
 Clone la branche main
 
@@ -8,9 +8,9 @@ Installer les dépendances npm
 
 Créer un .env à la racine
 
-`REACT_APP_BASE_URL=http://localhost:3000`
-`REACT_APP_API_BASE_URL=http://localhost:4000`
-`REACT_APP_SOCKET=http://localhost:4001/`
+- `REACT_APP_BASE_URL=http://localhost:3000`
+- `REACT_APP_API_BASE_URL=http://localhost:4000`
+- `REACT_APP_SOCKET=http://localhost:4001/`
 
 Et enfin lancer
 
