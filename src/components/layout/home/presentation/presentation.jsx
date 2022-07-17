@@ -1,6 +1,11 @@
 import './presentation.scss'
+import { TokenContext } from '../../../../App'
+import { useNavigate } from 'react-router-dom'
+import { useContext } from 'react'
 
 export const PresentationHome = () => {
+  let userToken = useContext(TokenContext)
+  const navigate = useNavigate()
   return (
     <section className="sectionPres">
       <div className="wrap">
@@ -21,7 +26,11 @@ export const PresentationHome = () => {
           Des présentations captivante, efficace et innovante Commencer à créer
           votre présentation
         </h5>
-        <button>Je créer ma présentation</button>
+        <button
+          onClick={() => navigate(userToken[0] ? '/managepdf' : '/signup')}
+        >
+          Je veux créer ma présentation
+        </button>
       </div>
     </section>
   )

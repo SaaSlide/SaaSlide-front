@@ -34,7 +34,7 @@ export const DisplayFeatures = ({
     <div>
       {diapoInfo && (
         <div>
-          {diapoInfo?.notes && (
+          {diapoInfo?.notes.length > 0 && (
             <div>
               <h3>Notes :</h3>
               <p>

@@ -66,12 +66,13 @@ export const PdfList = () => {
             {pdfs &&
               pdfs.map((diapo) => {
                 return (
-                  <a key={diapo._id} href={`/diapo/create/${diapo._id}`}>
-                    <div
-                      className="diapoCover"
-                      onMouseEnter={() => setIsDiapoHovered(diapo._id)}
-                      onMouseLeave={() => setIsDiapoHovered(false)}
-                    >
+                  <div
+                    key={diapo._id}
+                    className="diapoCover"
+                    onMouseEnter={() => setIsDiapoHovered(diapo._id)}
+                    onMouseLeave={() => setIsDiapoHovered(false)}
+                  >
+                    <a href={`/diapo/create/${diapo._id}`}>
                       <img
                         className="diapoCover-img"
                         src={
@@ -81,19 +82,19 @@ export const PdfList = () => {
                         }
                         alt="Première page diaporama"
                       />
-                      {isDiapoHovered === diapo._id && (
-                        <button
-                          onClick={() => deleteDiapo(diapo._id)}
-                          className="cross-delete"
-                        >
-                          <img
-                            src="/assets/icons/cross-delete.svg"
-                            alt="Croix de suppression"
-                          />
-                        </button>
-                      )}
-                    </div>
-                  </a>
+                    </a>
+                    {isDiapoHovered === diapo._id && (
+                      <button
+                        onClick={() => deleteDiapo(diapo._id)}
+                        className="cross-delete"
+                      >
+                        <img
+                          src="/assets/icons/cross-delete.svg"
+                          alt="Croix de suppression"
+                        />
+                      </button>
+                    )}
+                  </div>
                 )
               })}
           </div>

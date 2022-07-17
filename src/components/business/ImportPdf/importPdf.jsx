@@ -4,8 +4,10 @@ import { AddNewPdf } from '../../../services/apiService'
 import Button from '../../layout/button/button'
 import './importPdf.scss'
 import { useIsMobile } from '../../../utils/hooks'
+import { useNavigate } from 'react-router-dom'
 
 export const ImportPdf = () => {
+  const navigate = useNavigate()
   let userToken = useContext(TokenContext)
   let [pdfName, setPdfName] = useState('')
   let [errorOnImport, setErrorOnImport] = useState('')
@@ -28,6 +30,10 @@ export const ImportPdf = () => {
       userToken,
       e.target.children[0].firstChild.firstChild.files[0],
     )
+    if (addNewPdfResponse.status === 200) {
+      console.log(addNewPdfResponse.data.id)
+      navigate(`/diapo/create/${addNewPdfResponse.data.id}`)
+    }
   }
 
   return (
