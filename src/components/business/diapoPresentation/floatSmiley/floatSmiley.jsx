@@ -71,10 +71,16 @@ export const FloatSmiley = () => {
 
     draw()
 
-    socket.on('get_smiley', (smiley) => {
+    const getSmiley = (smiley) => {
+      console.log(smiley)
+
       emojis.push(new randomReaction(smiley))
-    })
-  }, [])
+    }
+
+    socket.on('get_smiley', getSmiley)
+
+    return () => socket.off('get_smiley', getSmiley)
+  }, [socket])
 
   // document.addEventListener('fullscreenchange', () => {
   //   w = window.innerWidth

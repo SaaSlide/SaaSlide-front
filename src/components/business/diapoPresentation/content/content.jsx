@@ -41,7 +41,7 @@ export const ContentPresentation = ({ id }) => {
     const refresh = ({ value, prevSlide }) => {
       const newIndex = value + prevSlide
       setIndex(newIndex)
-      setQuizz(diapo[newIndex - 1].quizzs[0] ?? null)
+      if (diapo[newIndex - 1].quizzs[0]) setQuizz(diapo[newIndex - 1].quizzs[0])
     }
 
     socket.on('get_slide', refresh)
@@ -58,14 +58,15 @@ export const ContentPresentation = ({ id }) => {
       case 'ArrowRight':
         if (newIndex < diapo.length) {
           setIndex(newIndex + 1)
-          setQuizz(diapo[newIndex].quizzs[0] ?? null)
+          if (diapo[newIndex].quizzs[0]) setQuizz(diapo[newIndex].quizzs[0])
           sio.updateSlide('next', 1, newIndex)
         }
         break
       case 'ArrowLeft':
         if (newIndex > 0) {
           setIndex(newIndex - 1)
-          setQuizz(diapo[newIndex - 2].quizzs[0] ?? null)
+          if (diapo[newIndex - 2].quizzs[0])
+            setQuizz(diapo[newIndex - 2].quizzs[0])
           sio.updateSlide('previous', -1, newIndex)
         }
         break
@@ -101,11 +102,8 @@ export const ContentPresentation = ({ id }) => {
       if (type === 'quizz') {
         console.group('Quizz')
         console.log('Choice Received', choice)
-        const initialCount =
-          diapo[slide - 1].quizzs[0].possibilities[choice - 1].count
-        let newDiapo = diapo
-        newDiapo[slide - 1].quizzs[0].possibilities[choice - 1].count =
-          initialCount + 1
+        let newDiapo = [...diapo]
+        newDiapo[slide - 1].quizzs[0].possibilities[choice - 1].count++
         console.log('Quizz After Update', newDiapo[slide - 1].quizzs[0])
         setQuizz(newDiapo[slide - 1].quizzs[0])
         setDiapo(newDiapo)
@@ -120,6 +118,7 @@ export const ContentPresentation = ({ id }) => {
       }
     }
     console.groupEnd()
+    console.groupEnd()
   }
 
   useEffect(() => {
@@ -127,11 +126,7 @@ export const ContentPresentation = ({ id }) => {
     return () => {
       socket.off('get_response', updateModal)
     }
-  }, [diapo, index])
-
-  useEffect(() => {
-    console.log(quizz)
-  }, [quizz])
+  }, [diapo, index, socket])
 
   return (
     diapo && (

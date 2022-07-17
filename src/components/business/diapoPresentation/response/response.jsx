@@ -2,49 +2,9 @@ import './response.scss'
 import { useContext, useState, useEffect } from 'react'
 
 export const ResponsePercents = ({ type, data }) => {
-  console.log(data)
   // const [isVisible, setIsVisible] = useState(true)
   // const [nbAnswers, setNbAnswers] = useState(0)
   // const [tempData, setTempData] = useState(data)
-
-  // useEffect(() => {
-  //   // setIsVisible(false)
-  //   setNbAnswers(0)
-  //   if (resType === 'quizz') resetQuizz()
-  //   else resetSurvey()
-  //   setTempData(data)
-  // }, [index])
-
-  // useEffect(() => {
-  //   if (socket) {
-  //     socket.on('get_params', ({ display, type }) => {
-  //       if (resType === type) setIsVisible(display)
-  //     })
-  //     socket.on('get_response', ({ slide, type, id, choice }) => {
-  //       if (resType === type) {
-  //         console.log('test')
-  //         if (type === 'quizz') {
-  //           const newQuizz = { ...tempData }
-  //           const indexToUpdate = newQuizz.possibilities.findIndex(
-  //             (possibilitie) => possibilitie.choice === choice,
-  //           )
-  //           newQuizz.possibilities[indexToUpdate].count++
-  //           setNbAnswers(nbAnswers + 1)
-  //           setTempData(newQuizz)
-  //         }
-  //         if (type === 'survey') {
-  //           const newSurvey = { ...tempData }
-  //           const indexToUpdate = newSurvey.survey.findIndex(
-  //             (possi) => possi.possibilitie === choice,
-  //           )
-  //           newSurvey.survey[indexToUpdate].count++
-  //           setNbAnswers(nbAnswers + 1)
-  //           setTempData(newSurvey)
-  //         }
-  //       }
-  //     })
-  //   }
-  // }, [socket])
 
   // const resetQuizz = () => {
   //   const newQuizz = { ...tempData }
@@ -61,8 +21,6 @@ export const ResponsePercents = ({ type, data }) => {
   //   })
   //   setTempData(newSurvey)
   // }
-
-  console.log('render')
 
   return (
     <div className="responsePercents" style={{ opacity: 1 }}>

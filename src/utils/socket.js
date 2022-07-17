@@ -71,11 +71,15 @@ const SocketProvider = ({ room, pseudo, children }) => {
   */
 
   useEffect(() => {
+    console.log('mount')
     socket.emit('join_room', room, (res) => {
       console.log(res.value)
     })
 
-    return () => socket.disconnect()
+    return () => {
+      console.log('unmounb')
+      socket.disconnect()
+    }
   }, [sio])
 
   return (
