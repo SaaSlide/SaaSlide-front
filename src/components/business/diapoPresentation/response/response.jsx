@@ -3,6 +3,7 @@ import './response.scss'
 export const ResponsePercents = ({ type, data, open }) => {
   return (
     <div className="responsePercents" style={{ opacity: 1 }}>
+      <p className="title">{data.name}</p>
       {data
         ? type === 'quizz'
           ? data.possibilities.map((possibilitie, i) => {
@@ -16,6 +17,7 @@ export const ResponsePercents = ({ type, data, open }) => {
                     0,
                   )}
                   quizz
+                  open={open}
                   answer={possibilitie.answer}
                 />
               )
@@ -35,7 +37,7 @@ export const ResponsePercents = ({ type, data, open }) => {
   )
 }
 
-const ProgressBar = ({ name, value, max, quizz = false, answer }) => {
+const ProgressBar = ({ name, value, max, quizz = false, answer, open }) => {
   let percentWidth
   let percentRounded
 
@@ -50,7 +52,8 @@ const ProgressBar = ({ name, value, max, quizz = false, answer }) => {
         <div
           style={{
             width: (percentWidth ? percentWidth : '0') + '%',
-            backgroundColor: quizz ? (answer ? '#58BF28' : '#B33030') : '',
+            backgroundColor:
+              quizz && !open ? (answer ? '#58BF28' : '#B33030') : '',
           }}
         />
       </div>

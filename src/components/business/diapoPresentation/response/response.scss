@@ -17,8 +17,14 @@
 
   background-color: var.$color-tertiary;
 
-  padding: 100px 150px;
+  padding: 100px 110px;
   transition: 0.3s;
+
+  .title {
+    font-size: 30px;
+    font-weight: 500;
+    margin-bottom: 40px;
+  }
 }
 
 .progressContainer {

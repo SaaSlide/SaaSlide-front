@@ -4,6 +4,7 @@ import { ButtonAnswer } from '../buttonAnswer/buttonAnswer'
 
 export const AnswerModal = ({
   type,
+  disabled,
   pageNumber,
   interactId,
   question,
@@ -19,7 +20,7 @@ export const AnswerModal = ({
           <img src="/assets/icons/close.svg" alt="" />
         </button>
         <p className="question-title">{question}</p>
-        <div>
+        <div className={`${disabled ? 'disabled' : ''}`}>
           {(type === 'survey' &&
             question &&
             options &&

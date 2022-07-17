@@ -29,18 +29,10 @@ export const FeatureModal = ({
     setDisplayFeature(!displayFeature)
   }
 
-  const open = () => {
-    sio.sendParams(
-      slideIndex,
-      type.title,
-      featureId,
-      displayFeature,
-      !openFeature,
-    )
-    setOpenFeature(!openFeature)
+  const close = () => {
+    sio.sendParams(slideIndex, type.title, featureId, displayFeature, false)
+    setOpenFeature(false)
   }
-
-  console.log(options)
 
   // prettier-ignore
   return (
@@ -70,15 +62,15 @@ export const FeatureModal = ({
                     ? numberResponse.filter((item) => item === index + 1).length
                     : 0
                 }
-                numberSpec={numberUser}
+                numberSpec={numberResponse.length}
               />
             </div>
           ))}
-        <div>
+        {/* <div>
           <p>
             Participation total : {numberResponse}/{numberUser}
           </p>
-        </div>
+        </div> */}
       </div>
       <div>
           <Button
@@ -88,9 +80,9 @@ export const FeatureModal = ({
             title={(displayFeature ? "Masquer le " : "Afficher le ") + `${type.title === "quizz" ? "quizz" : "sondage"}`}
           />
         <Button
-          title="Arrêter le sondage"
-          className="btn-danger-outline"
-          onClick={() => open()}
+          title={"Arrêter le "+`${type.title === "quizz" ? "quizz" : "sondage"}`}
+          className={`btn-danger-outline ${!openFeature ? "disabled" : ""}`}
+          onClick={() => close()}
         />
       </div>
     </div>

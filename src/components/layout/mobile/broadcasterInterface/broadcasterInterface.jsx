@@ -14,7 +14,7 @@ import { DisplayFeatures } from './displayFeatures/displayFeatures'
 export const BroadcasterInterface = () => {
   const [slideIndex, setSlideIndex] = useState(0)
   const [questions, setQuestions] = useState([])
-  const [numberUser, SetNumberUser] = useState()
+  const [numberUser, setNumberUser] = useState()
   const [diapo, setDiapo] = useState()
   const { socket, diapoId } = useContext(SocketContext)
   const [quizzQuestion, setQuizzQuestion] = useState()
@@ -25,10 +25,6 @@ export const BroadcasterInterface = () => {
   const [surveyOptions, setSurveyOptions] = useState()
   const [surveyResponse, setSurveyResponse] = useState([])
   const [surveyId, setSurveyId] = useState()
-
-  const fill = (element) => {
-    setQuestions([element, ...questions])
-  }
 
   const getDiapoInfo = async () => {
     const response = await GetDiapoById(diapoId)
@@ -53,17 +49,30 @@ export const BroadcasterInterface = () => {
     }
   }
 
+  const fill = (element) => {
+    setQuestions([element, ...questions])
+  }
+
+  const getQuestion = ({ pseudo, question }) => {
+    setQuestions([{ text: `${pseudo} : ${question}`, me: false }, ...questions])
+  }
+
   useEffect(() => {
     getDiapoInfo()
 
-    socket.on('get_question', ({ pseudo, question }) => {
-      fill({ text: `${pseudo} : ${question}`, me: false })
-    })
+    socket.on('get_question', getQuestion)
 
-    socket.on('update_number_user', (res) => SetNumberUser(res))
+    const setNumUser = (data) => {
+      setNumberUser(data)
+    }
 
-    return () => socket.disconnect()
-  }, [diapoId, socket])
+    socket.on('update_number_user', setNumUser)
+
+    return () => {
+      socket.off('get_question', getQuestion)
+      socket.off('update_number_user', setNumUser)
+    }
+  }, [diapoId, socket, questions])
 
   useEffect(() => {
     socket.on('get_response', ({ slide, type, id, choice }) => {

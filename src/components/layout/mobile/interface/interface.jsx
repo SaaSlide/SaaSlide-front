@@ -58,12 +58,14 @@ const Interface = () => {
   useEffect(() => {
     getDiapoInfo()
 
-    socket.on('get_slide', ({ action, value, prevSlide }) => {
+    const getSlide = ({ value, prevSlide }) => {
       setPageNumber(value + prevSlide)
-    })
+    }
+
+    socket.on('get_slide', getSlide)
 
     return () => {
-      socket.disconnect()
+      socket.off('get_slide', getSlide)
     }
   }, [diapoId])
 
