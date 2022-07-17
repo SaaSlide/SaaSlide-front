@@ -47,16 +47,10 @@ export const ProfileModal = (props) => {
       e.target[1].files[0],
       e.target[4].value,
     )
-    if (updateResponse.status === 200) {
-      console.log('Profile updated')
-    } else {
-      console.log('Error while trying to update profile')
-    }
   }
 
   const LogOut = () => {
     DeleteCookie()
-    console.log('cookie deleted')
     setContext('')
     navigate('/signin')
   }
@@ -64,7 +58,6 @@ export const ProfileModal = (props) => {
   const deleteAccount = (token, idUser) => {
     DeleteUserProfile(token, idUser)
     DeleteCookie()
-    console.log('cookie deleted')
     setContext('')
     navigate('/signin')
   }

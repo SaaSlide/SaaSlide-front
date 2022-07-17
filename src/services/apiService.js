@@ -2,7 +2,6 @@ import axios from 'axios'
 axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL
 
 export const Register = (name, email, password) => {
-  console.log(name, email, password)
   return axios
     .post('/auth/register', {
       name: name,
@@ -10,11 +9,9 @@ export const Register = (name, email, password) => {
       password: password,
     })
     .then((res) => {
-      console.log(res)
       return res
     })
     .catch((err) => {
-      console.log(err)
       return err
     })
 }
@@ -32,11 +29,9 @@ export const Login = (email, password) => {
       },
     )
     .then((res) => {
-      console.log(res)
       return res
     })
     .catch((err) => {
-      console.log(err)
       return err
     })
 }
@@ -55,11 +50,9 @@ export const AddNewPdf = (userToken, pdf) => {
       headers: headers,
     })
     .then((res) => {
-      console.log(res)
       return res
     })
     .catch((err) => {
-      console.log(err)
       return err
     })
 }
@@ -70,18 +63,14 @@ export const GetAllDiapoForUser = (userToken) => {
     'Authorization': `Bearer ${userToken[0]}`
   }
 
-  console.log(userToken[0])
-
   return axios
     .get('/api/diapo', {
       headers: headers,
     })
     .then((res) => {
-      console.log(res)
       return res.data
     })
     .catch((err) => {
-      console.log(err)
       return err
     })
 }
@@ -90,11 +79,9 @@ export const GetDiapoById = (diapoId) => {
   return axios
     .get('/diapo/' + diapoId)
     .then((res) => {
-      console.log(res)
       return res.data
     })
     .catch((err) => {
-      console.log(err)
       return err
     })
 }
@@ -110,11 +97,9 @@ export const DeleteDiapoById = (userToken, diapoId) => {
       headers: headers,
     })
     .then((res) => {
-      console.log(res)
       return res.data
     })
     .catch((err) => {
-      console.log(err)
       return err
     })
 }

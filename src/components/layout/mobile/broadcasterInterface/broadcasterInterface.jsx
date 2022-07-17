@@ -62,22 +62,30 @@ export const BroadcasterInterface = () => {
 
     socket.on('update_number_user', (res) => SetNumberUser(res))
 
+    return () => socket.disconnect()
+  }, [diapoId, socket])
+
+  useEffect(() => {
     socket.on('get_response', ({ slide, type, id, choice }) => {
       if (type === 'survey') {
-        setSurveyResponse([...surveyResponse, choice])
+        let surveyDataset = [...surveyResponse]
+        surveyDataset.push(choice)
+        setSurveyResponse(surveyDataset)
       } else if (type === 'quizz') {
-        setQuizzResponse([...quizzResponse, choice])
+        let quizzDataset = [...quizzResponse]
+        quizzDataset.push(choice)
+        setQuizzResponse(quizzDataset)
       }
-      console.log(surveyResponse, quizzResponse)
     })
-
-    return () => socket.disconnect()
-  }, [diapoId])
+  }, [surveyResponse, quizzResponse])
 
   useEffect(() => {
     onNewSlide()
-    setSurveyResponse()
-    setQuizzResponse()
+
+    return () => {
+      setSurveyResponse([])
+      setQuizzResponse([])
+    }
   }, [slideIndex])
 
   return (

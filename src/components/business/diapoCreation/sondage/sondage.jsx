@@ -7,7 +7,6 @@ export const Sondage = () => {
   const { sondage, saveSondage, removeSondage } = useManageDiapo()
   const [sondageTemp, setSondageTemp] = useState(sondage)
   const isMobile = useIsMobile()
-  console.log(sondage)
 
   useEffect(() => {
     setSondageTemp(sondage)

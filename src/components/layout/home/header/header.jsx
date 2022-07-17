@@ -8,14 +8,14 @@ export const HeaderHome = () => {
     <header className="header">
       <nav>
         <img src="/assets/images/logo_blanc.png" alt="logo" />
-        {!userToken ? (
+        {userToken[0] ? (
+          <div className="user-space-button">
+            <a href="/managepdf">Votre espace</a>
+          </div>
+        ) : (
           <div>
             <a href="/signup">S'inscrire</a>
             <a href="/signin">Se connecter</a>
-          </div>
-        ) : (
-          <div className="user-space-button">
-            <a href="/managepdf">Votre espace</a>
           </div>
         )}
       </nav>

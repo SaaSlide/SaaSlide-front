@@ -14,7 +14,6 @@ export const SidebarMobile = () => {
 
   const handleCloseLinks = () => {
     setOpenLinks(false)
-    console.log('okkkkkk')
   }
 
   return (

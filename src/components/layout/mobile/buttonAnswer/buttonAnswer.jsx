@@ -39,7 +39,6 @@ export const ButtonAnswer = ({
         aria-hidden="true"
       >
         <p className="btn-answer-name">{option}</p>
-        {/* TODO: if result set % of responses here */}
       </div>
     </>
   )
