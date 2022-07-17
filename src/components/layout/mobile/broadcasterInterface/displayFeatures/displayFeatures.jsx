@@ -18,8 +18,6 @@ export const DisplayFeatures = ({
   surveyResponse,
   numberUser,
 }) => {
-  const [actualPage, setActualPage] = useState()
-
   const quizz = {
     color: '#3F53D9',
     title: 'quizz',
@@ -36,7 +34,6 @@ export const DisplayFeatures = ({
     <div>
       {diapoInfo && (
         <div>
-          <h1>{diapoInfo?.page}</h1>
           {diapoInfo?.notes && (
             <div>
               <h3>Notes :</h3>
