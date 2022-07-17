@@ -26,7 +26,7 @@ const SecondLayout = ({ children }) => {
       >
         {!isMobile && (
           <div className="buttonsContainer">
-            <a href="/diapo-list" className="buttonLeave">
+            <a href="/managepdf" className="buttonLeave">
               Quitter le projet
             </a>
             <a href={`/diapo/presentation/${diapo._id}`}>
@@ -110,7 +110,7 @@ const SecondLayout = ({ children }) => {
             </div>
             {isMobile && (
               <div className="buttonsContainerResponsive">
-                <a href="/diapo-list" className="buttonLeave">
+                <a href="/managepdf" className="buttonLeave">
                   Quitter le projet
                 </a>
               </div>
