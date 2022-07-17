@@ -11,7 +11,7 @@ export const DownloadPdf = ({ diapoPath, emoji = true }) => {
         <div className="dld-pdf-btn">
           <a
             className="btn-secondary-sm-outline"
-            href={`http://localhost:4000/${diapoPath}`}
+            href={`${process.env.REACT_APP_API_BASE_URL}/${diapoPath}`}
             download="Présentation"
             target="_blank"
             rel="noreferrer"

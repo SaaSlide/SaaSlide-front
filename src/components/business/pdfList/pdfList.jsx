@@ -76,7 +76,8 @@ export const PdfList = () => {
                       <img
                         className="diapoCover-img"
                         src={
-                          'http://localhost:4000/' +
+                          process.env.REACT_APP_API_BASE_URL +
+                          '/' +
                           diapo.infoDiapo[0].path.substring(2)
                         }
                         alt="Première page diaporama"
@@ -107,7 +108,8 @@ export const PdfList = () => {
                   <img
                     className="diapoCover-img"
                     src={
-                      'http://localhost:4000/' +
+                      process.env.REACT_APP_API_BASE_URL +
+                      '/' +
                       diapo.infoDiapo[0].path.substring(2)
                     }
                     alt="Première page diaporama"

@@ -6,7 +6,11 @@ export const SliderPresentation = ({ diapo }) => {
       {diapo.map((slide) => {
         const path = slide.path.replace('./', '')
         return (
-          <img key={slide._id} src={'http://localhost:4000/' + path} alt="" />
+          <img
+            key={slide._id}
+            src={process.env.REACT_APP_API_BASE_URL + '/' + path}
+            alt=""
+          />
         )
       })}
     </div>

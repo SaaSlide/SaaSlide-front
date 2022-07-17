@@ -5,7 +5,9 @@ export const QRCodePresentation = ({ id }) => {
   return (
     <div className="QRCodeContainer">
       <div className="QRCode">
-        <QRCode value={`http://localhost:3000/mobile/presentation/${id}`} />
+        <QRCode
+          value={`${process.env.REACT_APP_BASE_URL}/mobile/presentation/${id}`}
+        />
       </div>
       <p>Scanner le QR code pour suivre la présentation</p>
     </div>

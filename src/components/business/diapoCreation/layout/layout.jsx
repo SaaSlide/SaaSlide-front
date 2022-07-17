@@ -66,7 +66,7 @@ const SecondLayout = ({ children }) => {
                     <img
                       key={ind}
                       className="imgSlider"
-                      src={`${'http://localhost:4000'}/${path}`}
+                      src={`${process.env.REACT_APP_API_BASE_URL}/${path}`}
                       alt="slide"
                       style={{ transform: `translateX(-${100 * index}%)` }}
                     />
