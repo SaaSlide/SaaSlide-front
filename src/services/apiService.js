@@ -1,6 +1,5 @@
 import axios from 'axios'
-import { useState } from 'react'
-axios.defaults.baseURL = 'http://localhost:4000'
+axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL
 
 export const Register = (name, email, password) => {
   console.log(name, email, password)

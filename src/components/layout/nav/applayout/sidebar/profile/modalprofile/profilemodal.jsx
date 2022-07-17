@@ -152,7 +152,7 @@ export const ProfileModal = (props) => {
             >
               <img
                 onClick={() => props.closeModal(false)}
-                src="/assets/close.svg"
+                src="/assets/icons/close.svg"
                 alt="close"
                 aria-hidden="true"
               />
