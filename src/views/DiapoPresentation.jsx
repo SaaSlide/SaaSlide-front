@@ -10,9 +10,7 @@ export const DiapoPresentation = () => {
 
   return (
     <SocketProvider room={id} pseudo={'Bastian'}>
-      <React.StrictMode>
-        <ContentPresentation id={id} />
-      </React.StrictMode>
+      <ContentPresentation id={id} />
     </SocketProvider>
   )
 }

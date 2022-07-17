@@ -4,7 +4,7 @@ import { io } from 'socket.io-client'
 export const SocketContext = createContext({})
 
 const SocketProvider = ({ room, pseudo, children }) => {
-  const socket = io('http://localhost:4001/')
+  const socket = io(process.env.REACT_APP_SOCKET)
 
   const sio = {
     /**
@@ -71,13 +71,11 @@ const SocketProvider = ({ room, pseudo, children }) => {
   */
 
   useEffect(() => {
-    console.log('mount')
     socket.emit('join_room', room, (res) => {
       console.log(res.value)
     })
 
     return () => {
-      console.log('unmounb')
       socket.disconnect()
     }
   }, [sio])
