@@ -41,20 +41,11 @@ const Interface = () => {
           setSurveyId(currentSlide.surveys[0]._id)
           setSurveyName(currentSlide.surveys[0].name)
           setSurveyOptions(currentSlide.surveys[0].survey)
-        } else {
-          setSurveyId()
-          setSurveyName()
-          setSurveyOptions()
         }
         if (currentSlide.quizzs.length > 0) {
           setQuizzId(currentSlide.quizzs[0]._id)
-          console.log(currentSlide.quizzs[0]._id)
           setQuizzQuestion(currentSlide.quizzs[0].question)
           setQuizzOptions(currentSlide.quizzs[0].possibilities)
-        } else {
-          setQuizzId()
-          setQuizzQuestion()
-          setQuizzOptions()
         }
       }
     }
@@ -67,17 +58,28 @@ const Interface = () => {
   useEffect(() => {
     getDiapoInfo()
 
-    socket.on('get_slide', ({ action, value, prevSlide }) => {
+    const getSlide = ({ value, prevSlide }) => {
       setPageNumber(value + prevSlide)
-    })
+    }
+
+    socket.on('get_slide', getSlide)
 
     return () => {
-      socket.disconnect()
+      socket.off('get_slide', getSlide)
     }
   }, [diapoId])
 
   useEffect(() => {
     onNewSlide()
+
+    return () => {
+      setSurveyId()
+      setSurveyName()
+      setSurveyOptions()
+      setQuizzId()
+      setQuizzQuestion()
+      setQuizzOptions()
+    }
   }, [pageNumber])
 
   /* eslint-disable */

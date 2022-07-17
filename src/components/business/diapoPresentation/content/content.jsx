@@ -16,6 +16,18 @@ export const ContentPresentation = ({ id }) => {
   const [fullscreen, setFullscreen] = useState(false)
   const [index, setIndex] = useState(0)
   const [diapo, setDiapo] = useState([])
+
+  const [response, setResponse] = useState({
+    type: null, // null || "quizz" ||  "survey"
+    quizz: {
+      data: null,
+      open: true,
+    },
+    survey: {
+      data: null,
+      open: true,
+    },
+  })
   const [userToken] = useContext(TokenContext)
 
   useEffect(() => {
@@ -37,37 +49,73 @@ export const ContentPresentation = ({ id }) => {
   }, [userToken])
 
   useEffect(() => {
-    if (socket)
-      socket.on('get_slide', ({ value, prevSlide }) => {
-        setIndex(value + prevSlide)
-      })
-  }, [socket, index])
-
-  useEffect(() => {
-    if (diapo.length > 0) {
-      document.addEventListener('keyup', pressKey)
-
-      return () => document.removeEventListener('keyup', pressKey)
+    const refresh = ({ value, prevSlide }) => {
+      const newIndex = value + prevSlide
+      setIndex(newIndex)
+      if (
+        newIndex != 0 &&
+        (diapo[newIndex - 1].quizzs || diapo[newIndex - 1].surveys)
+      )
+        setResponse({
+          ...response,
+          quizz: {
+            ...response.quizz,
+            data: diapo[newIndex - 1].quizzs[0] || null,
+          },
+          survey: {
+            ...response.survey,
+            data: diapo[newIndex - 1].surveys[0] || null,
+          },
+        })
     }
-  }, [index, diapo.length])
+
+    socket.on('get_slide', refresh)
+
+    return () => socket.off('get_slide', refresh)
+  }, [socket, index, diapo, response])
 
   const pressKey = (e) => {
-    let newIndex
+    let newIndex = index
     switch (e.key) {
       case 'Escape':
         changeFullscreen()
         break
       case 'ArrowRight':
-        newIndex = index
         if (newIndex < diapo.length) {
           setIndex(newIndex + 1)
+          if (diapo[newIndex].quizzs || diapo[newIndex].surveys)
+            setResponse({
+              ...response,
+              quizz: {
+                ...response.quizz,
+                data: diapo[newIndex].quizzs[0] || null,
+              },
+              survey: {
+                ...response.survey,
+                data: diapo[newIndex].surveys[0] || null,
+              },
+            })
           sio.updateSlide('next', 1, newIndex)
         }
         break
       case 'ArrowLeft':
-        newIndex = index
         if (newIndex > 0) {
           setIndex(newIndex - 1)
+          if (
+            newIndex - 1 != 0 &&
+            (diapo[newIndex - 2].quizzs || diapo[newIndex - 2].surveys)
+          )
+            setResponse({
+              ...response,
+              quizz: {
+                ...response.quizz,
+                data: diapo[newIndex - 2].quizzs[0] || null,
+              },
+              survey: {
+                ...response.survey,
+                data: diapo[newIndex - 2].surveys[0] || null,
+              },
+            })
           sio.updateSlide('previous', -1, newIndex)
         }
         break
@@ -75,6 +123,14 @@ export const ContentPresentation = ({ id }) => {
         break
     }
   }
+
+  useEffect(() => {
+    if (diapo.length > 0) {
+      document.addEventListener('keyup', pressKey)
+
+      return () => document.removeEventListener('keyup', pressKey)
+    }
+  }, [index, diapo.length, response])
 
   const changeFullscreen = () => {
     const { current } = ref
@@ -87,6 +143,57 @@ export const ContentPresentation = ({ id }) => {
     }
   }
 
+  const updateModal = ({ slide, type, choice }) => {
+    if (index === slide) {
+      let newDiapo = [...diapo]
+      if (type === 'quizz') {
+        newDiapo[slide - 1].quizzs[0].possibilities[choice - 1].count++
+        setResponse({
+          ...response,
+          quizz: { ...response.quizz, data: newDiapo[slide - 1].quizzs[0] },
+        })
+      } else {
+        newDiapo[slide - 1].surveys[0].survey[choice - 1].count++
+        setResponse({
+          ...response,
+          survey: { ...response.survey, data: newDiapo[slide - 1].surveys[0] },
+        })
+      }
+      setDiapo(newDiapo)
+    }
+  }
+
+  const updateParams = ({ type, display, open }) => {
+    if (type === 'quizz') {
+      setResponse({
+        ...response,
+        type: display ? type : null,
+        quizz: {
+          ...response.quizz,
+          open,
+        },
+      })
+    } else {
+      setResponse({
+        ...response,
+        type: display ? type : null,
+        quizz: {
+          ...response.quizz,
+          open,
+        },
+      })
+    }
+  }
+
+  useEffect(() => {
+    socket.on('get_response', updateModal)
+    socket.on('get_params', updateParams)
+    return () => {
+      socket.off('get_response', updateModal)
+      socket.off('get_params', updateParams)
+    }
+  }, [diapo, index, socket, response])
+
   return (
     diapo && (
       <div ref={ref} className="containerDiapoPres">
@@ -94,26 +201,25 @@ export const ContentPresentation = ({ id }) => {
           <img src="/assets/icons/fullscreen.svg" alt="fullscreen icon" />
         </button>
         <FloatSmiley />
-
         {index === 0 ? (
           <QRCodePresentation id={id} />
         ) : (
           <>
-            {diapo[index - 1].quizzs.length > 0 && (
+            {response.type && (
               <ResponsePercents
-                index={index}
-                resType="quizz"
-                data={diapo[index - 1].quizzs[0]}
+                type={response.type}
+                data={
+                  response.type === 'quizz'
+                    ? response.quizz.data
+                    : response.survey.data
+                }
+                open={
+                  response.type === 'quizz'
+                    ? response.quizz.open
+                    : response.survey.open
+                }
               />
             )}
-
-            {/* {diapo[index - 1].surveys.length > 0 && (
-              <ResponsePercents
-                index={index}
-                resType="survey"
-                data={diapo[index - 1].surveys[0]}
-              />
-            )} */}
             <SliderPresentation diapo={diapo} />
           </>
         )}

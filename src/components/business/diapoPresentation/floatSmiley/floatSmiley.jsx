@@ -71,17 +71,14 @@ export const FloatSmiley = () => {
 
     draw()
 
-    socket.on('get_smiley', (smiley) => {
+    const getSmiley = (smiley) => {
       emojis.push(new randomReaction(smiley))
-    })
-  }, [])
+    }
 
-  document.addEventListener('fullscreenchange', () => {
-    w = window.innerWidth
-    h = window.innerHeight
-    canvas.width = w
-    canvas.height = h
-  })
+    socket.on('get_smiley', getSmiley)
+
+    return () => socket.off('get_smiley', getSmiley)
+  }, [socket])
 
   return (
     <canvas ref={ref} id="canvas-smiley" className="canvas-smiley"></canvas>

@@ -74,7 +74,6 @@ export const SignUp = () => {
   }
 
   const handleSubmit = async (e) => {
-    console.log('submit')
     e.preventDefault()
     let registerResponse = await Register(
       e.target[0].value,

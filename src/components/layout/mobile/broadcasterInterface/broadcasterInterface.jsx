@@ -14,7 +14,7 @@ import { DisplayFeatures } from './displayFeatures/displayFeatures'
 export const BroadcasterInterface = () => {
   const [slideIndex, setSlideIndex] = useState(0)
   const [questions, setQuestions] = useState([])
-  const [numberUser, SetNumberUser] = useState()
+  const [numberUser, setNumberUser] = useState()
   const [diapo, setDiapo] = useState()
   const { socket, diapoId } = useContext(SocketContext)
   const [quizzQuestion, setQuizzQuestion] = useState()
@@ -26,64 +26,75 @@ export const BroadcasterInterface = () => {
   const [surveyResponse, setSurveyResponse] = useState([])
   const [surveyId, setSurveyId] = useState()
 
-  const fill = (element) => {
-    setQuestions([element, ...questions])
-  }
-
   const getDiapoInfo = async () => {
     const response = await GetDiapoById(diapoId)
     setDiapo(response)
   }
 
   const onNewSlide = () => {
+    setSurveyId((surveyId) => (surveyId = ''))
+    setQuizzId((quizzId) => (quizzId = ''))
     if (diapo && slideIndex >= 1 && diapo?.infoDiapo.length) {
       let currentSlide = diapo.infoDiapo[slideIndex - 1]
       if (currentSlide.surveys.length > 0) {
         setSurveyId(currentSlide.surveys[0]._id)
         setSurveyQuestion(currentSlide.surveys[0].name)
         setSurveyOptions(currentSlide.surveys[0].survey)
-      } else {
-        setSurveyId()
-        setSurveyQuestion()
-        setSurveyOptions()
       }
       if (currentSlide.quizzs.length > 0) {
         setQuizzId(currentSlide.quizzs[0]._id)
         setQuizzQuestion(currentSlide.quizzs[0].question)
         setQuizzOptions(currentSlide.quizzs[0].possibilities)
-      } else {
-        setQuizzId()
-        setQuizzQuestion()
-        setQuizzOptions()
       }
     }
+  }
+
+  const fill = (element) => {
+    setQuestions([element, ...questions])
+  }
+
+  const getQuestion = ({ pseudo, question }) => {
+    setQuestions([{ text: `${pseudo} : ${question}`, me: false }, ...questions])
   }
 
   useEffect(() => {
     getDiapoInfo()
 
-    socket.on('get_question', ({ pseudo, question }) => {
-      fill({ text: `${pseudo} : ${question}`, me: false })
-    })
+    socket.on('get_question', getQuestion)
 
-    socket.on('update_number_user', (res) => SetNumberUser(res))
+    const setNumUser = (data) => {
+      setNumberUser(data)
+    }
 
+    socket.on('update_number_user', setNumUser)
+
+    return () => {
+      socket.off('get_question', getQuestion)
+      socket.off('update_number_user', setNumUser)
+    }
+  }, [diapoId, socket, questions])
+
+  useEffect(() => {
     socket.on('get_response', ({ slide, type, id, choice }) => {
       if (type === 'survey') {
-        setSurveyResponse([...surveyResponse, choice])
+        let surveyDataset = [...surveyResponse]
+        surveyDataset.push(choice)
+        setSurveyResponse(surveyDataset)
       } else if (type === 'quizz') {
-        setQuizzResponse([...quizzResponse, choice])
+        let quizzDataset = [...quizzResponse]
+        quizzDataset.push(choice)
+        setQuizzResponse(quizzDataset)
       }
-      console.log(surveyResponse, quizzResponse)
     })
-
-    return () => socket.disconnect()
-  }, [diapoId])
+  }, [surveyResponse, quizzResponse])
 
   useEffect(() => {
     onNewSlide()
-    setSurveyResponse()
-    setQuizzResponse()
+
+    return () => {
+      setSurveyResponse([])
+      setQuizzResponse([])
+    }
   }, [slideIndex])
 
   return (

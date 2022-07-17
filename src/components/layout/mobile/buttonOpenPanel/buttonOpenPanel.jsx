@@ -14,7 +14,7 @@ export const ButtonOpenPanel = ({
   const [isButtonSelected, setIsButtonSelected] = useState()
 
   const [isFeatureOpen, setIsFeatureOpen] = useState()
-  const { socket, diapoId } = useContext(SocketContext)
+  const { socket } = useContext(SocketContext)
 
   useEffect(() => {
     setIsButtonSelected()
@@ -22,22 +22,26 @@ export const ButtonOpenPanel = ({
   }, [pageNumber])
 
   useEffect(() => {
-    socket.on('get_params', ({ slide, type, id, display, open }) => {
+    const getParams = ({ id, display, open }) => {
       if (interactId === id) {
-        setIsFeatureOpen(open)
+        setIsFeatureOpen(display && open)
+        if (!open) {
+          setIsAnswerModalShown(false)
+        }
       }
-    })
+    }
+    socket.on('get_params', getParams)
 
     return () => {
-      socket.off('get_params')
+      socket.off('get_params', getParams)
     }
-  }, [diapoId])
+  }, [interactId])
 
   return (
     <>
       {(isFeatureOpen && type === 'survey' && (
         <div
-          onClick={() => setIsAnswerModalShown(true)}
+          onClick={isFeatureOpen ? () => setIsAnswerModalShown(true) : ''}
           aria-hidden="true"
           className="bop bop-survey"
         >
@@ -51,7 +55,7 @@ export const ButtonOpenPanel = ({
       )) ||
         (isFeatureOpen && type === 'quizz' && (
           <div
-            onClick={() => setIsAnswerModalShown(true)}
+            onClick={isFeatureOpen ? () => setIsAnswerModalShown(true) : ''}
             aria-hidden="true"
             className="bop bop-quizz"
           >

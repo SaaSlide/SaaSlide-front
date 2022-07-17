@@ -16,8 +16,8 @@ export const BroadcasterLogin = () => {
     e.preventDefault()
     const loginResponse = await Login(emailValue, passwordValue)
     if (loginResponse.status === 200) {
-      console.log('connected as admin')
       navigate(`/mobile/broadcasterPage/interface/${params.diapoId}`, {
+        name: emailValue.split('@')[0],
         replace: true,
       })
     } else {

@@ -4,8 +4,10 @@ import { AddNewPdf } from '../../../services/apiService'
 import Button from '../../layout/button/button'
 import './importPdf.scss'
 import { useIsMobile } from '../../../utils/hooks'
+import { useNavigate } from 'react-router-dom'
 
 export const ImportPdf = () => {
+  const navigate = useNavigate()
   let userToken = useContext(TokenContext)
   let [pdfName, setPdfName] = useState('')
   let [errorOnImport, setErrorOnImport] = useState('')
@@ -29,12 +31,7 @@ export const ImportPdf = () => {
       e.target.children[0].firstChild.firstChild.files[0],
     )
     if (addNewPdfResponse.status === 200) {
-      // TODO: reload pdf list
-      console.log(addNewPdfResponse)
-      setPdfName('Fichier importé !')
-    } else {
-      // TODO: state for display error
-      console.log(addNewPdfResponse)
+      navigate(`/diapo/create/${addNewPdfResponse.data.id}`)
     }
   }
 

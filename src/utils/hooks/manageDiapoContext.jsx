@@ -76,7 +76,7 @@ function useProvideManageDiapo() {
         })
         checkExistence(res.data)
       } catch (error) {
-        console.log(error)
+        return error
       }
     }
     if (userToken) fetchData()
@@ -165,7 +165,7 @@ function useProvideManageDiapo() {
         draggable: true,
         progress: undefined,
       })
-      console.log(error)
+      return error
     }
   }
   const removeSondage = async (id) => {
@@ -199,12 +199,11 @@ function useProvideManageDiapo() {
         draggable: true,
         progress: undefined,
       })
-      console.log(error)
+      return error
     }
   }
 
   const saveQuizz = async (body) => {
-    console.log(body)
     if (body.length < 2) {
       toast.warn('Veuillez au moins ajoutez 2 propositions', {
         position: 'bottom-center',
@@ -236,7 +235,6 @@ function useProvideManageDiapo() {
           },
         )
       }
-      console.log(res.data)
 
       updateDiapo('quizzs', res.data)
 
@@ -259,7 +257,6 @@ function useProvideManageDiapo() {
         draggable: true,
         progress: undefined,
       })
-      console.log(error)
     }
   }
   const removeQuizz = async (id) => {
@@ -293,7 +290,6 @@ function useProvideManageDiapo() {
         draggable: true,
         progress: undefined,
       })
-      console.log(error)
     }
   }
   const removeNote = async (id) => {
@@ -327,7 +323,6 @@ function useProvideManageDiapo() {
         draggable: true,
         progress: undefined,
       })
-      console.log(error)
     }
   }
   const saveNote = async (body) => {
@@ -372,7 +367,6 @@ function useProvideManageDiapo() {
         draggable: true,
         progress: undefined,
       })
-      console.log(error)
     }
   }
   const saveParams = async (body) => {
@@ -408,7 +402,6 @@ function useProvideManageDiapo() {
         draggable: true,
         progress: undefined,
       })
-      console.log(error)
     }
   }
   return {

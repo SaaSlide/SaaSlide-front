@@ -15,20 +15,23 @@ export const FeatureModal = ({
   numberUser,
 }) => {
   const [displayFeature, setDisplayFeature] = useState(false)
+  const [openFeature, setOpenFeature] = useState(true)
   const { sio } = useContext(SocketContext)
 
-  const showFeature = () => {
+  const diplay = () => {
+    sio.sendParams(
+      slideIndex,
+      type.title,
+      featureId,
+      !displayFeature,
+      openFeature,
+    )
     setDisplayFeature(!displayFeature)
-    sio.sendParams(slideIndex, type.title, featureId, true, false)
   }
 
-  const hideFeature = () => {
-    setDisplayFeature(!displayFeature)
-    sio.sendParams(slideIndex, type.title, featureId, false, false)
-  }
-
-  const closeFeature = () => {
-    sio.sendParams(slideIndex, type.title, featureId, false, false)
+  const close = () => {
+    sio.sendParams(slideIndex, type.title, featureId, displayFeature, false)
+    setOpenFeature(false)
   }
 
   // prettier-ignore
@@ -43,6 +46,7 @@ export const FeatureModal = ({
         {options &&
           options.map((option, index) => (
             <div key={index}>
+              <p>{option.choice ? option.choice : option.proposition}</p>
               <ProgressBar
                 width="70vw"
                 height="5vh"
@@ -58,37 +62,27 @@ export const FeatureModal = ({
                     ? numberResponse.filter((item) => item === index + 1).length
                     : 0
                 }
-                numberSpec={numberUser}
+                numberSpec={numberResponse.length}
               />
-              <p>{option.choice ? option.choice : option.proposition}</p>
             </div>
           ))}
-        <div>
+        {/* <div>
           <p>
             Participation total : {numberResponse}/{numberUser}
           </p>
-        </div>
+        </div> */}
       </div>
       <div>
-        {displayFeature ? (
           <Button
             type="button"
             className="btn-secondary"
-            onClick={() => showFeature()}
-            title="Afficher le sondage"
+            onClick={() => diplay()}
+            title={(displayFeature ? "Masquer le " : "Afficher le ") + `${type.title === "quizz" ? "quizz" : "sondage"}`}
           />
-        ) : (
-          <Button
-            type="button"
-            className="btn-primary"
-            onClick={() => hideFeature()}
-            title="Fermer le sondage"
-          />
-        )}
         <Button
-          title="Arrêter le sondage"
-          className="btn-danger-outline"
-          onClick={() => closeFeature()}
+          title={"Arrêter le "+`${type.title === "quizz" ? "quizz" : "sondage"}`}
+          className={`btn-danger-outline ${!openFeature ? "disabled" : ""}`}
+          onClick={() => close()}
         />
       </div>
     </div>

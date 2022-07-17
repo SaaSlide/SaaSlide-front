@@ -1,6 +1,9 @@
 import './presentation.scss'
+import { TokenContext } from '../../../../App'
+import { useContext } from 'react'
 
 export const PresentationHome = () => {
+  let userToken = useContext(TokenContext)
   return (
     <section className="sectionPres">
       <div className="wrap">
@@ -21,7 +24,9 @@ export const PresentationHome = () => {
           Des présentations captivante, efficace et innovante Commencer à créer
           votre présentation
         </h5>
-        <a href="/managepdf">Je créer ma présentation</a>
+        <a href={userToken[0] ? '/managepdf' : '/signup'}>
+          Je veux créer ma présentation
+        </a>
       </div>
     </section>
   )

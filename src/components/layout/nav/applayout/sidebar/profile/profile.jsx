@@ -18,7 +18,7 @@ export const Profile = () => {
 
   useEffect(() => {
     getUserInfo()
-  }, [])
+  }, [userToken])
 
   return (
     <div>
