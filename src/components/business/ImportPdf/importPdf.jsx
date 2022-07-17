@@ -31,7 +31,6 @@ export const ImportPdf = () => {
       e.target.children[0].firstChild.firstChild.files[0],
     )
     if (addNewPdfResponse.status === 200) {
-      console.log(addNewPdfResponse.data.id)
       navigate(`/diapo/create/${addNewPdfResponse.data.id}`)
     }
   }

@@ -153,7 +153,6 @@ export const ContentPresentation = ({ id }) => {
           quizz: { ...response.quizz, data: newDiapo[slide - 1].quizzs[0] },
         })
       } else {
-        console.log(newDiapo)
         newDiapo[slide - 1].surveys[0].survey[choice - 1].count++
         setResponse({
           ...response,

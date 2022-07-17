@@ -1,7 +1,6 @@
 import './response.scss'
 
 export const ResponsePercents = ({ type, data, open }) => {
-  console.log(data)
   return (
     <div className="responsePercents" style={{ opacity: 1 }}>
       <p className="title">{data.name}</p>

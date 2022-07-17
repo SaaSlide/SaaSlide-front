@@ -17,7 +17,6 @@ export const Profile = () => {
   }
 
   useEffect(() => {
-    console.log(TokenContext)
     getUserInfo()
   }, [userToken])
 
