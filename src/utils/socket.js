@@ -6,19 +6,6 @@ export const SocketContext = createContext({})
 const SocketProvider = ({ room, pseudo, children }) => {
   const socket = io('http://localhost:4001/')
 
-  /**
-  To get the number of clients connected to the room
-  socket.on('update_number_user', (res) =>
-    console.log(`${res} personne connecté à la session`),
-  )
-  */
-
-  useEffect(() => {
-    socket.emit('join_room', room, (res) => {
-      console.log(res.value)
-    })
-  }, [])
-
   const sio = {
     /**
      * Sending to all clients in room except sender
@@ -29,7 +16,7 @@ const SocketProvider = ({ room, pseudo, children }) => {
      * @param {number} prevSlide - previous slide number
      */
     updateSlide: (action, value, prevSlide) => {
-      socket.emit('update_slide', { room, action, value, prevSlide })
+      socket.emit('update_slide', { action, value, prevSlide })
     },
     /**
      * Sending to all clients in room except sender
@@ -38,7 +25,7 @@ const SocketProvider = ({ room, pseudo, children }) => {
      * @param {string} question
      */
     sendQuestion: (question) => {
-      socket.emit('send_question', { room, pseudo, question })
+      socket.emit('send_question', { pseudo, question })
     },
     /**
      * Sending to all clients in room except sender
@@ -51,7 +38,7 @@ const SocketProvider = ({ room, pseudo, children }) => {
      * @param {boolean} open
      */
     sendParams: (slide, type, id, display, open) => {
-      socket.emit('send_params', { room, slide, type, id, display, open })
+      socket.emit('send_params', { slide, type, id, display, open })
     },
     /**
      * Sending to all clients in room except sender
@@ -63,7 +50,7 @@ const SocketProvider = ({ room, pseudo, children }) => {
      * @param {string|number} choice
      */
     sendResponse: (slide, type, id, choice) => {
-      socket.emit('send_response', { room, slide, type, id, choice })
+      socket.emit('send_response', { slide, type, id, choice })
     },
     /**
      * Sending to all clients in room includes sender
@@ -72,9 +59,28 @@ const SocketProvider = ({ room, pseudo, children }) => {
      * @param {string} smiley
      */
     sendSmiley: (smiley) => {
-      socket.emit('send_smiley', { room, smiley })
+      socket.emit('send_smiley', smiley)
     },
   }
+
+  /**
+  To get the number of clients connected to the room
+  socket.on('update_number_user', (res) =>
+    console.log(`${res} personne connecté à la session`),
+  )
+  */
+
+  useEffect(() => {
+    console.log('mount')
+    socket.emit('join_room', room, (res) => {
+      console.log(res.value)
+    })
+
+    return () => {
+      console.log('unmounb')
+      socket.disconnect()
+    }
+  }, [sio])
 
   return (
     <SocketContext.Provider value={{ socket, sio, pseudo, diapoId: room }}>
