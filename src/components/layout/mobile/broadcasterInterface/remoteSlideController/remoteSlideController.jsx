@@ -12,7 +12,6 @@ export const RemoteSlideController = ({
   useEffect(() => {
     socket.on('get_slide', ({ value, prevSlide }) => {
       let newSlideIndex = prevSlide + value
-      console.log('proc', newSlideIndex)
       setSlideIndex(newSlideIndex)
     })
 

@@ -26,7 +26,6 @@ export const PdfList = () => {
   }
 
   const deleteDiapo = async (diapoId) => {
-    console.log(diapoId)
     const deleteResponse = await DeleteDiapoById(userToken, diapoId)
 
     if (deleteResponse) {

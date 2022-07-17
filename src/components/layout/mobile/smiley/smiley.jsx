@@ -22,7 +22,6 @@ const Smiley = () => {
   ]
 
   const send = (e) => {
-    console.log('envoi')
     sio.sendSmiley(e.target.innerHTML)
   }
 

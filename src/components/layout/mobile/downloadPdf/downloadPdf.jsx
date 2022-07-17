@@ -3,7 +3,6 @@ import Smiley from '../smiley/smiley'
 import './downloadPdf.scss'
 
 export const DownloadPdf = ({ diapoPath, emoji = true }) => {
-  // give info to emoji modal if they are available
   return (
     <>
       <div className="dld-pdf">

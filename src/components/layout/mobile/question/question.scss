@@ -23,7 +23,8 @@
     margin-top: 30px;
     font-weight: 500;
     max-height: calc(100% - 156px - 30px);
-    overflow: scroll;
+    overflow-y: auto;
+    overflow-x: hidden;
 
     p.me {
       color: $color-primary;

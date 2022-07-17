@@ -12,8 +12,6 @@ export const Quizz = () => {
     setQuizzTemp(quizz)
   }, [quizz])
 
-  console.log(quizzTemp)
-
   const addProposition = () => {
     const newQuizz = { ...quizzTemp }
     newQuizz.possibilities.push({ choice: 'Nouveau choix', answer: false })
@@ -41,8 +39,6 @@ export const Quizz = () => {
     newQuizz.possibilities[index].answer = value
     setQuizzTemp(newQuizz)
   }
-
-  console.log(quizzTemp)
 
   return (
     <LayoutWindow

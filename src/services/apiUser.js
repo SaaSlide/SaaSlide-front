@@ -11,20 +11,16 @@ export const GetUserProfile = (userToken) => {
       headers: headers,
     })
     .then((res) => {
-      console.log(res)
       return res.data
     })
     .catch((err) => {
-      console.log(err)
       return err
     })
 }
 
 export const UpdateUserProfile = (userToken, name, mail, picture, password) => {
-  console.log(userToken)
   // prettier-ignore
   const headers = {
-    //'Content-Type': 'multipart/form-data',
     'Authorization': `Bearer ${userToken}`
   }
   const formData = new FormData()
@@ -33,7 +29,6 @@ export const UpdateUserProfile = (userToken, name, mail, picture, password) => {
   return axios
     .put(
       '/api/user/profile',
-      //formData,
       {
         name: name,
         mail: mail,
@@ -44,11 +39,9 @@ export const UpdateUserProfile = (userToken, name, mail, picture, password) => {
       },
     )
     .then((res) => {
-      console.log(res)
       return res
     })
     .catch((err) => {
-      console.log(err)
       return err
     })
 }
@@ -64,11 +57,9 @@ export const DeleteUserProfile = (userToken, idUser) => {
       },
     })
     .then((res) => {
-      console.log(res)
       return res
     })
     .catch((err) => {
-      console.log(err)
       return err
     })
 }
@@ -77,11 +68,9 @@ export const DeleteCookie = () => {
   return axios
     .get('/delete-cookie', {})
     .then((res) => {
-      console.log(res)
       return res
     })
     .catch((err) => {
-      console.log(err)
       return err
     })
 }

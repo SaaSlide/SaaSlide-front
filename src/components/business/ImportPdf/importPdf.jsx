@@ -28,14 +28,6 @@ export const ImportPdf = () => {
       userToken,
       e.target.children[0].firstChild.firstChild.files[0],
     )
-    if (addNewPdfResponse.status === 200) {
-      // TODO: reload pdf list
-      console.log(addNewPdfResponse)
-      setPdfName('Fichier importé !')
-    } else {
-      // TODO: state for display error
-      console.log(addNewPdfResponse)
-    }
   }
 
   return (
