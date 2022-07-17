@@ -28,14 +28,14 @@ export const SondageHome = () => {
       description:
         'L’audience dispose d’un chat qui lui permets d’intéragir en direct avec le présentateur et le reste de l’audience de manière anonyme. Le chat est une option désactivable par le présentateur durant la création de sa présentation.',
 
-      assetSrc: '/assets/images/iphone2.png',
+      assetSrc: '/assets/images/iphone3.png',
     },
     {
       title: 'Emojis',
       description:
         'Le public pourra, si il le souhaite, envoyer des émojis qui seront visible par tous durant une présentation. Cette fonction est un moyen ludique et simple pour communiquer avec l’audience et le présentateur. C’est une fonction optionnel qui pourra être désactiver par le présentateur si il le souhaite.',
 
-      assetSrc: '/assets/images/iphone2.png',
+      assetSrc: '/assets/images/iphone4.png',
     },
   ]
 
