@@ -36,25 +36,19 @@ export const BroadcasterInterface = () => {
   }
 
   const onNewSlide = () => {
+    setSurveyId((surveyId) => (surveyId = ''))
+    setQuizzId((quizzId) => (quizzId = ''))
     if (diapo && slideIndex >= 1 && diapo?.infoDiapo.length) {
       let currentSlide = diapo.infoDiapo[slideIndex - 1]
       if (currentSlide.surveys.length > 0) {
         setSurveyId(currentSlide.surveys[0]._id)
         setSurveyQuestion(currentSlide.surveys[0].name)
         setSurveyOptions(currentSlide.surveys[0].survey)
-      } else {
-        setSurveyId()
-        setSurveyQuestion()
-        setSurveyOptions()
       }
       if (currentSlide.quizzs.length > 0) {
         setQuizzId(currentSlide.quizzs[0]._id)
         setQuizzQuestion(currentSlide.quizzs[0].question)
         setQuizzOptions(currentSlide.quizzs[0].possibilities)
-      } else {
-        setQuizzId()
-        setQuizzQuestion()
-        setQuizzOptions()
       }
     }
   }

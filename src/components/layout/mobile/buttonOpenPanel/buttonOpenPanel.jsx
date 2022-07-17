@@ -22,16 +22,17 @@ export const ButtonOpenPanel = ({
   }, [pageNumber])
 
   useEffect(() => {
-    socket.on('get_params', ({ slide, type, id, display, open }) => {
+    const getParams = ({ slide, type, id, display, open }) => {
       if (interactId === id) {
         setIsFeatureOpen(open)
       }
-    })
+    }
+    socket.on('get_params', getParams)
 
     return () => {
-      socket.off('get_params')
+      socket.off('get_params', getParams)
     }
-  }, [diapoId])
+  }, [interactId])
 
   return (
     <>
