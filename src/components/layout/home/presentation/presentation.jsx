@@ -11,8 +11,8 @@ export const PresentationHome = () => {
         <div className="btnTextContainer">
           <h5>Créer votre présentation rapidement </h5>
           <div className="btnContainer">
-            <button>Création</button>
-            <button className="btnPres">Présentation</button>
+            <a href="/managepdf">Création</a>
+            <a className="btnPres">Présentation</a>
           </div>
         </div>
       </div>
@@ -21,7 +21,7 @@ export const PresentationHome = () => {
           Des présentations captivante, efficace et innovante Commencer à créer
           votre présentation
         </h5>
-        <button>Je créer ma présentation</button>
+        <a href="/managepdf">Je créer ma présentation</a>
       </div>
     </section>
   )
