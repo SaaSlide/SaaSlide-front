@@ -9,7 +9,7 @@ export const DiapoPresentation = () => {
   const id = location.pathname.replace('/diapo/presentation/', '')
 
   return (
-    <SocketProvider room={id} pseudo={'Bastian'}>
+    <SocketProvider room={id} pseudo={'Présentateur'}>
       <ContentPresentation id={id} />
     </SocketProvider>
   )
