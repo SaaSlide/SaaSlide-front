@@ -18,15 +18,7 @@ const RoutesApp = () => {
       <Route path="/signin" element={<SignIn />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/" element={<Home />} />
-      <Route
-        path="/diapo-list"
-        element={
-          <>
-            <ImportPdf />
-            <PdfList />
-          </>
-        }
-      ></Route>
+
       <Route path="/diapo/create/:id" element={<DiapoCreation />}></Route>
       <Route
         path="/diapo/presentation/:id"
