@@ -16,7 +16,18 @@ export const ContentPresentation = ({ id }) => {
   const [fullscreen, setFullscreen] = useState(false)
   const [index, setIndex] = useState(0)
   const [diapo, setDiapo] = useState([])
-  const [quizz, setQuizz] = useState(null)
+
+  const [response, setResponse] = useState({
+    type: null, // null || "quizz" ||  "survey"
+    quizz: {
+      data: null,
+      open: true,
+    },
+    survey: {
+      data: null,
+      open: true,
+    },
+  })
   const [userToken] = useContext(TokenContext)
 
   useEffect(() => {
@@ -41,13 +52,27 @@ export const ContentPresentation = ({ id }) => {
     const refresh = ({ value, prevSlide }) => {
       const newIndex = value + prevSlide
       setIndex(newIndex)
-      if (diapo[newIndex - 1].quizzs[0]) setQuizz(diapo[newIndex - 1].quizzs[0])
+      if (
+        newIndex != 0 &&
+        (diapo[newIndex - 1].quizzs || diapo[newIndex - 1].surveys)
+      )
+        setResponse({
+          ...response,
+          quizz: {
+            ...response.quizz,
+            data: diapo[newIndex - 1].quizzs[0] || null,
+          },
+          survey: {
+            ...response.survey,
+            data: diapo[newIndex - 1].surveys[0] || null,
+          },
+        })
     }
 
     socket.on('get_slide', refresh)
 
     return () => socket.off('get_slide', refresh)
-  }, [socket, index, diapo])
+  }, [socket, index, diapo, response])
 
   const pressKey = (e) => {
     let newIndex = index
@@ -58,15 +83,39 @@ export const ContentPresentation = ({ id }) => {
       case 'ArrowRight':
         if (newIndex < diapo.length) {
           setIndex(newIndex + 1)
-          if (diapo[newIndex].quizzs[0]) setQuizz(diapo[newIndex].quizzs[0])
+          if (diapo[newIndex].quizzs || diapo[newIndex].surveys)
+            setResponse({
+              ...response,
+              quizz: {
+                ...response.quizz,
+                data: diapo[newIndex].quizzs[0] || null,
+              },
+              survey: {
+                ...response.survey,
+                data: diapo[newIndex].surveys[0] || null,
+              },
+            })
           sio.updateSlide('next', 1, newIndex)
         }
         break
       case 'ArrowLeft':
         if (newIndex > 0) {
           setIndex(newIndex - 1)
-          if (diapo[newIndex - 2].quizzs[0])
-            setQuizz(diapo[newIndex - 2].quizzs[0])
+          if (
+            newIndex - 1 != 0 &&
+            (diapo[newIndex - 2].quizzs || diapo[newIndex - 2].surveys)
+          )
+            setResponse({
+              ...response,
+              quizz: {
+                ...response.quizz,
+                data: diapo[newIndex - 2].quizzs[0] || null,
+              },
+              survey: {
+                ...response.survey,
+                data: diapo[newIndex - 2].surveys[0] || null,
+              },
+            })
           sio.updateSlide('previous', -1, newIndex)
         }
         break
@@ -81,7 +130,7 @@ export const ContentPresentation = ({ id }) => {
 
       return () => document.removeEventListener('keyup', pressKey)
     }
-  }, [index, diapo.length])
+  }, [index, diapo.length, response])
 
   const changeFullscreen = () => {
     const { current } = ref
@@ -95,38 +144,56 @@ export const ContentPresentation = ({ id }) => {
   }
 
   const updateModal = ({ slide, type, choice }) => {
-    console.group('In Update Modal')
-    console.log('Verif Slide', index, '?=', slide)
     if (index === slide) {
-      console.log('Good Slide')
+      let newDiapo = [...diapo]
       if (type === 'quizz') {
-        console.group('Quizz')
-        console.log('Choice Received', choice)
-        let newDiapo = [...diapo]
         newDiapo[slide - 1].quizzs[0].possibilities[choice - 1].count++
-        console.log('Quizz After Update', newDiapo[slide - 1].quizzs[0])
-        setQuizz(newDiapo[slide - 1].quizzs[0])
-        setDiapo(newDiapo)
+        setResponse({
+          ...response,
+          quizz: { ...response.quizz, data: newDiapo[slide - 1].quizzs[0] },
+        })
       } else {
-        // const newSurvey = { ...tempData }
-        // const indexToUpdate = newSurvey.survey.findIndex(
-        //   (possi) => possi.possibilitie === choice,
-        // )
-        // newSurvey.survey[indexToUpdate].count++
-        // setNbAnswers(nbAnswers + 1)
-        // setTempData(newSurvey)
+        console.log(newDiapo)
+        newDiapo[slide - 1].surveys[0].survey[choice - 1].count++
+        setResponse({
+          ...response,
+          survey: { ...response.survey, data: newDiapo[slide - 1].surveys[0] },
+        })
       }
+      setDiapo(newDiapo)
     }
-    console.groupEnd()
-    console.groupEnd()
+  }
+
+  const updateParams = ({ type, display, open }) => {
+    if (type === 'quizz') {
+      setResponse({
+        ...response,
+        type: display ? type : null,
+        quizz: {
+          ...response.quizz,
+          open,
+        },
+      })
+    } else {
+      setResponse({
+        ...response,
+        type: display ? type : null,
+        quizz: {
+          ...response.quizz,
+          open,
+        },
+      })
+    }
   }
 
   useEffect(() => {
     socket.on('get_response', updateModal)
+    socket.on('get_params', updateParams)
     return () => {
       socket.off('get_response', updateModal)
+      socket.off('get_params', updateParams)
     }
-  }, [diapo, index, socket])
+  }, [diapo, index, socket, response])
 
   return (
     diapo && (
@@ -139,15 +206,21 @@ export const ContentPresentation = ({ id }) => {
           <QRCodePresentation id={id} />
         ) : (
           <>
-            {quizz && <ResponsePercents type="quizz" data={quizz} />}
-
-            {/* {diapo[index - 1].surveys.length > 0 && (
+            {response.type && (
               <ResponsePercents
-                index={index}
-                resType="survey"
-                data={diapo[index - 1].surveys[0]}
+                type={response.type}
+                data={
+                  response.type === 'quizz'
+                    ? response.quizz.data
+                    : response.survey.data
+                }
+                open={
+                  response.type === 'quizz'
+                    ? response.quizz.open
+                    : response.survey.open
+                }
               />
-            )} */}
+            )}
             <SliderPresentation diapo={diapo} />
           </>
         )}
