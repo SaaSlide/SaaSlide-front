@@ -97,6 +97,8 @@ export const BroadcasterInterface = () => {
     }
   }, [slideIndex])
 
+  console.log(diapo)
+
   return (
     <>
       <TopNav specCount={numberUser} diapoId={diapoId} />
@@ -120,7 +122,9 @@ export const BroadcasterInterface = () => {
           numberUser={numberUser}
         />
       </div>
-      <Question viewer={false} questions={questions} setQuestions={fill} />
+      {diapo?.sendAnswer && (
+        <Question viewer={false} questions={questions} setQuestions={fill} />
+      )}
     </>
   )
 }

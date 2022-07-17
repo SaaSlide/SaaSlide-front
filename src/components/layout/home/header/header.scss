@@ -1,4 +1,4 @@
-@use '../../../../assets/styles/variable.scss' as var;
+@use '../../../../assets/styles/variables.scss' as var;
 @use '../../../../assets/styles/mixin.scss' as mix;
 @import '../../../../assets/styles/variables.scss';
 .header {
@@ -143,8 +143,8 @@
     }
   }
 
-  .user-space-button{
-    background-color: $color-primary; 
+  .user-space-button {
+    background-color: $color-primary;
     border: 3px solid $color-primary;
     display: flex;
     justify-content: center;
@@ -153,16 +153,16 @@
     width: 10vw;
     border-radius: 7px;
 
-    &:hover{
-        background-color: $hover-primary;
-        border: 3px solid $hover-primary;
+    &:hover {
+      background-color: $hover-primary;
+      border: 3px solid $hover-primary;
     }
 
-    &:focus{
-        border-color: $focus-primary;
+    &:focus {
+      border-color: $focus-primary;
     }
     :nth-child(1) {
       padding-right: 0;
     }
-}
+  }
 }

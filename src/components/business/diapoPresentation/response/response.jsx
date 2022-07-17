@@ -3,7 +3,7 @@ import './response.scss'
 export const ResponsePercents = ({ type, data, open }) => {
   return (
     <div className="responsePercents" style={{ opacity: 1 }}>
-      <p className="title">{data.name}</p>
+      <p className="title">{type === 'survey' ? data.name : data.question}</p>
       {data
         ? type === 'quizz'
           ? data.possibilities.map((possibilitie, i) => {

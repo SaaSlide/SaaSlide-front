@@ -1,4 +1,4 @@
-@use '../../../../assets/styles/variable.scss' as var;
+@use '../../../../assets/styles/variables.scss' as var;
 @use '../../../../assets/styles/mixin.scss' as mix;
 
 .quizzContainer {
@@ -89,7 +89,7 @@
 }
 
 // RESPONSIVE MOBILE
-.propositionsContainerResponsive{
+.propositionsContainerResponsive {
   display: flex;
   justify-content: center;
   flex-direction: column;

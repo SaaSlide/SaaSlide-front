@@ -1,4 +1,4 @@
-@use '../../../../assets/styles/variable.scss' as var;
+@use '../../../../assets/styles/variables.scss' as var;
 @use '../../../../assets/styles/mixin.scss' as mix;
 
 .sondageContainer {
@@ -54,32 +54,31 @@
   }
 }
 
-
-// RESPONSIVE MOBILE 
-.propositionContainerResponsive{
+// RESPONSIVE MOBILE
+.propositionContainerResponsive {
   display: flex;
   justify-content: center;
   flex-direction: column;
   gap: 10px;
 }
 
-.inputContainerPropositionResponsive{
+.inputContainerPropositionResponsive {
   display: flex;
   justify-content: center;
   flex-direction: row-reverse;
   gap: 10px;
 }
 
-.inputQuestionResponsive{
-    width: 75vw;
-    display: block;
-    margin: -10px 0 20px 0;
-    max-width: 400px;
-    margin-bottom: 20px;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 500;
-    padding: 15px 20px;
-    border: none;
-    border-radius: 7px;
-    filter: drop-shadow(4px 4px 15px rgba(0, 0, 0, 0.05));
+.inputQuestionResponsive {
+  width: 75vw;
+  display: block;
+  margin: -10px 0 20px 0;
+  max-width: 400px;
+  margin-bottom: 20px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 7px;
+  filter: drop-shadow(4px 4px 15px rgba(0, 0, 0, 0.05));
 }

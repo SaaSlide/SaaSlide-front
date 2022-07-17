@@ -22,17 +22,19 @@ interface-container-home {
     height: 100%;
 
     li {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 5px;
-      color: white;
-      opacity: 0.5;
-      font-size: 12px;
-
-      &.n-active,
-      &:hover {
+      &.n-active button,
+      &:hover button {
         opacity: 1;
+      }
+
+      button {
+        display: flex;
+        gap: 5px;
+        flex-direction: column;
+        align-items: center;
+        color: white;
+        opacity: 0.5;
+        font-size: 12px;
       }
     }
   }

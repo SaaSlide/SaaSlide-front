@@ -55,7 +55,7 @@ export const ContentPresentation = ({ id }) => {
       if (
         newIndex != 0 &&
         (diapo[newIndex - 1].quizzs || diapo[newIndex - 1].surveys)
-      )
+      ) {
         setResponse({
           ...response,
           quizz: {
@@ -67,6 +67,9 @@ export const ContentPresentation = ({ id }) => {
             data: diapo[newIndex - 1].surveys[0] || null,
           },
         })
+      } else {
+        setResponse({ ...response, type: null })
+      }
     }
 
     socket.on('get_slide', refresh)
@@ -83,7 +86,7 @@ export const ContentPresentation = ({ id }) => {
       case 'ArrowRight':
         if (newIndex < diapo.length) {
           setIndex(newIndex + 1)
-          if (diapo[newIndex].quizzs || diapo[newIndex].surveys)
+          if (diapo[newIndex].quizzs || diapo[newIndex].surveys) {
             setResponse({
               ...response,
               quizz: {
@@ -95,6 +98,9 @@ export const ContentPresentation = ({ id }) => {
                 data: diapo[newIndex].surveys[0] || null,
               },
             })
+          } else {
+            setResponse({ ...response, type: null })
+          }
           sio.updateSlide('next', 1, newIndex)
         }
         break
@@ -104,7 +110,7 @@ export const ContentPresentation = ({ id }) => {
           if (
             newIndex - 1 != 0 &&
             (diapo[newIndex - 2].quizzs || diapo[newIndex - 2].surveys)
-          )
+          ) {
             setResponse({
               ...response,
               quizz: {
@@ -116,6 +122,9 @@ export const ContentPresentation = ({ id }) => {
                 data: diapo[newIndex - 2].surveys[0] || null,
               },
             })
+          } else {
+            setResponse({ ...response, type: null })
+          }
           sio.updateSlide('previous', -1, newIndex)
         }
         break
@@ -173,7 +182,7 @@ export const ContentPresentation = ({ id }) => {
           open,
         },
       })
-    } else {
+    } else if (type === 'survey') {
       setResponse({
         ...response,
         type: display ? type : null,
@@ -182,6 +191,8 @@ export const ContentPresentation = ({ id }) => {
           open,
         },
       })
+    } else {
+      setResponse({ ...response, type: null })
     }
   }
 
@@ -194,6 +205,8 @@ export const ContentPresentation = ({ id }) => {
     }
   }, [diapo, index, socket, response])
 
+  console.log(response.type)
+
   return (
     diapo && (
       <div ref={ref} className="containerDiapoPres">
@@ -205,7 +218,7 @@ export const ContentPresentation = ({ id }) => {
           <QRCodePresentation id={id} />
         ) : (
           <>
-            {response.type && (
+            {response.type !== null && (
               <ResponsePercents
                 type={response.type}
                 data={
@@ -220,7 +233,7 @@ export const ContentPresentation = ({ id }) => {
                 }
               />
             )}
-            <SliderPresentation diapo={diapo} />
+            <SliderPresentation diapo={diapo} index={index} />
           </>
         )}
       </div>

@@ -18,5 +18,8 @@
 
 .dld-pdf-btn {
   display: flex;
-  margin-top: 2.5vh;
+
+  &.mt {
+    margin-top: 2.5vh;
+  }
 }

@@ -66,11 +66,6 @@ export const FeatureModal = ({
               />
             </div>
           ))}
-        {/* <div>
-          <p>
-            Participation total : {numberResponse}/{numberUser}
-          </p>
-        </div> */}
       </div>
       <div>
           <Button

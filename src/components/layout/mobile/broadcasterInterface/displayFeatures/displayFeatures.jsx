@@ -30,6 +30,8 @@ export const DisplayFeatures = ({
     icon: <IconSondage size={80} color={'white'} />,
   }
 
+  console.log(diapoInfo)
+
   return (
     <div>
       {diapoInfo && (
@@ -37,11 +39,7 @@ export const DisplayFeatures = ({
           {diapoInfo?.notes.length > 0 && (
             <div>
               <h3>Notes :</h3>
-              <p>
-                {diapoInfo?.notes.map((note) => (
-                  <p key={note}>{note}</p>
-                ))}
-              </p>
+              <p>{diapoInfo.notes[0].description}</p>
             </div>
           )}
           {diapoInfo?.surveys.length > 0 && (
