@@ -1,6 +1,6 @@
 # Comment lancer le front ?
 
-Clone la branche main
+Clone la branche develop
 
 Installer les dépendances npm
 
