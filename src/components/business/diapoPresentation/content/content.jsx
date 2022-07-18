@@ -18,7 +18,7 @@ export const ContentPresentation = ({ id }) => {
   const [diapo, setDiapo] = useState([])
 
   const [response, setResponse] = useState({
-    type: null, // null || "quizz" ||  "survey"
+    type: null,
     quizz: {
       data: null,
       open: true,
@@ -54,7 +54,7 @@ export const ContentPresentation = ({ id }) => {
       setIndex(newIndex)
       if (
         newIndex != 0 &&
-        (diapo[newIndex - 1].quizzs || diapo[newIndex - 1].surveys)
+        (diapo[newIndex - 1].quizzs[0] || diapo[newIndex - 1].surveys[0])
       ) {
         setResponse({
           ...response,
@@ -68,6 +68,7 @@ export const ContentPresentation = ({ id }) => {
           },
         })
       } else {
+        console.log('ici')
         setResponse({ ...response, type: null })
       }
     }
@@ -86,7 +87,7 @@ export const ContentPresentation = ({ id }) => {
       case 'ArrowRight':
         if (newIndex < diapo.length) {
           setIndex(newIndex + 1)
-          if (diapo[newIndex].quizzs || diapo[newIndex].surveys) {
+          if (diapo[newIndex].quizzs[0] || diapo[newIndex].surveys[0]) {
             setResponse({
               ...response,
               quizz: {
@@ -109,7 +110,7 @@ export const ContentPresentation = ({ id }) => {
           setIndex(newIndex - 1)
           if (
             newIndex - 1 != 0 &&
-            (diapo[newIndex - 2].quizzs || diapo[newIndex - 2].surveys)
+            (diapo[newIndex - 2].quizzs[0] || diapo[newIndex - 2].surveys[0])
           ) {
             setResponse({
               ...response,
@@ -191,8 +192,6 @@ export const ContentPresentation = ({ id }) => {
           open,
         },
       })
-    } else {
-      setResponse({ ...response, type: null })
     }
   }
 
@@ -204,8 +203,6 @@ export const ContentPresentation = ({ id }) => {
       socket.off('get_params', updateParams)
     }
   }, [diapo, index, socket, response])
-
-  console.log(response.type)
 
   return (
     diapo && (
